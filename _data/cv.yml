@@ -1,0 +1,50 @@
+- title: General Information
+  type: map
+  contents:
+    - name: Organization
+      value: RMDev Research
+    - name: Focus Area
+      value: LLM Development Methodologies
+    - name: Research Type
+      value: Data-Driven, Empirical Analysis
+
+- title: Research Areas
+  type: nested_list
+  contents:
+    - title: Conversational AI Development
+      items:
+        - Systematic analysis of LLM interaction patterns
+        - Development workflow optimization
+        - Real-time data collection and analysis
+    - title: Production Learning Systems
+      items:
+        - Live environment validation
+        - Continuous improvement cycles
+        - Empirical testing methodologies
+    - title: Development Methodologies
+      items:
+        - Multi-agent development processes
+        - Self-bootstrapping systems
+        - Progressive training approaches
+
+- title: Methodology
+  type: time_table
+  contents:
+    - title: Data Collection Phase
+      year: Ongoing
+      description:
+        - Comprehensive logging of development conversations
+        - Real-time capture of LLM interactions
+        - Systematic documentation of patterns and outcomes
+    - title: Analysis Phase
+      year: Ongoing
+      description:
+        - Rigorous examination of collected data
+        - Pattern identification and validation
+        - Hypothesis generation and testing
+    - title: Validation Phase
+      year: Ongoing
+      description:
+        - Production environment testing
+        - Empirical validation of findings
+        - Iterative refinement based on results
