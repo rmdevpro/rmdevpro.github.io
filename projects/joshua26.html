@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua26 Ecosystem | J. Morrissette</title>
+  <meta name="description" content="A distributed agentic AI ecosystem testing the hypothesis that StateGraphs are the right level of abstraction for autonomous agent cognition.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="/" class="site-title">J. Morrissette — Agentic Systems Research</a>
+      <div class="nav-links">
+        <a href="/">about</a>
+        <a href="/projects/" class="active">projects</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Joshua26 Ecosystem</h1>
+
+    <blockquote>Agents can autonomously build and maintain a system structured as a collection of LangGraph StateGraphs, because the graph structure is the right level of abstraction for agent cognition.</blockquote>
+
+    <p>Joshua26 is a working production system designed to test this hypothesis. It runs across three bare-metal Linux hosts connected by a Docker Swarm overlay network, with NFS shared storage and per-host local workspaces.</p>
+
+    <h2>Architecture</h2>
+
+    <p>The fundamental building block is the <strong>MAD</strong> (Multipurpose Agentic Duo) — an autonomous actor that simultaneously serves its domain capabilities as an MCP server and consumes other agents as an intelligent client, with the same domain expertise governing both roles.</p>
+
+    <p>Two instantiations:</p>
+
+    <p><strong>pMAD (Persistent MAD)</strong> — a system-domain agent with an infrastructure body. Always running. Governs a specific technical domain. Contains an Imperator — a resident LLM-backed agent that handles complex, multi-step, goal-directed operations within its domain. Examples: Hopper (engineering), Rogers (context), Sutherland (inference), Starret (version control).</p>
+
+    <p><strong>eMAD (Ephemeral MAD)</strong> — a subject-domain agent with no infrastructure body. Exists only during execution of its StateGraph. Shares collective memory across all instances of its role. Installed as a Python package into a hosting pMAD at runtime via Alexandria (the internal PyPI proxy). Example: Hopper as an eMAD hosted by Kaiser.</p>
+
+    <h2>State 2 Architecture</h2>
+
+    <p>The current target architecture for all pMADs:</p>
+
+<pre><code>[mad]               # nginx:alpine — sole network boundary (ingress AND egress)
+[mad]-langgraph     # Python — LangGraph StateGraph + Imperator
+[mad]-[technology]  # Official images — postgres, redis, etc. (if needed)</code></pre>
+
+    <p>All programmatic logic lives in the LangGraph StateGraph. The Nginx gateway is pure configuration — no custom code. This makes the system readable and modifiable by agents: when an agent opens a pMAD codebase, all intelligence is in the graph.</p>
+
+    <h2>State 3 — Dynamic Intelligence Loading</h2>
+
+    <p>Kaiser (the eMAD hosting pMAD) implements State 3: the infrastructure shell is stable and rarely rebuilt; intelligence travels as versioned Python packages installed at runtime from Alexandria. Zero-downtime eMAD deployment. The same eMAD library runs concurrently across multiple Kaiser instances.</p>
+
+    <h2>Deployed Services</h2>
+
+    <table>
+      <thead>
+        <tr><th>Service</th><th>Role</th><th>State</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Rogers</td><td>Context Broker — conversation memory, knowledge graph, engineered context assembly</td><td>State 2</td></tr>
+        <tr><td>Sutherland</td><td>Inference service — GPUStack cluster, local LLMs, alias routing</td><td>State 2</td></tr>
+        <tr><td>Hopper</td><td>Engineering eMAD — autonomous SDLC (requirements → deployed software)</td><td>State 3</td></tr>
+        <tr><td>Kaiser</td><td>eMAD host — dynamic intelligence loading via Alexandria</td><td>State 3</td></tr>
+        <tr><td>Starret</td><td>Version control — git safety net, commit/push workflows</td><td>State 2</td></tr>
+        <tr><td>Alexandria</td><td>Supply chain — PyPI, NPM, Docker registry caching proxies</td><td>State 2</td></tr>
+        <tr><td>Henson</td><td>Human interaction hub — persona-driven agents, chat interfaces</td><td>State 2</td></tr>
+        <tr><td>Apgar</td><td>Observability — ecosystem metrics, automated diagnostics</td><td>State 2</td></tr>
+        <tr><td>Blueprint</td><td>Multi-agent workbench — parallel CLI agents, Advisory Quorum</td><td>State 2</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Source</h2>
+
+    <p>The Joshua26 codebase and full documentation are available on <a href="https://github.com/jmorrissette-RMDC">GitHub</a>. The concept papers describe the intellectual framework behind the architecture and are published as an ongoing research series on <a href="https://jmorrissettermdc.substack.com">Substack</a>.</p>
+  </main>
+
+  <footer>
+    <div class="container">
+      &copy; 2026 Jason J. Morrissette
+    </div>
+  </footer>
+</body>
+</html>
