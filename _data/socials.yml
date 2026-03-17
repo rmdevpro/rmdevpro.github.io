@@ -1,9 +1,4 @@
 # Social media links for J. Morrissette
-email: jm.drums.garrison@gmail.com
-github_username: rmdevpro
-linkedin_username: # add your LinkedIn username
-rss_icon: true
-custom_social:
-  logo: https://substack-post-media.s3.amazonaws.com/public/images/substack-icon.png
-  title: Substack
-  url: https://substack.com # update with actual Substack URL when created
+github_username: jmorrissette-RMDC
+linkedin_username: jason-morrissette-6704261b
+rss_icon: false
