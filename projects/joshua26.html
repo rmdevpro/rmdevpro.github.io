@@ -21,56 +21,91 @@
   <main class="container">
     <h1>Joshua26 Ecosystem</h1>
 
+    <p>Joshua26 is a distributed AI agent ecosystem — a working lab environment built to test a specific research hypothesis:</p>
+
     <blockquote>Agents can autonomously build and maintain a system structured as a collection of LangGraph StateGraphs, because the graph structure is the right level of abstraction for agent cognition.</blockquote>
 
-    <p>Joshua26 is a working production system designed to test this hypothesis. It runs across three bare-metal Linux hosts connected by a Docker Swarm overlay network, with NFS shared storage and per-host local workspaces.</p>
+    <p>The ecosystem runs across three bare-metal Linux hosts connected by a Docker Swarm overlay network, with 87TB of ZFS-backed NFS shared storage and a six-GPU compute cluster (3x P40, 2x V100 SXM2 NVLink, 1x V100 PCIe). The architect does not code or modify systems directly — he uses LLMs via CLIs and agents to do the work, acting as technical director.</p>
 
-    <h2>Architecture</h2>
+    <h2>The MAD Pattern</h2>
 
-    <p>The fundamental building block is the <strong>MAD</strong> (Multipurpose Agentic Duo) — an autonomous actor that simultaneously serves its domain capabilities as an MCP server and consumes other agents as an intelligent client, with the same domain expertise governing both roles.</p>
+    <p>The fundamental building block is the <strong>MAD</strong> (Multipurpose Agentic Duo) — an autonomous actor that simultaneously serves its domain as an MCP server and consumes other domains as an intelligent client. The "Duo" is the inseparable combination of serving and using — a MAD that only serves is just a microservice; a MAD that only uses is just a client. The combination, governed by shared domain intelligence in both directions, is what makes it an autonomous actor.</p>
 
-    <p>Two instantiations:</p>
+    <p>Every MAD is composed of two conceptually distinct aspects:</p>
 
-    <p><strong>pMAD (Persistent MAD)</strong> — a system-domain agent with an infrastructure body. Always running. Governs a specific technical domain. Contains an Imperator — a resident LLM-backed agent that handles complex, multi-step, goal-directed operations within its domain. Examples: Hopper (engineering), Rogers (context), Sutherland (inference), Starret (version control).</p>
+    <p><strong>Action Engine (AE)</strong> — the physical system. All containers, gateways, databases, caches, sidecars, observability, and the bootstrap kernel. Provides direct tool capabilities and, via the overlay network, access to the full tool set of every other MAD in the ecosystem.</p>
 
-    <p><strong>eMAD (Ephemeral MAD)</strong> — a subject-domain agent with no infrastructure body. Exists only during execution of its StateGraph. Shares collective memory across all instances of its role. Installed as a Python package into a hosting pMAD at runtime via Alexandria (the internal PyPI proxy). Example: Hopper as an eMAD hosted by Kaiser.</p>
+    <p><strong>Thought Engine (TE)</strong> — the cognitive intelligence. The Imperator agent and its cognitive apparatus: Progressive Cognitive Pipeline, inference, conversation-as-state. Conceptually distinct from the AE, though both run within the same deployment. The AE calls into the TE, not the other way around.</p>
 
-    <h2>State 2 Architecture</h2>
+    <h2>pMAD and eMAD</h2>
 
-    <p>The current target architecture for all pMADs:</p>
+    <p><strong>pMAD (Persistent MAD)</strong> — owns its own AE and TE. System domain. Always running as a deployed service with containers, gateway, and networking. Examples: Rogers (context), Sutherland (inference), Starret (version control).</p>
+
+    <p><strong>eMAD (Ephemeral MAD)</strong> — has its own TE but no AE. Subject matter domain. Exists only during StateGraph execution, hosted by a pMAD. An eMAD is a library package — pure cognitive intelligence with no infrastructure. Installed at runtime via Alexandria (the internal PyPI). Examples: Hopper (engineering), Jerry Maguire (job search).</p>
+
+    <p>The eMAD is a direct consequence of the AE/TE separation: once the TE is a library package independent of infrastructure, an autonomous agent can exist without owning any containers.</p>
+
+    <h2>Agent Classes</h2>
+
+    <p><strong>Imperator</strong> — the prime agent within any TE. Possesses Identity, Purpose, and Autonomy. Generates its own Intent. Self-directing. Both pMADs and eMADs have Imperators. A caller can delegate a goal in natural language and the Imperator handles the multi-step execution — the calling agent does not need to know how.</p>
+
+    <p><strong>Executor</strong> — no Identity, Purpose, or Autonomy of its own. Cognitive but never independent. Sub-agents, AE tools, StateGraph workers. Not addressable externally.</p>
+
+    <h2>Container Architecture</h2>
+
+    <p><strong>State 2</strong> (current deployed architecture) — OTS infrastructure, graph-native logic, built-in observability, and the Imperator pattern:</p>
 
 <pre><code>[mad]               # nginx:alpine — sole network boundary (ingress AND egress)
 [mad]-langgraph     # Python — LangGraph StateGraph + Imperator
 [mad]-[technology]  # Official images — postgres, redis, etc. (if needed)</code></pre>
 
-    <p>All programmatic logic lives in the LangGraph StateGraph. The Nginx gateway is pure configuration — no custom code. This makes the system readable and modifiable by agents: when an agent opens a pMAD codebase, all intelligence is in the graph.</p>
+    <p>All programmatic logic lives in the StateGraph. The Nginx gateway is pure configuration — no custom code. There is exactly one place to look for intelligence: the graph. This is what makes the system readable and modifiable by agents.</p>
 
-    <h2>State 3 — Dynamic Intelligence Loading</h2>
+    <p><strong>State 3</strong> (target architecture) — the container reduces to a bootstrap kernel. Everything that makes it <em>this particular pMAD</em> — both AE and TE — is dynamically loaded from Alexandria as versioned Python packages at runtime. The container itself is interchangeable. Kaiser is the first State 3 pMAD.</p>
 
-    <p>Kaiser (the eMAD hosting pMAD) implements State 3: the infrastructure shell is stable and rarely rebuilt; intelligence travels as versioned Python packages installed at runtime from Alexandria. Zero-downtime eMAD deployment. The same eMAD library runs concurrently across multiple Kaiser instances.</p>
+    <h2>Infrastructure</h2>
+
+    <table>
+      <thead>
+        <tr><th>Host</th><th>Role</th><th>Key Resources</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>irina</td><td>Swarm Leader, storage</td><td>87TB ZFS, Tesla P4</td></tr>
+        <tr><td>M5</td><td>Compute</td><td>256GB RAM, 6x GPU (3x P40 24GB, 2x V100 SXM2 32GB NVLink, 1x V100 PCIe 32GB)</td></tr>
+        <tr><td>Hymie</td><td>Desktop automation</td><td>Human-like input simulation workstation</td></tr>
+      </tbody>
+    </table>
+
+    <p>Docker Swarm provides the overlay network (joshua-net). Each pMAD operates on two networks: joshua-net for cross-MAD communication, and a private per-MAD network for internal containers. The gateway is the sole boundary in both directions.</p>
 
     <h2>Deployed Services</h2>
 
     <table>
       <thead>
-        <tr><th>Service</th><th>Role</th><th>State</th></tr>
+        <tr><th>Service</th><th>Type</th><th>Role</th></tr>
       </thead>
       <tbody>
-        <tr><td>Rogers</td><td>Context Broker — conversation memory, knowledge graph, engineered context assembly</td><td>State 2</td></tr>
-        <tr><td>Sutherland</td><td>Inference service — GPUStack cluster, local LLMs, alias routing</td><td>State 2</td></tr>
-        <tr><td>Hopper</td><td>Engineering eMAD — autonomous SDLC (requirements → deployed software)</td><td>State 3</td></tr>
-        <tr><td>Kaiser</td><td>eMAD host — dynamic intelligence loading via Alexandria</td><td>State 3</td></tr>
-        <tr><td>Starret</td><td>Version control — git safety net, commit/push workflows</td><td>State 2</td></tr>
-        <tr><td>Alexandria</td><td>Supply chain — PyPI, NPM, Docker registry caching proxies</td><td>State 2</td></tr>
-        <tr><td>Henson</td><td>Human interaction hub — persona-driven agents, chat interfaces</td><td>State 2</td></tr>
-        <tr><td>Apgar</td><td>Observability — ecosystem metrics, automated diagnostics</td><td>State 2</td></tr>
-        <tr><td>Blueprint</td><td>Multi-agent workbench — parallel CLI agents, Advisory Quorum</td><td>State 2</td></tr>
+        <tr><td>Rogers</td><td>pMAD</td><td>Context Broker — conversation memory, knowledge graph, engineered context assembly</td></tr>
+        <tr><td>Sutherland</td><td>pMAD</td><td>Inference Broker — GPUStack cluster manager, local LLMs, alias routing</td></tr>
+        <tr><td>Henson</td><td>pMAD</td><td>Human Interaction Hub — persona-driven Imperators, chat interfaces</td></tr>
+        <tr><td>Starret</td><td>pMAD</td><td>Version control — git safety net, commit/push workflows</td></tr>
+        <tr><td>Malory</td><td>pMAD</td><td>Browser automation — headless Playwright</td></tr>
+        <tr><td>Hymie</td><td>pMAD</td><td>Desktop automation — human-like input simulation via uinput</td></tr>
+        <tr><td>Apgar</td><td>pMAD</td><td>Observability — ecosystem metrics, automated diagnostics</td></tr>
+        <tr><td>Alexandria</td><td>pMAD</td><td>Supply Chain Wall — PyPI, NPM, Docker registry caching proxies</td></tr>
+        <tr><td>Brin</td><td>pMAD</td><td>GSuite integration — Docs, Sheets, Drive, Slides, Calendar</td></tr>
+        <tr><td>Muybridge</td><td>pMAD</td><td>GPU video processing — Wan2.1 VACE, FaceSwap</td></tr>
+        <tr><td>Kaiser</td><td>pMAD</td><td>eMAD host — dynamic intelligence loading (State 3)</td></tr>
+        <tr><td>Hopper</td><td>eMAD</td><td>Engineering Department — autonomous SDLC, Quorum Engine. Hosted by Kaiser.</td></tr>
+        <tr><td>Jerry Maguire</td><td>eMAD</td><td>Job Hunter — autonomous job search, resume generation. Hosted by Kaiser.</td></tr>
       </tbody>
     </table>
 
+    <p><a href="/projects/blueprint.html">Blueprint</a> — the multi-agent conversational code workbench — is part of the Joshua26 ecosystem but is not a MAD. It is the architect's tool for directing agents, not an autonomous actor within the ecosystem.</p>
+
     <h2>Source</h2>
 
-    <p>The Joshua26 codebase and full documentation are available on <a href="https://github.com/jmorrissette-RMDC">GitHub</a>. The concept papers describe the intellectual framework behind the architecture and are published as an ongoing research series on <a href="https://jmorrissettermdc.substack.com">Substack</a>.</p>
+    <p>The Joshua26 codebase and documentation are on <a href="https://github.com/jmorrissette-RMDC/portfolio/tree/main/joshua26">GitHub</a>. The intellectual framework behind the architecture is described in the <a href="/projects/concept-papers.html">concept papers</a>, published as an ongoing series on <a href="https://jmorrissettermdc.substack.com">Substack</a>.</p>
   </main>
 
   <footer>

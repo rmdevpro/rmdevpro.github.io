@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua | J. Morrissette</title>
+  <meta name="description" content="The original Joshua AI agent ecosystem — the predecessor to Joshua26, with thesis papers, case studies, and architecture documentation.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="/" class="site-title">J. Morrissette — Agentic Systems Research</a>
+      <div class="nav-links">
+        <a href="/">about</a>
+        <a href="/projects/" class="active">projects</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Joshua</h1>
+
+    <p>Joshua was the first-generation AI agent ecosystem — the predecessor to <a href="/projects/joshua26.html">Joshua26</a>. Built through self-directed study and hands-on construction beginning in August 2025, it was the system where the core concepts of agentic architecture were discovered, tested, and documented. The conceptual framework described in the <a href="/projects/concept-papers.html">concept papers</a> was developed through building Joshua and reasoning from what worked, what failed, and what emerged.</p>
+
+    <h2>Architecture</h2>
+
+    <p>Joshua implemented the <strong>Conversation Bus Architecture</strong> — all MAD-to-MAD communication flowed through a single central bus (Rogers), providing a unified conversational substrate for the entire ecosystem. Every interaction between agents was a conversation, stored and retrievable.</p>
+
+    <p>The container pattern was the <strong>Cellular Monolith</strong> — each MAD was a single container bundling its runtime, database, and MCP server together. Simple to deploy and reason about during the bootstrap phase, but increasingly limiting as the ecosystem grew. The migration away from this pattern became one of the defining design lessons carried into Joshua26.</p>
+
+    <h2>Progressive Cognitive Pipeline</h2>
+
+    <p>Joshua introduced the <strong>Progressive Cognitive Pipeline (PCP)</strong> — a five-tier inbound cognitive architecture that routes incoming requests through increasingly sophisticated processing:</p>
+
+    <ol>
+      <li><strong>Decision Tree Router (DTR)</strong> — fast, non-LLM routing via online Hoeffding trees</li>
+      <li><strong>Lightweight Pre-Processing Module (LPPM)</strong> — quick categorization and enrichment</li>
+      <li><strong>Context Engineering Tier (CET)</strong> — context assembly from the conversational record</li>
+      <li><strong>Imperator</strong> — full autonomous reasoning and multi-step orchestration</li>
+      <li><strong>Cognitive Reasoning System (CRS)</strong> — metacognitive oversight and learning</li>
+    </ol>
+
+    <p>The PCP was Joshua's most significant architectural contribution. The principle — that not every request deserves the same cognitive investment — carried directly into Joshua26's three-tier model.</p>
+
+    <h2>What It Proved</h2>
+
+    <p>Six case studies documented the system's operation across different domains, providing first-generation empirical grounding for the core claims of the conceptual framework. These ranged from the initial cellular monolith deployment through multi-agent software development, academic paper creation, and patent portfolio development.</p>
+
+    <h2>What Carried Forward</h2>
+
+    <p>Joshua26 inherited the core ideas — MADs as autonomous actors, conversation as state, the Imperator pattern, the PCP — but redesigned the infrastructure from scratch. The Conversation Bus gave way to a peer-to-peer overlay network. The Cellular Monolith gave way to composed containers with OTS infrastructure. The five-tier PCP was simplified to three tiers. The concepts proved sound; the implementation needed to evolve.</p>
+
+    <h2>Papers</h2>
+
+    <h3>Core Papers (J Series)</h3>
+    <ul>
+      <li><a href="/assets/pdf/thesis/J01_Primary_Overview_v1.5_Draft.pdf">J01: Primary Overview</a></li>
+      <li><a href="/assets/pdf/thesis/J02_System_Evolution_and_Current_State_v1.0_Draft.pdf">J02: System Evolution and Current State</a></li>
+      <li><a href="/assets/pdf/thesis/J03_Cellular_Monolith_Architecture_v1.5_Draft.pdf">J03: Cellular Monolith Architecture</a></li>
+      <li><a href="/assets/pdf/thesis/J04_Progressive_Cognitive_Pipeline_v2.1_PROSE.pdf">J04: Progressive Cognitive Pipeline</a></li>
+      <li><a href="/assets/pdf/thesis/J05_eMADs_v1.1_Draft.pdf">J05: eMADs</a></li>
+      <li><a href="/assets/pdf/thesis/J06_Pure_Multi-LLM_Agile_Methodology_v1.0_Draft.pdf">J06: Pure Multi-LLM Agile Methodology</a></li>
+    </ul>
+
+    <h3>Case Studies (C Series)</h3>
+    <ul>
+      <li><a href="/assets/pdf/thesis/C01_V0_Cellular_Monolith_Case_Study_Summary_v1.0_Draft.pdf">C01: V0 Cellular Monolith</a> — <a href="/assets/pdf/thesis/Appendix_A_V0_Cellular_Monolith_Case_Study_Full.pdf">Full Appendix</a></li>
+      <li><a href="/assets/pdf/thesis/C02_V1_Synergos_Case_Study_Summary_v1.0_Draft.pdf">C02: V1 Synergos</a> — <a href="/assets/pdf/thesis/Appendix_B_V1_Synergos_Case_Study_Full.pdf">Full Appendix</a></li>
+      <li><a href="/assets/pdf/thesis/C03_V2_Blueprint_Case_Study_Summary_v1.0_Draft.pdf">C03: V2 Blueprint</a> — <a href="/assets/pdf/thesis/Appendix_C_V2_Blueprint_Case_Study_Full.pdf">Full Appendix</a></li>
+      <li><a href="/assets/pdf/thesis/C04_Academic_Paper_Creation_Case_Study_Summary_v1.0_Draft.pdf">C04: Academic Paper Creation</a> — <a href="/assets/pdf/thesis/Appendix_D_Academic_Paper_Creation_Case_Study_Full.pdf">Full Appendix</a></li>
+    </ul>
+
+    <h3>Implementation Guides (M Series)</h3>
+    <ul>
+      <li><a href="/assets/pdf/thesis/M01_Construction_v1.3_Draft.pdf">M01: Construction</a></li>
+      <li><a href="/assets/pdf/thesis/M02_Data_v1.3_Draft.pdf">M02: Data</a></li>
+      <li><a href="/assets/pdf/thesis/M03_Documentation_v1.3_Draft.pdf">M03: Documentation</a></li>
+      <li><a href="/assets/pdf/thesis/M04_Information_v1.3_Draft.pdf">M04: Information</a></li>
+      <li><a href="/assets/pdf/thesis/M05_Communication_v1.3_Draft.pdf">M05: Communication</a></li>
+      <li><a href="/assets/pdf/thesis/M06_Security_v1.3_Draft.pdf">M06: Security</a></li>
+    </ul>
+
+    <h2>Source</h2>
+
+    <p>Architecture documentation and papers are on <a href="https://github.com/jmorrissette-RMDC/portfolio/tree/main/joshua">GitHub</a>.</p>
+  </main>
+
+  <footer>
+    <div class="container">
+      &copy; 2026 Jason J. Morrissette
+    </div>
+  </footer>
+</body>
+</html>
