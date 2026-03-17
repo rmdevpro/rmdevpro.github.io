@@ -8,8 +8,7 @@ profile:
   align: right
   image: prof_pic.jpg
   image_circular: false
-  more_info: >
-    <p>j@4morr.com</p>
+  more_info: false
 
 selected_papers: false
 social: true
