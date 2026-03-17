@@ -9,7 +9,7 @@ profile:
   image: prof_pic.jpg
   image_circular: false
   more_info: >
-    <p>jm.drums.garrison@gmail.com</p>
+    <p>j@4morr.com</p>
 
 selected_papers: false
 social: true

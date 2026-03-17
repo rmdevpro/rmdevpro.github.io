@@ -3,7 +3,7 @@ layout: page
 title: projects
 permalink: /projects/
 description: Joshua ecosystem projects and initiatives.
-nav: true
+nav: false
 nav_order: 3
 display_categories: [main]
 horizontal: false

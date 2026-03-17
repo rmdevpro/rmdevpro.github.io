@@ -3,7 +3,7 @@ layout: page
 title: Discussion Board
 permalink: /discussions/
 description: Join the conversation about Joshua and conversational AI development
-nav: true
+nav: false
 nav_order: 6
 giscus_comments: true
 ---
