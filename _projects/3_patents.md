@@ -16,7 +16,7 @@ The papers are published as an ongoing series on the [Blog](/blog/), each paired
 ## Core Concepts
 
 **Foundational**
-- [A Proposed Approach to Agentic Systems](/blog/) — the manifesto: 10 primitives and 7 principles for agentic system design
+- [A Proposed Approach to Agentic Systems](/blog/) — the foundational paper: 10 primitives and 7 principles for agentic system design
 - [The MAD Pattern](/blog/) — autonomous actors as the building block: simultaneously server and client, governed by shared domain intelligence
 - [Conversation as State](/blog/) — agents as mechanically stateless but infinitely stateful; the accumulated conversational record as the substrate of memory and expertise
 - [Intent](/blog/) — the transformation from linguistic probability to machine action; why intent-based systems handle the unanticipated where protocol-based systems cannot
