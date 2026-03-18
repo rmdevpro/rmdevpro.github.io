@@ -21,17 +21,11 @@
   <main class="container">
     <h1>Blueprint — Multi-Agent Conversational Code Workbench</h1>
 
-    <p>Blueprint is part of the <a href="/projects/joshua26.html">Joshua26</a> ecosystem but is not a MAD — it is my workbench, not an autonomous actor. Where MADs serve domains and consume other domains as intelligent peers, Blueprint is the tool through which I direct the ecosystem.</p>
-
-    <h2>What Blueprint Is</h2>
-
-    <p>A multi-agent CLI workbench — a new category of tool that sits adjacent to the IDE but is distinct from it. Where the IDE is built for one developer working with one codebase, Blueprint is an environment for a human directing a team of AI agents simultaneously.</p>
-
-    <p>I watch what each agent is doing, decide what to do next, and intervene when needed. The agents execute; I direct.</p>
+    <p>Blueprint is a proof of concept for a multi-agent code workbench, built to explore two key ideas. First: utilizing the tier 1 providers' CLI tools (Claude Code, Gemini CLI, Codex CLI) instead of their APIs, in order to take advantage of the enormous investment those companies put into their agentic CLIs rather than reinventing it myself. Second: establishing conversational interaction between the workbench agents — the ability to message each other and utilize the Quorum pattern for collaborative problem solving.</p>
 
     <h2>Design</h2>
 
-    <p><strong>CLI Agents</strong> — full interactive terminals connected to dedicated execution environments (Claude Code, Gemini CLI) running in isolated containers with SSH and PTY access. Each agent runs in its own persistent session that survives browser close and reconnect. CLI agents inherit the deep agentic investment of their respective Tier 1 providers — Blueprint coordinates them rather than replacing them.</p>
+    <p><strong>CLI Agents</strong> — full interactive terminals connected to dedicated execution environments running in isolated containers with SSH and PTY access. Each agent runs in its own persistent session that survives browser close and reconnect. CLI agents inherit the deep agentic capabilities of their respective providers — Blueprint coordinates them rather than replacing them.</p>
 
     <p><strong>Chat Agents</strong> — lightweight ReAct interfaces backed by any OpenAI-compatible endpoint. For models and endpoints without a CLI tool — smaller models, locally hosted models, experimental endpoints.</p>
 
@@ -39,13 +33,9 @@
 
     <p><strong>Shared Tool Layer</strong> — all agents in a team share an MCP server providing: inter-agent messaging, shared task list, shared notes, core document injection at team start, and a lightweight Advisory Quorum (parallel generation from Claude + Gemini + OpenAI, Lead synthesis, one review round).</p>
 
-    <h2>Ecosystem Independence</h2>
-
-    <p>Blueprint is designed to work when nothing else does. When the system being built is broken, the workbench must still run. All backing services are self-contained. External API calls go directly to model providers. The memory integration is optional and degrades gracefully.</p>
-
     <h2>Status</h2>
 
-    <p>Blueprint is in active development. The core workbench functionality is operational; ongoing work focuses on stability and feature completion.</p>
+    <p>Blueprint provided a valuable tool for exploration and is roughly 85% functional and usable, but has some bugs to work through. I stopped active development to focus on <a href="/projects/joshua26.html">Hopper</a> — Joshua26's own engineering agent — which represents the next step in the same direction: agents building software autonomously rather than under direct human orchestration.</p>
   </main>
 
   <footer>
