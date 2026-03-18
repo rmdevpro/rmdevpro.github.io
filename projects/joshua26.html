@@ -81,26 +81,26 @@
         <tr><th>Service</th><th>Type</th><th>Role</th><th>Status</th><th>Description</th></tr>
       </thead>
       <tbody>
-        <tr><td>Rogers</td><td>pMAD</td><td>Context Broker</td><td>Deployed</td><td>Conversation memory, three-tier context assembly, knowledge graph. PostgreSQL + pgvector, Neo4j, Redis.</td></tr>
+        <tr><td>Rogers</td><td>pMAD</td><td>Context Broker</td><td>Deployed</td><td>Conversation memory, three-tier context assembly, knowledge graph. PostgreSQL + pgvector, Neo4j, Redis, Mem0.</td></tr>
         <tr><td>Sutherland</td><td>pMAD</td><td>Inference Broker</td><td>Deployed</td><td>Unified LLM inference, embeddings, reranking. Ray Serve cluster, llama-cpp-python. GPU pool: V100 NVLink pair, P40s, P4, RTX 3050. Cloud API routing (OpenAI, Anthropic, Gemini, xAI, Together AI) via model aliases. Local model download and caching from HuggingFace.</td></tr>
         <tr><td>Henson</td><td>pMAD</td><td>Human Switchboard</td><td>Deployed</td><td>Persona-driven chat interface, session management, context/inference orchestration. Open WebUI, PostgreSQL.</td></tr>
         <tr><td>Starret</td><td>pMAD</td><td>Release Department</td><td>Deployed</td><td>Git operations, GitHub API, CI/CD triggering. Two-tool design: starret_chat (git ops), starret_github (GitHub API). GitHub Actions runner backing container.</td></tr>
         <tr><td>Malory</td><td>pMAD</td><td>Browser Automation</td><td>Deployed</td><td>Headless browser testing and scraping. Playwright with Chromium.</td></tr>
-        <tr><td>Hymie</td><td>pMAD</td><td>Desktop Automation</td><td>Deployed</td><td>Human-like keyboard/mouse input via kernel-level uinput. Anti-bot evasion, screenshot capture, Wayland/GNOME integration.</td></tr>
+        <tr><td>Hymie</td><td>pMAD</td><td>Desktop Automation</td><td>Deployed</td><td>Human-like keyboard/mouse input via kernel-level uinput (python-evdev). Anti-bot evasion, screenshot capture, OpenCV template matching, Wayland/GNOME integration.</td></tr>
         <tr><td>Apgar</td><td>pMAD</td><td>Observability</td><td>Deployed</td><td>Ecosystem metrics, log aggregation, diagnostics. Prometheus, Loki, Grafana, Promtail.</td></tr>
         <tr><td>Alexandria</td><td>pMAD</td><td>Supply Chain Wall</td><td>Deployed</td><td>Transparent caching proxies for PyPI, NPM, and Docker images. Devpi, Verdaccio, Docker Registry 2.0.</td></tr>
         <tr><td>Kaiser</td><td>pMAD</td><td>eMAD Host</td><td>Deployed</td><td>Dynamic intelligence loading (State 3). Bootstrap kernel with runtime package installation via Alexandria. PostgreSQL eMAD registry.</td></tr>
-        <tr><td>Muybridge</td><td>pMAD</td><td>GPU Video Processing</td><td>Deployed</td><td>Video generation via Wan2.1 VACE on GPUStack.</td></tr>
+        <tr><td>Muybridge</td><td>pMAD</td><td>GPU Video Processing</td><td>Deployed</td><td>Video generation via Wan2.1 VACE on GPUStack. PyTorch, diffusers, FFmpeg. RunPod for cloud GPU dispatch.</td></tr>
         <tr><td>Shannon</td><td>pMAD</td><td>Conversation Broker</td><td>Planned</td><td>Agent-to-agent messaging with From/To/CC addressing, trigger delivery, loop protection. PostgreSQL, Redis.</td></tr>
         <tr><td>Horace</td><td>pMAD</td><td>Filesystem Domain</td><td>Planned</td><td>Semantic code search, AST analysis, intent-based filesystem access. Qdrant, Neo4j, tree-sitter, PostgreSQL.</td></tr>
         <tr><td>Hopper</td><td>eMAD</td><td>Engineering Department</td><td>In Development</td><td>SDLC orchestration, multi-LLM Quorum Engine for requirements, design, code generation, and review. Hosted by Kaiser.</td></tr>
-        <tr><td>Brin</td><td>eMAD</td><td>GSuite Integration</td><td>In Development</td><td>Docs, Sheets, Drive, Slides, Calendar. Hosted by Kaiser.</td></tr>
+        <tr><td>Brin</td><td>eMAD</td><td>GSuite Integration</td><td>In Development</td><td>Docs, Sheets, Drive, Slides, Calendar. Google APIs. Hosted by Kaiser.</td></tr>
         <tr><td>Grace</td><td>eMAD</td><td>Ecosystem Chat</td><td>In Development</td><td>Conversational interface to the ecosystem. Hosted by Kaiser.</td></tr>
         <tr><td>Jerry Maguire</td><td>eMAD</td><td>Job Hunter</td><td>In Development</td><td>Autonomous job search, resume generation. Hosted by Kaiser.</td></tr>
       </tbody>
     </table>
 
-    <p><strong>Common stack:</strong> All services are built on LangGraph StateGraphs, MCP protocol (HTTP/SSE), Docker Compose, and Python. Gateways are Nginx (State 2/3) or Node.js (State 1). All inference routes through Sutherland — no service calls an LLM endpoint directly.</p>
+    <p><strong>Common stack:</strong> All services are built on LangGraph StateGraphs with the LangChain ecosystem, MCP protocol (HTTP/SSE via FastMCP), Docker Compose, Python (Quart/Hypercorn), and asyncpg. Gateways are Nginx (State 2/3) or Node.js (State 1). All inference routes through Sutherland — no service calls an LLM endpoint directly.</p>
 
 
     <h2>Source</h2>
