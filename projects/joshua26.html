@@ -23,58 +23,13 @@
 
     <p>Joshua26 is the second-generation <a href="/projects/concept-papers.html">Conversationally Cognizant AI</a> ecosystem. After building <a href="/projects/joshua.html">Joshua</a>, the concepts had proven themselves but the software had accumulated the kind of debt that is cheaper to rewrite than repair. Given how quickly LLMs can produce code, and the processes I had developed for building with them, a clean refactor was the obvious path — carry the ideas forward, leave the implementation behind. Joshua26 is that refactor. I do not code directly — I design, direct, and review. Through Joshua and into Joshua26, the building has been done primarily through Claude Code, Gemini CLI, Codex CLI, and Cursor, using MCP servers to call cloud LLMs for the more complex work. With the advent of Hopper — Joshua26's own engineering agent — that is now starting to shift toward the ecosystem's own agents building and maintaining themselves. Architecture documentation, requirements, and design documents are available in the <a href="https://github.com/jmorrissette-RMDC/portfolio/tree/main/Joshua26">portfolio repository</a>. Code is not included at this time — it will be released in sections starting in April. If you would like early access to specific components, please reach out.</p>
 
-    <h2>The MAD Pattern</h2>
+    <h2>Architecture</h2>
 
-    <p>The fundamental building block is the <strong>MAD</strong> (Multipurpose Agentic Duo) — an autonomous actor that simultaneously serves its domain as an MCP server and consumes other domains as an intelligent client. The "Duo" is the inseparable combination of serving and using — a MAD that only serves is just a microservice; a MAD that only uses is just a client. The combination, governed by shared domain intelligence in both directions, is what makes it an autonomous actor.</p>
+    <p>The building block is the <strong>MAD</strong> (Multipurpose Agentic Duo) — an autonomous actor that simultaneously serves its domain and consumes others, governed by shared domain intelligence in both directions. Each MAD separates its <strong>Action Engine (AE)</strong> — containers, gateways, databases, infrastructure — from its <strong>Thought Engine (TE)</strong> — the Imperator agent and its cognitive apparatus. A <strong>pMAD</strong> (Persistent MAD) owns both and runs continuously as infrastructure. An <strong>eMAD</strong> (Ephemeral MAD) is a TE with no AE — a library package installed at runtime into a host pMAD, existing only during execution. The Imperator is the prime agent within any TE, designed to be self-directing and goal-oriented; the Imperator is still in active development, with much of its functionality available today but the full autonomous capability remaining the target. Executors are cognitive but never independent — sub-agents, tools, and workers that operate under authority.</p>
 
-    <p>Every MAD is composed of two conceptually distinct aspects:</p>
+    <p>The ecosystem runs across three bare-metal Linux hosts (irina: 87TB ZFS storage + Tesla P4; M5: 256GB RAM + 6x GPU including V100 NVLink pair and P40s; Hymie: desktop automation workstation) connected by a Docker Swarm overlay network. All programmatic logic lives in LangGraph StateGraphs — there is exactly one place to look for intelligence. The current deployed architecture (State 2) uses OTS containers with Nginx gateways. The target architecture (State 3) reduces the container to a bootstrap kernel with both AE and TE dynamically loaded as versioned packages from Alexandria at runtime — Kaiser is the first State 3 pMAD.</p>
 
-    <p><strong>Action Engine (AE)</strong> — the physical system. All containers, gateways, databases, caches, sidecars, observability, and the bootstrap kernel. Provides direct tool capabilities and, via the overlay network, access to the full tool set of every other MAD in the ecosystem.</p>
-
-    <p><strong>Thought Engine (TE)</strong> — the cognitive intelligence. The Imperator agent and its cognitive apparatus: Progressive Cognitive Pipeline, inference, conversation-as-state. Conceptually distinct from the AE, though both run within the same deployment. The AE calls into the TE, not the other way around.</p>
-
-    <h2>pMAD and eMAD</h2>
-
-    <p><strong>pMAD (Persistent MAD)</strong> — owns its own AE and TE. System domain. Always running as a deployed service with containers, gateway, and networking. Examples: Rogers (context), Sutherland (inference), Starret (version control).</p>
-
-    <p><strong>eMAD (Ephemeral MAD)</strong> — has its own TE but no AE. Subject matter domain. Exists only during StateGraph execution, hosted by a pMAD. An eMAD is a library package — pure cognitive intelligence with no infrastructure. Installed at runtime via Alexandria (the internal PyPI). Examples: Hopper (engineering), Jerry Maguire (job search).</p>
-
-    <p>The eMAD is a direct consequence of the AE/TE separation: once the TE is a library package independent of infrastructure, an autonomous agent can exist without owning any containers.</p>
-
-    <h2>Agent Classes</h2>
-
-    <p><strong>Imperator</strong> — the prime agent within any TE. Designed to possess Identity, Purpose, and Autonomy — generating its own Intent and self-directing toward goals. Both pMADs and eMADs have Imperators. The target is that a caller can delegate a goal in natural language and the Imperator handles multi-step execution autonomously. The Imperator is still in active development; much of its core functionality is available today, but the full goal-oriented autonomous capability described in the concept papers remains the target, not the current state.</p>
-
-    <p><strong>Executor</strong> — no Identity, Purpose, or Autonomy of its own. Cognitive but never independent. Sub-agents, AE tools, StateGraph workers. Not addressable externally.</p>
-
-    <h2>Container Architecture</h2>
-
-    <p><strong>State 2</strong> (current deployed architecture) — OTS infrastructure, graph-native logic, built-in observability, and the Imperator pattern:</p>
-
-<pre><code>[mad]               # nginx:alpine — sole network boundary (ingress AND egress)
-[mad]-langgraph     # Python — LangGraph StateGraph + Imperator
-[mad]-[technology]  # Official images — postgres, redis, etc. (if needed)</code></pre>
-
-    <p>All programmatic logic lives in the StateGraph. The Nginx gateway is pure configuration — no custom code. There is exactly one place to look for intelligence: the graph. This is what makes the system readable and modifiable by agents.</p>
-
-    <p><strong>State 3</strong> (target architecture) — the container reduces to a bootstrap kernel. Everything that makes it <em>this particular pMAD</em> — both AE and TE — is dynamically loaded from Alexandria as versioned Python packages at runtime. The container itself is interchangeable. Kaiser is the first State 3 pMAD.</p>
-
-    <h2>Infrastructure</h2>
-
-    <table>
-      <thead>
-        <tr><th>Host</th><th>Role</th><th>Key Resources</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>irina</td><td>Swarm Leader, storage</td><td>87TB ZFS, Tesla P4</td></tr>
-        <tr><td>M5</td><td>Compute</td><td>256GB RAM, 6x GPU (3x P40 24GB, 2x V100 SXM2 32GB NVLink, 1x V100 PCIe 32GB)</td></tr>
-        <tr><td>Hymie</td><td>Desktop automation</td><td>Human-like input simulation workstation</td></tr>
-      </tbody>
-    </table>
-
-    <p>Docker Swarm provides the overlay network (joshua-net). Each pMAD operates on two networks: joshua-net for cross-MAD communication, and a private per-MAD network for internal containers. The gateway is the sole boundary in both directions.</p>
-
-    <h2>Deployed Services</h2>
+    <h2>Services</h2>
 
     <table>
       <thead>
@@ -102,10 +57,6 @@
 
     <p><strong>Common stack:</strong> All services are built on LangGraph StateGraphs with the LangChain ecosystem, MCP protocol (HTTP/SSE via FastMCP), Docker Compose, Python (Quart/Hypercorn), and asyncpg. Gateways are Nginx (State 2/3) or Node.js (State 1). All inference routes through Sutherland — no service calls an LLM endpoint directly.</p>
 
-
-    <h2>Source</h2>
-
-    <p>The Joshua26 codebase and documentation are on <a href="https://github.com/jmorrissette-RMDC/portfolio/tree/main/Joshua26">GitHub</a>. The intellectual framework behind the architecture is described in the <a href="/projects/concept-papers.html">concept papers</a>, published as an ongoing series on <a href="https://jmorrissettermdc.substack.com">Substack</a>.</p>
 
     <h2>On the Name</h2>
 
