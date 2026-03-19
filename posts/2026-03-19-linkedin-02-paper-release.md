@@ -8,4 +8,4 @@ These are practitioner's hypotheses, not academic claims. They came from buildin
 
 One paper per day through April 9. The full series and release schedule are on the site.
 
-https://jmorrissettermdc.substack.com
+https://jmorrissettermdc.substack.com/p/conversationally-cognizant-ai-systems
