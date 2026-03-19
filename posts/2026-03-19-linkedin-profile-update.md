@@ -1,5 +1,19 @@
 # LinkedIn Profile Updates
 
+## About Section
+
+I have spent 30 years leading and transforming complex technology organizations — from governing thousands of applications and millions of dollars in budget for giant multinationals, to critical leadership in a variety of startups, to founding and capitalizing a $9.4M venture, to driving multi-million-dollar turnarounds in analytics and SaaS.
+
+In August 2025 I paused that career to immerse in AI full-time. Since then I have built two multi-agent ecosystems from scratch, developed an original framework of 23 concept papers (Conversationally Cognizant AI), completed an MIT certification in data science, and filed 16 patent applications — all through an intensely AI-centric process using many of the leading AI tools.
+
+What I bring is the combination: deep operational leadership experience with genuine, hands-on AI systems knowledge and a dedication to innovation through a first principles approach. I have not read about agentic systems — I have built them. I have not attended a workshop on LLMs — I have spent over 1,500 hours in active conversation with them, learning where they genuinely deliver and where they fall down in ways the industry does not yet widely understand.
+
+My career has been defined by walking into complex, high-stakes situations and making them work — turnarounds, transformations, M&A, strategic pivots. I bring that same temperament to AI: practical, grounded in what actually works, skeptical of hype, focused on results.
+
+I am currently seeking senior leadership roles where I can bring this combination of operational experience and AI capability to an organization that values both.
+
+https://jmorrissette-rmdc.github.io
+
 ## Headline
 Global Technology Executive | AI Systems Builder & Practitioner | Organizational Transformation
 
