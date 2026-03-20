@@ -10,6 +10,8 @@ I did a general look around to find what was out there in practice. What I found
 
 But the pattern I am describing is different. The existing work is about using KGs to structure reasoning input — giving the model better context to reason with. What I am thinking about is using a KG to correct/augment/guide reasoning output — catching the model mid-chain when it is about to repeat a known mistake, and redirecting it before the mistake propagates through the remaining steps. Or conversely to inject desirable behaviors midstream.
 
+The open question is how the KG acquires its knowledge in the first place — the training signal that tells the graph what worked and what didn't. Something has to observe the outcome of a reasoning chain, evaluate whether it succeeded or failed, extract the pattern that caused the result, and encode it into the graph as a relationship. That could be another LLM evaluating the output, a human providing feedback, a test that passed or failed, or a downstream system that broke. The point is that the signal has to be collected, and the collection mechanism matters as much as the intervention mechanism. Without it, the graph has nothing to intervene with.
+
 This seems to me to be one of the most important ways one could use a knowledge graph. Chain-of-thought reasoning is powerful but blind to its own history. The model does not know that it tried this approach yesterday and it failed. A KG does. Connecting the two — not at prompt time, but at each reasoning step — turns CoT from an isolated reasoning exercise into one that learns from experience in real time.
 
 I would be very interested to hear from anyone who has implemented something like this in practice, or who sees reasons it would not work as cleanly as I am imagining.
