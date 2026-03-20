@@ -1,6 +1,6 @@
 # Knowledge Graphs vs LoRAs: Teaching LLMs Without Retraining
 
-I was speaking with a fellow engineer who was thinking about how to apply LoRAs to the image models available in Google Cloud. He was having trouble getting the results he needed — the image content wasn't cooperating with the fine-tuning approach. It's a familiar problem. LoRAs are powerful in theory, but in practice they come with significant training overhead and the difficulty of finding the right weights. I've largely moved away from them in favor of knowledge graphs.
+I was speaking with a fellow engineer who had been applying LoRAs to LLMs in Google Cloud successfully, but was unable to extend the same approach to image generation — the image content wasn't cooperating with the fine-tuning approach. It got me thinking about the broader problem. LoRAs are powerful in theory, but in practice they come with significant training overhead and the difficulty of finding the right weights. I've largely moved away from them in favor of knowledge graphs.
 
 ## The Problem with LoRAs
 
