@@ -1,11 +1,9 @@
 Paper 2/23: Conversation as State
 
-An agent's process ends. The RAM is freed. Nothing is running. Yet when it is next invoked, it has full continuity — every prior decision, every learned pattern, every relationship. How?
+When you wake up in the morning, you remember who you are and what you were working on — even though your brain was not actively processing it while you slept. Your memory persists through the accumulated experience of your life, not through a running process.
 
-The conversation IS the state. Not a log of state. Not a supplement to state. The accumulated conversational record is the substrate of memory and expertise. Agents are mechanically stateless between invocations but infinitely stateful through conversation.
+AI agents have the same problem to solve. Today's paper explores what happens when you treat the conversation record itself as the agent's memory — not as a log to be searched, but as the actual substrate of everything the agent knows.
 
-This has consequences: parallel instances without synchronization, ephemeral existence with infinite continuity, role-level collective memory, and resilience through shared conversational state.
+Second paper in the Conversationally Cognizant AI series. One per day through April 9.
 
-Paper 2 of 23 in the Conversationally Cognizant AI series. One per day through April 9.
-
-https://jmorrissettermdc.substack.com/p/conversation-as-state
+https://open.substack.com/pub/jmorrissettermdc/p/conversation-as-state?r=7xq8e8&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true
