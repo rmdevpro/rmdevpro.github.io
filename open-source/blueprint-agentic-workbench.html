@@ -92,9 +92,11 @@
 .detail-section .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; padding-top: 0.35rem; }
 .detail-section h2 { font-size: 1.75rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
 .detail-section p { max-width: 62ch; margin-bottom: 1rem; }
-.detail-section ul { margin: 0.5rem 0 0 1.25rem; max-width: 62ch; }
-.detail-section ul li { margin-bottom: 0.5rem; color: var(--text-soft); }
-.detail-section ul li b { color: var(--text); font-weight: 600; }
+.detail-section h3 { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 1.75rem; margin-bottom: 0.75rem; color: var(--text); }
+.detail-section h3 .o { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); margin-right: 0.6rem; }
+.detail-section ul, .detail-section ol { margin: 0.5rem 0 1rem 1.25rem; max-width: 62ch; }
+.detail-section ul li, .detail-section ol li { margin-bottom: 0.5rem; color: var(--text-soft); }
+.detail-section ul li b, .detail-section ol li b { color: var(--text); font-weight: 600; }
 .code {
   font-family: var(--mono);
   font-size: 0.875rem;
@@ -248,13 +250,27 @@
     <div class="lbl">§ 07 · Install</div>
     <div>
       <h2>Run it yourself.</h2>
+      <p>Two deployment paths. Run it locally with Docker for development, or host a private production instance on Hugging Face Spaces for about $5/month.</p>
+
+      <h3><span class="o">Option A</span>Docker · self-hosted</h3>
       <p>One command. You need Docker and <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">docker compose</code>.</p>
       <div class="code"><span class="comment"># Clone and run</span>
 <span class="cmd">git clone</span> https://github.com/rmdevpro/agentic-workbench.git
 <span class="cmd">cd</span> agentic-workbench
 <span class="cmd">docker compose up</span> -d</div>
       <p>Open <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">http://localhost:8080</code>. That's it.</p>
-      <p style="margin-top:1rem"><a class="link" href="https://github.com/rmdevpro/agentic-workbench#readme" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">GitHub — full install guide →</a></p>
+
+      <h3><span class="o">Option B</span>Hugging Face Spaces · production</h3>
+      <p>A managed, always-on environment that is genuinely production-suitable. The reference Space is published at <a href="https://huggingface.co/spaces/aristotle9/agentic-workbench" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px;">huggingface.co/spaces/aristotle9/agentic-workbench</a>.</p>
+      <ol>
+        <li>Open the reference Space and click <b>Duplicate this Space</b>.</li>
+        <li>Set the duplicated Space to <b>Private</b>.</li>
+        <li>In hardware settings, choose the <b>CPU Upgrade</b> tier ($0.03 / hour, roughly $5 / month).</li>
+        <li>Mount a persistent storage bucket to <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">/data</code> so projects and session state survive restarts.</li>
+      </ol>
+      <p>Your private Space is live at a Hugging Face URL — use it directly, or put a custom domain in front.</p>
+
+      <p style="margin-top:1.5rem"><a class="link" href="https://github.com/rmdevpro/agentic-workbench#readme" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">GitHub — full install guide →</a></p>
     </div>
   </div>
 
