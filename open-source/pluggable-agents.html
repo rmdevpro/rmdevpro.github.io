@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pluggable Agents — BlueprintAgentic</title>
+<meta name="description" content="Drop-in agents for Google Workspace and Microsoft 365. Gmail, Drive, Calendar, OneDrive — pip install and go.">
+<link rel="icon" href="../assets/logos/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(3rem, 6vw, 5rem); }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.75rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+.product-hero .back:hover { color: var(--accent); }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+.product-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.25rem; max-width: 18ch; }
+.product-hero .tagline { font-size: 1.25rem; line-height: 1.4; color: var(--text); max-width: 55ch; margin-bottom: 1.75rem; font-weight: 500; letter-spacing: -0.01em; }
+.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 2rem; }
+
+.two-package { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem; }
+.package-card { background: var(--bg-raised); border: 1px solid var(--rule); padding: 1.5rem; }
+.package-card .head { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule); }
+.package-card .head .v { color: var(--accent); }
+.package-card h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.015em; }
+.package-card p { font-size: 0.95rem; color: var(--text-soft); }
+@media (max-width: 720px) { .two-package { grid-template-columns: 1fr; } }
+
+.detail-section { display: grid; grid-template-columns: 7rem 1fr; gap: 2.5rem; padding-block: clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule); align-items: start; }
+.detail-section:last-of-type { border-bottom: none; }
+.detail-section .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; padding-top: 0.35rem; }
+.detail-section h2 { font-size: 1.75rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.detail-section h3 { font-size: 1.15rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.detail-section p { max-width: 62ch; margin-bottom: 1rem; }
+.detail-section ul { margin: 0.5rem 0 1rem 1.25rem; max-width: 62ch; }
+.detail-section ul li { margin-bottom: 0.5rem; color: var(--text-soft); }
+.detail-section ul li b { color: var(--text); font-weight: 600; }
+.code { font-family: var(--mono); font-size: 0.875rem; background: #0C0C0D; color: #E4E4E7; padding: 1rem 1.25rem; overflow-x: auto; border-radius: 4px; line-height: 1.6; margin-block: 1rem; max-width: 62ch; }
+.code .comment { color: #8A8A8F; }
+.code .cmd { color: #5CA8FF; }
+@media (max-width: 720px) { .detail-section { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+.caps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; max-width: 62ch; }
+.caps-grid .cap { background: var(--bg-raised); border: 1px solid var(--rule); padding: 0.9rem; font-family: var(--mono); font-size: 0.82rem; }
+.caps-grid .cap b { display: block; color: var(--accent); margin-bottom: 0.3rem; font-size: 0.72rem; letter-spacing: 0.05em; }
+@media (max-width: 720px) { .caps-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../index.html" aria-label="BlueprintAgentic"><img src="../assets/logos/wordmark-blue.png" alt="Blueprint"><span class="after">Agentic</span></a>
+    <ul><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#work">Work</a></li><li><a href="../index.html#open-source">Open Source</a></li><li><a href="../index.html#about">About</a></li></ul>
+    <a class="go" href="../index.html#contact">Contact →</a>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#open-source">← Open source</a>
+    <div class="kicker">§ Agents · Open source</div>
+    <h1>Pluggable Agents.</h1>
+    <p class="tagline">Drop-in agents for the services your business already runs on.</p>
+    <p class="sub">Every eMAD (ephemeral Modular Agent Daemon) is a Python package that plugs into an eMAD Host. Install it, the Host picks it up, and agents get new capabilities — no downtime, no monolithic redeploy. Two agents are currently published.</p>
+    <div class="two-package">
+      <div class="package-card">
+        <div class="head"><span>google-workspace-emad</span><span class="v">v0.2</span></div>
+        <h3>Google Workspace</h3>
+        <p>Gmail · Drive · Docs · Sheets · Slides · Calendar. 30+ tools.</p>
+      </div>
+      <div class="package-card">
+        <div class="head"><span>microsoft-365-emad</span><span class="v">v0.2</span></div>
+        <h3>Microsoft 365</h3>
+        <p>Outlook · Calendar · OneDrive. 15+ tools via Microsoft Graph.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="detail-section">
+    <div class="lbl">§ 01 · Google Workspace</div>
+    <div>
+      <h2>Full Google Workspace, agent-accessible.</h2>
+      <p>Gmail, Drive, Docs, Sheets, Slides, and Calendar — all callable by agents via a single registered eMAD. Service-account authentication with domain-wide delegation means agents act on behalf of real users, safely.</p>
+
+      <h3>Capabilities</h3>
+      <div class="caps-grid">
+        <div class="cap"><b>Gmail</b>read · send · search</div>
+        <div class="cap"><b>Drive</b>list · search · create · delete · share · move · copy · rename</div>
+        <div class="cap"><b>Sheets</b>read · write · append · clear · create</div>
+        <div class="cap"><b>Docs</b>read · write · create</div>
+        <div class="cap"><b>Slides</b>get · create</div>
+        <div class="cap"><b>Calendar</b>list · create · update · get events</div>
+      </div>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph · LangChain · google-api-python-client · asyncpg · Prometheus.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 02 · Microsoft 365</div>
+    <div>
+      <h2>Full Microsoft 365, agent-accessible.</h2>
+      <p>Outlook mail, Calendar, and OneDrive via the Microsoft Graph API. OAuth2 token lifecycle managed via MSAL.</p>
+
+      <h3>Capabilities</h3>
+      <div class="caps-grid">
+        <div class="cap"><b>Email</b>read · send · search · list folders · mark read</div>
+        <div class="cap"><b>Calendar</b>list events · create · delete</div>
+        <div class="cap"><b>OneDrive</b>list · upload · search · create folders · delete</div>
+        <div class="cap"><b>Auth</b>OAuth2 flow · token status</div>
+      </div>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph · LangChain · MSAL · httpx · asyncpg · Prometheus.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 03 · Why "pluggable"</div>
+    <div>
+      <h2>Install and the host picks it up.</h2>
+      <p>Because agents register with their host via Python entry points, you can:</p>
+      <ul>
+        <li>Install a new agent with <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">pip install</code> — the host discovers it automatically</li>
+        <li>Upgrade an agent without restarting the host</li>
+        <li>Develop agents independently from the runtime they'll be hosted in</li>
+        <li>Compose agents — a workflow can call Google Workspace, then Microsoft 365, then a custom internal agent, all in one conversation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-section" id="install">
+    <div class="lbl">§ 04 · Install</div>
+    <div>
+      <h2>Run them yourself.</h2>
+      <div class="code"><span class="comment"># Requires eMAD Host already running</span>
+<span class="cmd">pip install</span> google-workspace-emad
+<span class="cmd">pip install</span> microsoft-365-emad
+
+<span class="comment"># Restart not required — host discovers on install</span></div>
+      <p>Documentation for each agent lives in its repository.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 05 · Build your own</div>
+    <div>
+      <h2>Agents for your stack, too.</h2>
+      <p>If you need an agent for <b>Slack, Jira, SharePoint, Salesforce, ServiceNow</b>, or your internal APIs — we build those as standard engagements. The eMAD pattern makes it straightforward. The typical agent ships in a week or two depending on API complexity.</p>
+      <p style="margin-top:1rem"><a class="link" href="../index.html#contact" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">Talk to us →</a></p>
+    </div>
+  </div>
+</div>
+
+<section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
+  <div class="wrap">
+    <div class="section-head"><div class="lbl">§ Work with us</div><h2>Need a custom agent?</h2></div>
+    <p>We build pluggable agents for client systems on standard engagements. Send us a note.</p>
+    <div class="lines">
+      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
+      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+    <ul><li><a href="mailto:j@blueprintagentic.ai">Email</a></li><li><a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://github.com/jmorrissette-RMDC" target="_blank" rel="noopener">GitHub</a></li></ul>
+  </div>
+</footer>
+
+</body>
+</html>

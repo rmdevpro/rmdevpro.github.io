@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Platform — BlueprintAgentic</title>
+<meta name="description" content="Context Broker + eMAD Host. Durable conversational memory and hot-pluggable agent orchestration for production agentic AI.">
+<link rel="icon" href="../assets/logos/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(3rem, 6vw, 5rem); }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.75rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+.product-hero .back:hover { color: var(--accent); }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.75rem; }
+.product-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.25rem; max-width: 18ch; }
+.product-hero .tagline { font-size: 1.25rem; line-height: 1.4; color: var(--text); max-width: 55ch; margin-bottom: 1.75rem; font-weight: 500; letter-spacing: -0.01em; }
+.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 2rem; }
+
+.two-package {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.package-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+}
+.package-card .head { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule); }
+.package-card .head .v { color: var(--accent); }
+.package-card h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.015em; }
+.package-card p { font-size: 0.95rem; color: var(--text-soft); }
+@media (max-width: 720px) { .two-package { grid-template-columns: 1fr; } }
+
+.detail-section { display: grid; grid-template-columns: 7rem 1fr; gap: 2.5rem; padding-block: clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule); align-items: start; }
+.detail-section:last-of-type { border-bottom: none; }
+.detail-section .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; padding-top: 0.35rem; }
+.detail-section h2 { font-size: 1.75rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.detail-section h3 { font-size: 1.15rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.detail-section p { max-width: 62ch; margin-bottom: 1rem; }
+.detail-section ul { margin: 0.5rem 0 1rem 1.25rem; max-width: 62ch; }
+.detail-section ul li { margin-bottom: 0.5rem; color: var(--text-soft); }
+.detail-section ul li b { color: var(--text); font-weight: 600; }
+.code { font-family: var(--mono); font-size: 0.875rem; background: #0C0C0D; color: #E4E4E7; padding: 1rem 1.25rem; overflow-x: auto; border-radius: 4px; line-height: 1.6; margin-block: 1rem; max-width: 62ch; }
+.code .comment { color: #8A8A8F; }
+.code .cmd { color: #5CA8FF; }
+@media (max-width: 720px) { .detail-section { grid-template-columns: 1fr; gap: 0.5rem; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../index.html" aria-label="BlueprintAgentic"><img src="../assets/logos/wordmark-blue.png" alt="Blueprint"><span class="after">Agentic</span></a>
+    <ul><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#work">Work</a></li><li><a href="../index.html#open-source">Open Source</a></li><li><a href="../index.html#about">About</a></li></ul>
+    <a class="go" href="../index.html#contact">Contact →</a>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#open-source">← Open source</a>
+    <div class="kicker">§ Platform · Open source</div>
+    <h1>Agent Platform.</h1>
+    <p class="tagline">Infrastructure for production agentic systems.</p>
+    <p class="sub">Two independent but complementary open-source services that solve the two hardest problems in deploying real AI agents: remembering things across conversations, and plugging in new agents without breaking the ones already running.</p>
+    <div class="two-package">
+      <div class="package-card">
+        <div class="head"><span>context-broker</span><span class="v">v0.x</span></div>
+        <h3>Context Broker</h3>
+        <p>The memory layer.</p>
+      </div>
+      <div class="package-card">
+        <div class="head"><span>emad-host</span><span class="v">v0.x</span></div>
+        <h3>eMAD Host</h3>
+        <p>The runtime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="detail-section">
+    <div class="lbl">§ 01 · Context Broker</div>
+    <div>
+      <h2>The memory layer for AI agents.</h2>
+      <p>LLM agents reason inside finite context windows. Real conversations accumulate indefinitely. Context Broker bridges that gap.</p>
+      <p>It stores every message, embeds it for semantic search, extracts structured knowledge into a graph, and assembles purpose-built context windows on demand — curated views tailored to the specific participant, constructed according to a configured strategy, strictly bound by token budgets.</p>
+
+      <h3>What it does</h3>
+      <ul>
+        <li><b>Infinite conversation storage</b> with Postgres + pgvector</li>
+        <li><b>Multi-tier progressive compression</b> — archival summaries, chunk summaries, and recent verbatim, assembled to fit any token budget</li>
+        <li><b>Hybrid search</b> — vector similarity, BM25, reciprocal rank fusion, optional reranking</li>
+        <li><b>Knowledge graph</b> — automatic entity and relationship extraction into Neo4j</li>
+        <li><b>MCP tool interface</b> — ten-plus tools agents can call directly</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — drop-in integration for anything that speaks the OpenAI API</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph · FastAPI · PostgreSQL with pgvector · Redis · Neo4j · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 02 · eMAD Host</div>
+    <div>
+      <h2>Plug-and-play agent orchestration.</h2>
+      <p><b>eMAD</b> stands for <em>ephemeral Modular Agent Daemon</em>. The Host is the runtime that loads them, routes to them, and manages their lifecycle. Install a new agent with <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">pip install</code>, and the Host picks it up — no restart, no monolithic deploy.</p>
+
+      <h3>What it does</h3>
+      <ul>
+        <li><b>Dynamic agent loading</b> — agents register via Python entry points; the Host discovers and routes to them</li>
+        <li><b>Routing by model name</b> — any OpenAI client calling <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">model: my-agent</code> gets dispatched to the my-agent eMAD</li>
+        <li><b>Hot-swap</b> — replace or upgrade an agent without taking the Host down</li>
+        <li><b>Built-in tools</b> — sandboxed scripting, filesystem access, notifications, admin controls</li>
+        <li><b>Optional Context Broker integration</b> — eMADs can offload persistent memory to a Context Broker for conversation continuity</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph · FastAPI · PostgreSQL · Redis · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 03 · Together</div>
+    <div>
+      <h2>How they fit.</h2>
+      <p>Context Broker and eMAD Host are <b>independent but complementary</b>.</p>
+      <ul>
+        <li>Run <b>Context Broker alone</b> if you need durable conversational memory for an existing system.</li>
+        <li>Run <b>eMAD Host alone</b> if you need pluggable agent orchestration but don't need persistent memory.</li>
+        <li>Run <b>both together</b> — eMAD Host points at Context Broker, and every eMAD it hosts gets free durable memory across restarts.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-section" id="install">
+    <div class="lbl">§ 04 · Install</div>
+    <div>
+      <h2>Run it yourself.</h2>
+      <div class="code"><span class="comment"># Context Broker</span>
+<span class="cmd">git clone</span> https://github.com/rmdevpro/context-broker.git
+<span class="cmd">cd</span> context-broker &amp;&amp; <span class="cmd">docker compose up</span> -d
+
+<span class="comment"># eMAD Host</span>
+<span class="cmd">pip install</span> emad-host
+<span class="cmd">emad-host</span> --config config.yaml</div>
+      <p>Full documentation in each repository.</p>
+    </div>
+  </div>
+</div>
+
+<section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
+  <div class="wrap">
+    <div class="section-head"><div class="lbl">§ Work with us</div><h2>Deploying this in production?</h2></div>
+    <p>We stand up Context Broker and eMAD Host for clients as part of larger agentic builds. Send us a note.</p>
+    <div class="lines">
+      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
+      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+    <ul><li><a href="mailto:j@blueprintagentic.ai">Email</a></li><li><a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://github.com/jmorrissette-RMDC" target="_blank" rel="noopener">GitHub</a></li></ul>
+  </div>
+</footer>
+
+</body>
+</html>

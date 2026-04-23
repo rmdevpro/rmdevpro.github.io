@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blueprint Agentic Workbench — BlueprintAgentic</title>
+<meta name="description" content="The web-based workbench we use on every engagement. Run Claude, Gemini, and Codex concurrently. MIT licensed, self-hosted.">
+<link rel="icon" href="../assets/logos/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(3rem, 6vw, 5rem); }
+.product-hero .back {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.75rem;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.product-hero .back:hover { color: var(--accent); }
+.product-hero .kicker {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+.product-hero h1 {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+  max-width: 18ch;
+}
+.product-hero .tagline {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 55ch;
+  margin-bottom: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 2rem; }
+.product-hero .cta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.product-preview {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding-block: clamp(3rem, 6vw, 5rem);
+  background: var(--bg-raised);
+}
+.product-preview .frame {
+  border: 1px solid var(--rule);
+  background: white;
+  box-shadow: 0 20px 60px -30px rgba(9,31,56,0.2);
+  overflow: hidden;
+}
+.product-preview .frame img { width: 100%; display: block; }
+.product-preview .cap {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  display: flex; justify-content: space-between;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-block: 2.5rem;
+}
+.spec-grid > div { padding: 1.25rem 1.5rem; border-right: 1px solid var(--rule); }
+.spec-grid > div:last-child { border-right: none; }
+.spec-grid .k { font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 0.25rem; display: block; }
+.spec-grid .v { font-weight: 500; color: var(--text); font-size: 1rem; }
+.spec-grid .v.accent { color: var(--accent); }
+@media (max-width: 720px) { .spec-grid { grid-template-columns: repeat(2, 1fr); } .spec-grid > div:nth-child(2) { border-right: none; } }
+
+.detail-section {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 2.5rem;
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.detail-section:last-of-type { border-bottom: none; }
+.detail-section .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; padding-top: 0.35rem; }
+.detail-section h2 { font-size: 1.75rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.detail-section p { max-width: 62ch; margin-bottom: 1rem; }
+.detail-section ul { margin: 0.5rem 0 0 1.25rem; max-width: 62ch; }
+.detail-section ul li { margin-bottom: 0.5rem; color: var(--text-soft); }
+.detail-section ul li b { color: var(--text); font-weight: 600; }
+.code {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  background: #0C0C0D;
+  color: #E4E4E7;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  line-height: 1.6;
+  margin-block: 1rem;
+  max-width: 62ch;
+}
+.code .comment { color: #8A8A8F; }
+.code .cmd { color: #5CA8FF; }
+@media (max-width: 720px) { .detail-section { grid-template-columns: 1fr; gap: 0.5rem; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../index.html" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#open-source">Open Source</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <a class="go" href="../index.html#contact">Contact →</a>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#open-source">← Open source</a>
+    <div class="kicker">§ Flagship · Open source · MIT</div>
+    <h1>Blueprint Agentic Workbench.</h1>
+    <p class="tagline">Our primary tool. Free, via open source.</p>
+    <p class="sub">A web-based workbench for AI agents. Run Claude Code, Google Gemini, and OpenAI Codex concurrently — organized by project, persistent across sessions, all from a browser. The same workbench we use on every client engagement, published under MIT so you can run it too.</p>
+    <div class="cta">
+      <a class="btn" href="#">View on GitHub</a>
+      <a class="btn ghost" href="#install">Install guide</a>
+    </div>
+  </div>
+</section>
+
+<section class="product-preview">
+  <div class="wrap">
+    <div class="frame">
+      <img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface">
+    </div>
+    <div class="cap">
+      <span>Fig. 01 — Workbench running a Claude Code session</span>
+      <span>Single-user · Self-hosted · Docker</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="spec-grid">
+    <div><span class="k">Name</span><span class="v">blueprint-workbench</span></div>
+    <div><span class="k">License</span><span class="v">MIT</span></div>
+    <div><span class="k">Runtime</span><span class="v">Node.js 22 · Docker</span></div>
+    <div><span class="k">Status</span><span class="v accent">● Production</span></div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 01 · Why</div>
+    <div>
+      <h2>One browser, every AI.</h2>
+      <p>Every AI coding tool today runs in its own terminal, with its own state, with its own context window, with its own CLI conventions. If you work with more than one, you end up juggling tmux windows, lost sessions, and copy-paste between chats.</p>
+      <p>Blueprint Agentic Workbench is what happens when you take that pain seriously. One browser, multiple AI agents, proper project boundaries, persistent sessions, real file browsing, and integrated task tracking — all self-hosted in Docker, single-user by design.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 02 · Capabilities</div>
+    <div>
+      <h2>What it does.</h2>
+      <ul>
+        <li><b>Multi-AI session management</b> — Create, pause, resume, and switch between Claude, Gemini, and Codex sessions. State persists across restarts.</li>
+        <li><b>Browser-based terminal</b> — Full terminal access over WebSocket, powered by xterm.js. No native install, no desktop app.</li>
+        <li><b>Project organization</b> — Group sessions by project. Each gets its own workspace, configuration, and MCP tool registry.</li>
+        <li><b>Integrated task tracking</b> — Create and organize tasks inline with your work. Surface what's in-flight at a glance.</li>
+        <li><b>Vector search</b> — Built-in Qdrant vector database for semantic search across your codebase.</li>
+        <li><b>Workspace file browser</b> — Browse, create, edit, and upload files directly from the web UI.</li>
+        <li><b>MCP tool integration</b> — Register Model Context Protocol servers per project.</li>
+        <li><b>Environment safety markers</b> — Deploy as Dev (green) or Pro (red) to prevent prod/dev confusion at a glance.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 03 · Who it's for</div>
+    <div>
+      <h2>For builders, not evaluators.</h2>
+      <p>If you juggle multiple AI coding tools across multiple projects, and you've accepted that tmux pain as normal — this is for you.</p>
+      <ul>
+        <li>Solo developers running several AI agents on different problems in parallel</li>
+        <li>Teams evaluating different models side-by-side under identical conditions</li>
+        <li>Anyone who wants persistent, reproducible agent sessions without chasing terminal windows</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 04 · Stack</div>
+    <div>
+      <h2>Under the hood.</h2>
+      <p>Node.js 22 · Express · SQLite · tmux · node-pty · xterm.js · Qdrant · Docker. No build step in production, no external cloud dependencies, no telemetry.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="install">
+    <div class="lbl">§ 05 · Install</div>
+    <div>
+      <h2>Run it yourself.</h2>
+      <p>One command. You need Docker and <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">docker compose</code>.</p>
+      <div class="code"><span class="comment"># Clone and run</span>
+<span class="cmd">git clone</span> https://github.com/rmdevpro/blueprint.git
+<span class="cmd">cd</span> blueprint
+<span class="cmd">docker compose up</span> -d</div>
+      <p>Open <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">http://localhost:8080</code>. That's it.</p>
+      <p style="margin-top:1rem"><a class="link" href="#" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">GitHub — full install guide →</a></p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 06 · Open source</div>
+    <div>
+      <h2>MIT licensed.</h2>
+      <p>Fork it, modify it, ship it inside your own product. We accept contributions — bug reports, pull requests, and architectural suggestions alike. The repository is the canonical reference; this page exists only to tell you it exists.</p>
+    </div>
+  </div>
+</div>
+
+<section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Work with us</div>
+      <h2>Need this running in your organization?</h2>
+    </div>
+    <p>We set up Blueprint Agentic Workbench in client environments as part of most engagements. Send us a note.</p>
+    <div class="lines">
+      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
+      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+    <ul>
+      <li><a href="mailto:j@blueprintagentic.ai">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/jmorrissette-RMDC" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

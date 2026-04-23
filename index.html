@@ -1,60 +1,309 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>J. Morrissette — Conversationally Cognizant AI</title>
-  <meta name="description" content="Tech executive and hands-on AI researcher specializing in agentic AI systems.">
-  <meta property="og:title" content="J. Morrissette — Conversationally Cognizant AI">
-  <meta property="og:description" content="Tech executive and hands-on AI researcher specializing in agentic AI systems.">
-  <meta property="og:type" content="website">
-  <link rel="stylesheet" href="/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BlueprintAgentic — Agentic AI consulting</title>
+<meta name="description" content="Consulting for agentic AI systems and the IT infrastructure they run on.">
+<link rel="icon" href="assets/logos/favicon.ico">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Hero A — Split layout: text left, workbench screenshot bleeds off the right edge */
+.hero-split {
+  position: relative;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+  overflow: hidden;
+}
+.hero-split .row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  position: relative;
+}
+.hero-split .txt { min-width: 0; }
+.hero-split .meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--text-faint);
+  margin-bottom: 1.5rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.hero-split .meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.hero-split h1 {
+  font-size: clamp(2rem, 3.8vw, 2.85rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  max-width: 18ch;
+  margin-bottom: 1.25rem;
+}
+.hero-split h1 em { color: var(--accent); font-style: normal; font-weight: 600; }
+.hero-split .sub {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+  max-width: 45ch;
+  margin-bottom: 1.75rem;
+}
+.hero-split .cta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.hero-split .visual {
+  position: relative;
+  min-width: 0;
+}
+.hero-split .visual .frame {
+  position: relative;
+  width: 130%;
+  margin-right: -30%;
+  border: 1px solid var(--rule);
+  box-shadow: 0 30px 60px -24px rgba(9,31,56,0.18), 0 10px 20px -12px rgba(9,31,56,0.08);
+  background: white;
+  overflow: hidden;
+}
+.hero-split .visual img { width: 100%; height: auto; display: block; }
+.hero-split .visual .tag {
+  position: absolute;
+  bottom: 0.9rem; left: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-soft);
+  background: rgba(255,255,255,0.94);
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--rule);
+}
+@media (max-width: 960px) {
+  .hero-split .row { grid-template-columns: 1fr; }
+  .hero-split .visual .frame { width: 100%; margin-right: 0; }
+}
+.about-solo { max-width: 62ch; }
+.about-solo h3 { font-size: 1.3rem; margin-bottom: 1rem; font-weight: 500; }
+.about-solo p { margin-bottom: 0.85rem; font-size: 1rem; color: var(--text-soft); }
+.about-solo .link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--accent); font-weight: 500; font-size: 0.9375rem;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  margin-top: 0.5rem;
+}
+</style>
 </head>
 <body>
-  <nav>
-    <div class="container">
-      <a href="/" class="site-title">J. Morrissette — Conversationally Cognizant AI</a>
-      <div class="nav-links">
-        <a href="/" class="active">about</a>
-        <a href="/approach.html">approach</a>
-        <a href="/projects/">projects</a>
-      </div>
-    </div>
-  </nav>
 
-  <main class="container">
-    <div class="about-layout">
-      <img src="/assets/img/prof_pic.jpg" alt="J. Morrissette" class="about-photo">
-      <div class="about-text">
-        <h1>J. Morrissette</h1>
-        <p class="subtitle">Tech Executive &amp; Hands-on AI Researcher</p>
-      </div>
-    </div>
-
-    <p>Nearly 30 years leading and transforming technology organizations — from governing 2,000+ applications across a global enterprise to founding and capitalizing a $9.4M venture — and in mid-2025 I turned all of that toward AI and started learning, thinking, and building.</p>
-
-    <p><strong>Joshua26</strong> is the result: a distributed multi-agent ecosystem spanning three bare-metal hosts and a dozen cloud services, with autonomous agents that build, test, and maintain software with minimal human intervention. It's not a demo. It runs in production every day.</p>
-
-    <p>Along the way I developed <strong>Conversationally Cognizant AI</strong> — an original framework for how agentic systems should be structured — 23 concept papers covering everything from agent identity and autonomy to multi-model collaboration to why conversation itself is the right substrate for agent cognition. I hold an MIT certification in Generative AI as well as masters degrees in both IT and Business Administration.</p>
-
-    <p>I'm currently looking for senior leadership roles where I can bring my skills, experience and approach to an innovation focussed organization.</p>
-
-    <p>I take an extremely AI-centric approach to work. I have spent over 1,500 hours in active LLM conversation since August 2025. See the <a href="/approach.html">Approach</a> page for details.</p>
-
-    <h2>Find the Work</h2>
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="#" aria-label="BlueprintAgentic">
+      <img src="assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
     <ul>
-      <li><strong><a href="https://jmorrissettermdc.substack.com">Substack</a></strong> — concept paper series and field analysis</li>
-      <li><strong><a href="https://github.com/jmorrissette-RMDC">GitHub</a></strong> — published papers and framework</li>
-      <li><strong><a href="https://www.linkedin.com/in/jason-morrissette-6704261b/">LinkedIn</a></strong> — professional background and connect</li>
-      <li><strong><a href="https://x.com/jmorrissetterm">X</a></strong> — updates and discussion</li>
-      <li><strong><a href="/projects/">Projects</a></strong> — technology projects and research</li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#open-source">Open Source</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
-  </main>
+    <a class="go" href="#contact">Contact →</a>
+  </div>
+</header>
 
-  <footer>
-    <div class="container">
-      &copy; 2026 Jason J. Morrissette
+<section class="hero-split">
+  <div class="wrap">
+    <div class="row">
+      <div class="txt">
+        <div class="meta"><span class="dot"></span><span>Accepting client engagements · 2026</span></div>
+        <h1>We build <em>agentic systems</em> — and the infrastructure they run on.</h1>
+        <p class="sub">BlueprintAgentic is a consulting practice focused on production agentic AI. We architect, design, build, deploy, and operate — end to end — for companies that need a system, not a prototype.</p>
+        <div class="cta">
+          <a class="btn" href="#contact">Start a conversation</a>
+          <a class="btn ghost" href="#work">See the work</a>
+        </div>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="frame">
+          <img src="assets/workbench-preview.png" alt="">
+          <div class="tag">Blueprint Workbench — the workbench we build on.</div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Services</div>
+      <h2>What we do.</h2>
+    </div>
+    <div class="services-list">
+      <div class="item">
+        <div class="num">01 · Architecture</div>
+        <h3>System design.</h3>
+        <p>How agents coordinate, where memory lives, which models handle which tasks, how humans stay in the loop. Deliverables your team can build from — or that we can build for you.</p>
+      </div>
+      <div class="item">
+        <div class="num">02 · Design &amp; build</div>
+        <h3>Working software.</h3>
+        <p>We write the code, wire the infrastructure, ship the product, and keep it running. Python, TypeScript, Node.js, Go. LangGraph, MCP, Anthropic, Google, OpenAI.</p>
+      </div>
+      <div class="item">
+        <div class="num">03 · Full-stack IT</div>
+        <h3>The infrastructure underneath.</h3>
+        <p>Network, servers, WiFi, structured cabling, routers, firewalls. Camera systems and access control. UPS and generator backup. HVAC controls and facility automation. The stack agentic software actually runs on.</p>
+      </div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Flagship</div>
+      <h2>Blueprint Agentic Workbench.</h2>
+    </div>
+    <div class="flagship">
+      <div class="art">
+        <img src="assets/logos/logo-blue.png" alt="Blueprint Agentic Workbench">
+        <div class="meta"><span>Claude · Gemini · Codex</span><span>MIT · Open source</span></div>
+      </div>
+      <div class="copy">
+        <h3>Our primary tool. Free, via open source.</h3>
+        <p>Run Claude Code, Google Gemini, and OpenAI Codex concurrently. Organized by project, persistent across sessions, all from a browser. Full terminal access, vector search, task tracking, MCP tool registry.</p>
+        <p>Self-hosted in Docker. Single-user by design. The same workbench we use on every engagement — published under MIT so you can run it too.</p>
+        <a class="link" href="open-source/blueprint-agentic-workbench.html">Read more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="padding-block:0">
+  <div class="wrap">
+    <div class="roster">
+      <div class="lbl">§ Clients · commissioned work</div>
+      <div class="list">
+        <span>Milton Hilton</span>
+        <span>Bluefox Brands</span>
+        <span>Evergreen Agriculture Industries</span>
+        <span>Mass Cannabis Growers Cooperative</span>
+        <span>Blossom Flower</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Case study · 01</div>
+      <h2>Milton Hilton.</h2>
+    </div>
+    <div class="feature">
+      <div>
+        <h3>A 240,000 sq ft commercial building — all of it.</h3>
+        <p>Milton Hilton runs a 240,000 square foot multi-tenant commercial building in Massachusetts. Four co-located businesses. We delivered the entire technology stack.</p>
+        <p>Building-wide network and WiFi with tenant segmentation. Managed switching, servers, routers, firewalls. Full IP camera system. Access control for every tenant profile. UPS infrastructure and a generator capable of carrying the full building through extended outages.</p>
+        <p>Then the differentiator — an agentic industrial HVAC system. We designed the mechanical and electrical, specified the control hardware, wired the sensor network, and wrote the multi-agent control software that runs it. Production, 24/7.</p>
+        <a class="link" href="#">Read the case study →</a>
+        <dl class="specs">
+          <dt>Client</dt><dd>Milton Hilton</dd>
+          <dt>Footprint</dt><dd>240,000 sq ft</dd>
+          <dt>Tenants</dt><dd>4 co-located businesses</dd>
+          <dt>Systems</dt><dd>Network · Security · Power · Agentic HVAC</dd>
+          <dt>Role</dt><dd>Architect · Designer · Builder</dd>
+        </dl>
+      </div>
+      <div class="visual">
+        <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="40" y="40" width="320" height="200" fill="none" stroke="#0E4A8A" stroke-width="1.5"/>
+          <line x1="120" y1="40" x2="120" y2="240" stroke="#0E4A8A" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <line x1="200" y1="40" x2="200" y2="240" stroke="#0E4A8A" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <line x1="280" y1="40" x2="280" y2="240" stroke="#0E4A8A" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <line x1="40" y1="140" x2="360" y2="140" stroke="#0E4A8A" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <text x="80" y="95" font-family="Mona Sans" font-size="11" fill="#0E4A8A" text-anchor="middle">Zone 01</text>
+          <text x="160" y="95" font-family="Mona Sans" font-size="11" fill="#0E4A8A" text-anchor="middle">Zone 02</text>
+          <text x="240" y="95" font-family="Mona Sans" font-size="11" fill="#0E4A8A" text-anchor="middle">Zone 03</text>
+          <text x="320" y="95" font-family="Mona Sans" font-size="11" fill="#0E4A8A" text-anchor="middle">Zone 04</text>
+          <text x="200" y="190" font-family="Mona Sans" font-size="11" fill="#4A4A4E" text-anchor="middle">Corridor · MDF · UPS · Generator</text>
+          <circle cx="80" cy="55" r="4" fill="#0E4A8A"/>
+          <circle cx="160" cy="55" r="4" fill="#0E4A8A"/>
+          <circle cx="240" cy="55" r="4" fill="#0E4A8A"/>
+          <circle cx="320" cy="55" r="4" fill="#0E4A8A"/>
+          <text x="200" y="25" font-family="JetBrains Mono" font-size="9" fill="#4A4A4E" text-anchor="middle">Rooftop units · agentic control · live</text>
+          <line x1="40" y1="260" x2="360" y2="260" stroke="#0C0C0D" stroke-width="0.75"/>
+          <text x="200" y="275" font-family="JetBrains Mono" font-size="9" fill="#0C0C0D" text-anchor="middle">240,000 SQ FT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="open-source">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Open source</div>
+      <h2>Software we publish.</h2>
+    </div>
+    <div class="os-grid">
+      <a class="os pri" href="open-source/blueprint-agentic-workbench.html">
+        <span class="k">Flagship</span>
+        <h3>Blueprint Agentic Workbench</h3>
+        <p>Web workbench for AI agents. Claude, Gemini, Codex — one browser, persistent sessions, integrated tools.</p>
+        <div class="tech">Node.js · SQLite · Qdrant · Docker · MIT</div>
+      </a>
+      <a class="os" href="open-source/agent-platform.html">
+        <span class="k">Platform</span>
+        <h3>Agent Platform</h3>
+        <p>Context Broker for durable conversational memory. eMAD Host for hot-pluggable agent orchestration. Run one or both.</p>
+        <div class="tech">Python · LangGraph · Postgres · Neo4j</div>
+      </a>
+      <a class="os" href="open-source/pluggable-agents.html">
+        <span class="k">Agents</span>
+        <h3>Pluggable Agents</h3>
+        <p>Drop-in agents for Google Workspace and Microsoft 365. Gmail, Drive, Calendar, OneDrive — pip install and go.</p>
+        <div class="tech">Python · LangGraph · Microsoft Graph · Google API</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ About</div>
+      <h2>The practice.</h2>
+    </div>
+    <div class="about-solo">
+      <h3>A practice focused on production agentic AI and full-stack delivery.</h3>
+      <p>BlueprintAgentic designs and builds agentic AI systems for companies that need more than a prototype. The same practice that architects the agents also writes the code, wires the network, and commissions the HVAC.</p>
+      <p>Based in Massachusetts. Working with clients across technology, agriculture, regulated industries, and retail.</p>
+      <a class="link" href="#">Read more about us →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Contact</div>
+      <h2>Start a conversation.</h2>
+    </div>
+    <p>The best way in is a short email telling us what you're trying to build — or what's gone sideways. We typically respond within one business day.</p>
+    <div class="lines">
+      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
+      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+    <ul>
+      <li><a href="mailto:j@blueprintagentic.ai">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/jmorrissette-RMDC" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
 </body>
 </html>
