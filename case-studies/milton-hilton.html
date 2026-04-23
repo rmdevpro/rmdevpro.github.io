@@ -62,6 +62,12 @@
   padding-block: clamp(2.5rem, 5vw, 4rem);
   border-bottom: 1px solid var(--rule);
 }
+.figure-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+@media (max-width: 820px) { .figure-row { grid-template-columns: 1fr; } }
 .figure {
   background: var(--bg-raised);
   border: 1px solid var(--rule);
@@ -185,26 +191,97 @@
       <p>Everything visible in the diagram above was designed by us. Every wire, every module, every addressable point.</p>
     </div>
   </div>
+</div>
+
+<div class="figure-section">
+  <div class="wrap">
+    <div class="figure">
+      <img src="../assets/case-studies/milton-hilton/cameras-exterior.jpg" alt="Exterior camera coverage plan for the Milton Hilton campus, showing placement and coverage cones for existing and newly installed cameras around the building perimeter">
+      <div class="cap">
+        <span class="label">Fig. 03 — Exterior camera coverage plan</span>
+        <span>Perimeter · parking · loading docks</span>
+      </div>
+    </div>
+    <div class="figure-row" style="margin-top:1.25rem">
+      <div class="figure">
+        <img src="../assets/case-studies/milton-hilton/cameras-floor-1.png" alt="Floor 1 interior camera coverage plan — camera placements and coverage cones across common corridors, entrances, and shared areas">
+        <div class="cap">
+          <span class="label">Fig. 04 — Floor 1 interior</span>
+          <span>Common areas</span>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../assets/case-studies/milton-hilton/cameras-floor-2.jpg" alt="Floor 2 interior camera coverage plan — camera placements and coverage cones across shared corridors and common spaces on the second floor">
+        <div class="cap">
+          <span class="label">Fig. 05 — Floor 2 interior</span>
+          <span>Common areas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cs-section">
+    <div class="lbl">§ 03 · Security</div>
+    <div>
+      <h2>Camera and access coverage, engineered.</h2>
+      <p>Before a single camera was installed we produced coverage plans at floor-by-floor and exterior scale. Each camera's field of view was laid out over the architectural drawings so every corridor, entrance, loading dock, and shared space had intentional coverage — and so the gaps were visible and deliberate, not accidental.</p>
+      <p>The system combines new common-area cameras with the existing cameras already approved for the site. Same recording infrastructure; same review console; one archive. Access control runs on top of the same backbone — card-based entry with tenant-specific profiles, audit logging, and integration with the camera feeds.</p>
+    </div>
+  </div>
+</div>
+
+<div class="figure-section">
+  <div class="wrap">
+    <div class="figure-row">
+      <div class="figure">
+        <img src="../assets/case-studies/milton-hilton/power-present.jpg" alt="Present power schematic showing generator transfer switch, battery system with inverter, and UPS feeds to the three data rooms while the site is running on generator power">
+        <div class="cap">
+          <span class="label">Fig. 06 — Present schematic · on generator</span>
+          <span>Generator · batteries · UPS feeds</span>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../assets/case-studies/milton-hilton/power-future.jpg" alt="Future power schematic showing the expanded dual-battery configuration with transformer-fed night-light panels and a second battery inverter ready for installation">
+        <div class="cap">
+          <span class="label">Fig. 07 — Future schematic · expansion path</span>
+          <span>Dual batteries · transformer-fed loads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cs-section">
+    <div class="lbl">§ 04 · Power resiliency</div>
+    <div>
+      <h2>Batteries, generator, and a plan for more.</h2>
+      <p>The campus has three data rooms, each with its own UPS. Behind those UPSes is a coordinated battery inverter and a standby generator. The transfer switch and controls were designed so that, from the servers' perspective, the site never loses power — the UPS carries through the cutover, the batteries take over from the UPS, and the generator takes over from the batteries as it comes online.</p>
+      <p>The <b>Present schematic</b> above shows the installed system: one battery inverter tied to the generator control panel, a 600V→208V transformer, and discrete 60-amp feeds to the data-room UPSes and night-light panel. The <b>Future schematic</b> shows the planned expansion — a second battery system (Battery02) with its own inverter and transfer switch, repurposed night-light master panels, and a second transformer — all designed in now so the expansion drops in without rewiring the plant.</p>
+    </div>
+  </div>
 
   <div class="cs-section">
-    <div class="lbl">§ 03 · Full scope</div>
+    <div class="lbl">§ 05 · Full scope</div>
     <div>
       <h2>Everything the campus runs on.</h2>
-      <p>Agentic HVAC is the differentiator, but it is not the whole delivery. We built the full technology backbone of the building:</p>
+      <p>Between the HVAC plant, the control systems, the security coverage, and the power resiliency above, plus the rest:</p>
       <ul>
         <li><b>Network &amp; WiFi</b> — Campus-wide managed switching, structured cabling, tenant segmentation, full coverage across the 240,000 sq ft footprint.</li>
-        <li><b>Servers &amp; compute</b> — Core services, tenant-shared and tenant-isolated compute, monitoring, and backup.</li>
+        <li><b>Servers &amp; compute</b> — Three data rooms with core services, tenant-shared and tenant-isolated compute, monitoring, and backup.</li>
         <li><b>Routers &amp; firewalls</b> — Tenant isolation with shared, metered internet egress.</li>
-        <li><b>IP camera system</b> — Full interior, exterior, parking, and loading-dock coverage with archival recording.</li>
+        <li><b>IP camera system</b> — Full interior, exterior, parking, and loading-dock coverage, planned as shown above.</li>
         <li><b>Access control</b> — Card-based entry with tenant-specific profiles, audit logging, and integration with the camera system.</li>
-        <li><b>Power resiliency</b> — UPS capacity for critical loads plus a generator sized to carry the full building through extended outages.</li>
-        <li><b>HVAC</b> — The 250-ton water-source heat pump system and its agentic controller described above.</li>
+        <li><b>Power resiliency</b> — UPS per data room, coordinated battery inverter system, and a generator sized to carry the full building through extended outages.</li>
+        <li><b>HVAC</b> — The 250-ton water-source heat pump system with full energy recycling and its agentic controller.</li>
       </ul>
     </div>
   </div>
 
   <div class="cs-section">
-    <div class="lbl">§ 04 · Role</div>
+    <div class="lbl">§ 06 · Role</div>
     <div>
       <h2>Architect, designer, builder.</h2>
       <p>We handled every layer of the delivery — from the mechanical and electrical design of the HVAC plant to the racks in the IDF closet to the software running on the control supervisor. One accountable practice for the whole building.</p>
