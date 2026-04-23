@@ -198,22 +198,22 @@
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 03 · Why three models</div>
-    <div>
-      <h2>Practically eliminates hallucination.</h2>
-      <p>Three model families. Three training corpora. Three independent ways of being wrong. On its own, that is interesting. Once the models can talk to each other, it becomes the single best defense against hallucination we have seen.</p>
-      <p>The workbench's shared substrate lets sessions communicate directly. When one model produces a hallucination, the other two see it as non-factual and call it out. They discuss, they correct, and they converge on a single best answer. <b>The anti-hallucination work is done by the models themselves</b> — not by the user cross-checking three separate outputs.</p>
-      <p>Because the three models come from three different providers with three different training runs, the chance they all hallucinate the same thing at the same time is vanishingly small. That is why cross-provider <em>dialogue</em> — not parallel polling — is practical hallucination elimination.</p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 04 · Provider CLIs</div>
+    <div class="lbl">§ 03 · Provider CLIs</div>
     <div>
       <h2>Built on the CLIs from each provider.</h2>
       <p>We leverage the command-line interfaces built by each provider — Claude Code (Anthropic), Gemini CLI (Google), Codex (OpenAI). Every agent you spawn in the workbench is running the official first-party tool from its model's team, not a thin wrapper around an API.</p>
       <p>That means every agent benefits from the collective development of the world's three leading AI providers: all the tools, all the capabilities, all the plugins, all the skills, and provider-optimized context management. When Anthropic, Google, or OpenAI ships a new capability, it lands in the workbench the same day.</p>
       <p>And it gives the agents a near-infinite ability to customize the environment for you — installing packages, configuring tools, authoring their own plugins, reshaping their substrate — using the same mechanisms the provider engineering teams built for their own users.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 04 · Why three models</div>
+    <div>
+      <h2>Practically eliminates hallucination.</h2>
+      <p>Three model families. Three training corpora. Three independent ways of being wrong. On its own, that is interesting. Once the models can talk to each other, it becomes the single best defense against hallucination we have seen.</p>
+      <p>The workbench's shared substrate lets sessions communicate directly. When one model produces a hallucination, the other two see it as non-factual and call it out. They discuss, they correct, and they converge on a single best answer. <b>The anti-hallucination work is done by the models themselves</b> — not by the user cross-checking three separate outputs.</p>
+      <p>Because the three models come from three different providers with three different training runs, the chance they all hallucinate the same thing at the same time is vanishingly small. That is why cross-provider <em>dialogue</em> — not parallel polling — is practical hallucination elimination.</p>
     </div>
   </div>
 
@@ -225,6 +225,7 @@
         <li><b>Multi-session management</b> — Create, pause, resume, and switch between Claude, Gemini, and Codex sessions. State persists across restarts.</li>
         <li><b>Browser-based terminal</b> — Full CLI access over WebSocket, powered by xterm.js. No native install, no desktop app, no setup beyond Docker.</li>
         <li><b>Project organization</b> — Group sessions by project. Each gets its own workspace, configuration, and MCP tool registry.</li>
+        <li><b>Git &amp; GitHub integrated</b> — Every file the workbench touches — code, documents, notes, configs — is version-controlled and backed up through real git and real GitHub. Not just for code: strategy docs, briefs, and meeting notes get the same version history and recovery. And because it's real GitHub, you get the standard cross-user collaboration surface for free: pull requests, review, branches, ownership.</li>
         <li><b>Community coordination</b> — Any session can call, observe, or spawn any other. Agents route work across the community based on what the task needs.</li>
         <li><b>Integrated task tracking</b> — Create and organize tasks inline with your work. Surface what's in-flight at a glance.</li>
         <li><b>Semantic search</b> — Find files, notes, and past conversations by what they mean, not which words they contain. Word-matching search returns results only when exact terms appear; semantic search understands intent, so asking for <em>"the pricing decision"</em> surfaces the right thread even if that phrase is nowhere in it.</li>
