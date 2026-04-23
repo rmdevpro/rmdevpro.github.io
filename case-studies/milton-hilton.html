@@ -232,13 +232,7 @@
     <div>
       <h2>A mixed backup system, redesigned into two correct ones.</h2>
       <p>The campus has three data rooms, each with its own UPS. Behind those UPSes is a battery inverter and a standby generator, coordinated so that — from the servers' perspective — the site never loses power. UPS carries the cutover; batteries take over from the UPS; the generator takes over from the batteries as it comes online.</p>
-      <p>The system we inherited ran <b>IT infrastructure and emergency lighting off a single shared backup chain</b>. That arrangement is fragile — a fault in one load can compromise the other — and it does not meet life-safety code, which requires emergency lighting on a dedicated, independently-protected system.</p>
-      <p>We redesigned it as two fully split systems, each correctly engineered for its role:</p>
-      <ul>
-        <li><b>IT side</b> — a dedicated transformer (T109), the P123 generator control panel, and Battery01's inverter feed only the data-room UPSes and the chargers. Sized for continuous IT load, not shared.</li>
-        <li><b>Emergency-lighting side</b> — a separate transformer (T110) feeds the P124 / P125 / P126 / P304 night-light panels through their own disconnect. Fully independent, properly sized for the lighting load, and code-compliant. Battery02 is designed in now but only installed when needed.</li>
-      </ul>
-      <p>Durable, legal, and maintainable — instead of a bandaid on a problem.</p>
+      <p>The system we inherited ran <b>IT infrastructure and emergency lighting off a single shared backup chain</b>. That arrangement is fragile — a fault in one load can compromise the other — and it does not meet life-safety code, which requires emergency lighting on a dedicated, independently-protected system. We redesigned it as two fully split systems, each correctly engineered for its role.</p>
     </div>
   </div>
 
