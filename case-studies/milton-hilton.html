@@ -96,6 +96,7 @@
   align-items: start;
 }
 .cs-section:last-of-type { border-bottom: none; }
+.cs-section:has(+ .figure-section) { border-bottom: none; padding-bottom: 0.5rem; }
 .cs-section .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; padding-top: 0.35rem; }
 .cs-section h2 { font-size: 1.75rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
 .cs-section p { max-width: 62ch; margin-bottom: 1rem; color: var(--text-soft); font-size: 1rem; }
@@ -153,6 +154,15 @@
     <div><span class="k">Status</span><span class="v" style="color:var(--accent)">● Operating</span></div>
   </div>
 
+  <div class="cs-section">
+    <div class="lbl">§ 01 · HVAC</div>
+    <div>
+      <div class="pull-stat">250<span class="unit">tons · WSHP · full energy recycling</span></div>
+      <p>The core of the Milton Hilton project is a <b>250-ton water-source heat pump system with full energy recycling for both heating and cooling loads</b>. Heat removed from a tenant space that needs cooling is captured in the building's water loop and delivered, in the same moment, to a tenant space that needs heating. Under typical occupancy the building does not buy much net thermal energy at all — it moves what it already has.</p>
+      <p>The system is driven by an agentic control stack: sensor networks feed a multi-agent supervisor that continuously negotiates zone comfort targets, energy cost, outside conditions, and equipment health, then issues setpoints to the controllers. Running 24/7.</p>
+    </div>
+  </div>
+
   <div class="figure-section">
     <div class="figure">
       <img src="../assets/case-studies/milton-hilton/mechanical-room.png" alt="Mechanical room design — 3D model of the Milton Hilton HVAC plant showing main distribution headers, 50 HP circulation pumps, and heat pump units">
@@ -164,11 +174,11 @@
   </div>
 
   <div class="cs-section">
-    <div class="lbl">§ 01 · HVAC</div>
+    <div class="lbl">§ 02 · Control hardware</div>
     <div>
-      <div class="pull-stat">250<span class="unit">tons · WSHP · full energy recycling</span></div>
-      <p>The core of the Milton Hilton project is a <b>250-ton water-source heat pump system with full energy recycling for both heating and cooling loads</b>. Heat removed from a tenant space that needs cooling is captured in the building's water loop and delivered, in the same moment, to a tenant space that needs heating. Under typical occupancy the building does not buy much net thermal energy at all — it moves what it already has.</p>
-      <p>The system is driven by an agentic control stack: sensor networks feed a multi-agent supervisor that continuously negotiates zone comfort targets, energy cost, outside conditions, and equipment health, then issues setpoints to the controllers. Running 24/7.</p>
+      <h2>Designed from the panel out.</h2>
+      <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over RS-485. The supervisor hosts the agentic control software directly.</p>
+      <p>Every wire, every module, every addressable point in the diagram below was designed by us.</p>
     </div>
   </div>
 
@@ -183,17 +193,15 @@
   </div>
 
   <div class="cs-section">
-    <div class="lbl">§ 02 · Control hardware</div>
+    <div class="lbl">§ 03 · Security</div>
     <div>
-      <h2>Designed from the panel out.</h2>
-      <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over RS-485. The supervisor hosts the agentic control software directly.</p>
-      <p>Everything visible in the diagram above was designed by us. Every wire, every module, every addressable point.</p>
+      <h2>Camera and access coverage, engineered.</h2>
+      <p>Before a single camera was installed we produced coverage plans at floor-by-floor and exterior scale. Each camera's field of view was laid out over the architectural drawings so every corridor, entrance, loading dock, and shared space had intentional coverage — and so the gaps were visible and deliberate, not accidental.</p>
+      <p>The system combines new common-area cameras with the existing cameras already approved for the site. Same recording infrastructure; same review console; one archive. Access control runs on top of the same backbone — card-based entry with tenant-specific profiles, audit logging, and integration with the camera feeds.</p>
     </div>
   </div>
-</div>
 
-<div class="figure-section">
-  <div class="wrap">
+  <div class="figure-section">
     <div class="figure">
       <img src="../assets/case-studies/milton-hilton/cameras-exterior.jpg" alt="Exterior camera coverage plan for the Milton Hilton campus, showing placement and coverage cones for existing and newly installed cameras around the building perimeter">
       <div class="cap">
@@ -218,47 +226,38 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="wrap">
-  <div class="cs-section">
-    <div class="lbl">§ 03 · Security</div>
-    <div>
-      <h2>Camera and access coverage, engineered.</h2>
-      <p>Before a single camera was installed we produced coverage plans at floor-by-floor and exterior scale. Each camera's field of view was laid out over the architectural drawings so every corridor, entrance, loading dock, and shared space had intentional coverage — and so the gaps were visible and deliberate, not accidental.</p>
-      <p>The system combines new common-area cameras with the existing cameras already approved for the site. Same recording infrastructure; same review console; one archive. Access control runs on top of the same backbone — card-based entry with tenant-specific profiles, audit logging, and integration with the camera feeds.</p>
-    </div>
-  </div>
-</div>
-
-<div class="figure-section">
-  <div class="wrap">
-    <div class="figure-row">
-      <div class="figure">
-        <img src="../assets/case-studies/milton-hilton/power-present.jpg" alt="Present power schematic showing generator transfer switch, battery system with inverter, and UPS feeds to the three data rooms while the site is running on generator power">
-        <div class="cap">
-          <span class="label">Fig. 06 — Present schematic · on generator</span>
-          <span>Generator · batteries · UPS feeds</span>
-        </div>
-      </div>
-      <div class="figure">
-        <img src="../assets/case-studies/milton-hilton/power-future.jpg" alt="Future power schematic showing the expanded dual-battery configuration with transformer-fed night-light panels and a second battery inverter ready for installation">
-        <div class="cap">
-          <span class="label">Fig. 07 — Future schematic · expansion path</span>
-          <span>Dual batteries · transformer-fed loads</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
   <div class="cs-section">
     <div class="lbl">§ 04 · Power resiliency</div>
     <div>
-      <h2>Batteries, generator, and a plan for more.</h2>
-      <p>The campus has three data rooms, each with its own UPS. Behind those UPSes is a coordinated battery inverter and a standby generator. The transfer switch and controls were designed so that, from the servers' perspective, the site never loses power — the UPS carries through the cutover, the batteries take over from the UPS, and the generator takes over from the batteries as it comes online.</p>
-      <p>The <b>Present schematic</b> above shows the installed system: one battery inverter tied to the generator control panel, a 600V→208V transformer, and discrete 60-amp feeds to the data-room UPSes and night-light panel. The <b>Future schematic</b> shows the planned expansion — a second battery system (Battery02) with its own inverter and transfer switch, repurposed night-light master panels, and a second transformer — all designed in now so the expansion drops in without rewiring the plant.</p>
+      <h2>A mixed backup system, redesigned into two correct ones.</h2>
+      <p>The campus has three data rooms, each with its own UPS. Behind those UPSes is a battery inverter and a standby generator, coordinated so that — from the servers' perspective — the site never loses power. UPS carries the cutover; batteries take over from the UPS; the generator takes over from the batteries as it comes online.</p>
+      <p>The system we inherited ran <b>IT infrastructure and emergency lighting off a single shared backup chain</b>. That arrangement is fragile — a fault in one load can compromise the other — and it does not meet life-safety code, which requires emergency lighting on a dedicated, independently-protected system.</p>
+      <p>We redesigned it as two fully split systems, each correctly engineered for its role:</p>
+      <ul>
+        <li><b>IT side</b> — a dedicated transformer (T109), the P123 generator control panel, and Battery01's inverter feed only the data-room UPSes and the chargers. Sized for continuous IT load, not shared.</li>
+        <li><b>Emergency-lighting side</b> — a separate transformer (T110) feeds the P124 / P125 / P126 / P304 night-light panels through their own disconnect. Fully independent, properly sized for the lighting load, and code-compliant. Battery02 is designed in now but only installed when needed.</li>
+      </ul>
+      <p>Durable, legal, and maintainable — instead of a bandaid on a problem.</p>
+    </div>
+  </div>
+
+  <div class="figure-section">
+    <div class="figure-row">
+      <div class="figure">
+        <img src="../assets/case-studies/milton-hilton/power-present.jpg" alt="As-inherited power schematic showing a single backup chain shared between the data-room UPSes, the emergency lighting panel, and general night-light loads">
+        <div class="cap">
+          <span class="label">Fig. 06 — Inherited state · mixed system</span>
+          <span>IT and emergency lighting on one chain</span>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="../assets/case-studies/milton-hilton/power-future.jpg" alt="Redesigned power schematic showing IT infrastructure and emergency lighting split into two fully independent backup systems, each correctly engineered for its role">
+        <div class="cap">
+          <span class="label">Fig. 07 — Redesigned · split systems</span>
+          <span>IT and emergency lighting, fully separated</span>
+        </div>
+      </div>
     </div>
   </div>
 
