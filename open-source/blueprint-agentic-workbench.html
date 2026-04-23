@@ -186,8 +186,9 @@
     <div class="lbl">§ 02 · Why three models</div>
     <div>
       <h2>Practically eliminates hallucination.</h2>
-      <p>Three model families. Three different training corpora. Three independent ways of being wrong. When Claude, Gemini, and Codex all converge on the same answer, the chance they are hallucinating the <em>same thing</em> at the <em>same time</em> is vanishingly small.</p>
-      <p>That cross-provider consensus is the most reliable practical defense against hallucination we have seen. It requires no eval harness and no fine-tuning — it is a structural property of running three frontier models together. When they agree, you can ship. When they disagree, you see the disagreement, which is also useful: you get the full set of perspectives before you commit.</p>
+      <p>Three model families. Three training corpora. Three independent ways of being wrong. On its own, that is interesting. Once the models can talk to each other, it becomes the single best defense against hallucination we have seen.</p>
+      <p>The workbench's shared substrate lets sessions communicate directly. When one model produces a hallucination, the other two see it as non-factual and call it out. They discuss, they correct, and they converge on a single best answer. <b>The anti-hallucination work is done by the models themselves</b> — not by the user cross-checking three separate outputs.</p>
+      <p>Because the three models come from three different providers with three different training runs, the chance they all hallucinate the same thing at the same time is vanishingly small. That is why cross-provider <em>dialogue</em> — not parallel polling — is practical hallucination elimination.</p>
     </div>
   </div>
 
