@@ -136,7 +136,7 @@
     <div class="kicker">§ Flagship · Open source · MIT</div>
     <h1>Blueprint Agentic Workbench.</h1>
     <p class="tagline">A multi-agent workbench ecosystem. Dozens of AI sessions in one environment, able to communicate, coordinate, and co-work with each other and the user.</p>
-    <p class="sub">Claude, Gemini, and Codex running together in a single workspace — not as a coding tool, but as a general-purpose tool for any work that can be described in words. The same workbench we use on every engagement, published under MIT so you can run it too.</p>
+    <p class="sub">Not a coding tool — an agentic workbench. Claude, Gemini, and Codex run together in a single workspace, handling any work that can be described in words. The same workbench we use on every engagement, published under MIT so you can run it too.</p>
     <div class="cta">
       <a class="btn" href="#">View on GitHub</a>
       <a class="btn ghost" href="#install">Install guide</a>
@@ -167,7 +167,7 @@
   <div class="detail-section">
     <div class="lbl">§ 01 · Why</div>
     <div>
-      <h2>Not a coding workbench. An agentic one.</h2>
+      <h2>Not a coding tool. An agentic workbench.</h2>
       <p>Code is the universal substrate of everything on a computer. Opening a file, sending an email, querying an API, drafting a document, running an analysis, searching the web — it all happens through code. An agent that can write and run code can do any of those things.</p>
       <p>That is why it is an <b>agentic workbench</b>, not a coding workbench. The agent writes code to do the work, but the work itself can be anything. A partial list of what people drive it to do:</p>
       <ul>
@@ -193,11 +193,17 @@
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 03 · Coordination</div>
+    <div class="lbl">§ 03 · The mesh</div>
     <div>
-      <h2>Dozens of sessions. Coordinated through tmux.</h2>
-      <p>The sessions don't just run in parallel. They share a tmux substrate, which means they can see and call each other. Claude can hand work off to Gemini for a second read. Codex can review Claude's output before it ships. Gemini can run a background research task while Claude drives the primary work. The whole arrangement can scale to <b>dozens of concurrent sessions</b>, each on its own task, each able to reach the others.</p>
-      <p>This is how the workbench stops being a "pair programming" tool and starts being a team — a team of AI workers with different strengths, different training, and a shared workspace that lets them coordinate like colleagues.</p>
+      <h2>Dozens of sessions. A mesh, not a row.</h2>
+      <p>The sessions don't just run in parallel. Every session can communicate with, call, observe, or spawn any other. An agent that needs a capability outside its own reaches sideways and gets it. The possible arrangements are endless — a few that come up in real work:</p>
+      <ul>
+        <li><b>Cost-aware routing</b> — Claude Opus calls a Sonnet session to debug code (cheaper, still massively capable), or a Haiku session to run an automated test runbook. Reserve the expensive thinking for the hard parts.</li>
+        <li><b>Cross-provider specialization</b> — Gemini is excellent at strategy and synthesis but a weak prose writer. The user researches with Gemini; Gemini then calls a Sonnet session to draft the paper.</li>
+        <li><b>Parallel background work</b> — A primary Claude session drives the main task while a Gemini session runs research in the background, reporting findings back as they surface.</li>
+        <li><b>Self-provisioning</b> — When a session needs an MCP tool it doesn't yet have, it asks another session to install it and restart so the tool registers. The caller picks up the result when it's ready.</li>
+      </ul>
+      <p>The workbench does not impose a topology. The agents build one for the job at hand.</p>
     </div>
   </div>
 
@@ -219,7 +225,7 @@
         <li><b>Multi-session management</b> — Create, pause, resume, and switch between Claude, Gemini, and Codex sessions. State persists across restarts.</li>
         <li><b>Browser-based terminal</b> — Full CLI access over WebSocket, powered by xterm.js. No native install, no desktop app, no setup beyond Docker.</li>
         <li><b>Project organization</b> — Group sessions by project. Each gets its own workspace, configuration, and MCP tool registry.</li>
-        <li><b>Shared tmux substrate</b> — All sessions live on a shared tmux backbone, so agents can call and coordinate with each other.</li>
+        <li><b>Mesh coordination</b> — Any session can call, observe, or spawn any other. Agents route work across the mesh based on what the task needs.</li>
         <li><b>Integrated task tracking</b> — Create and organize tasks inline with your work. Surface what's in-flight at a glance.</li>
         <li><b>Vector search</b> — Built-in Qdrant vector database for semantic search across files, notes, and conversation history.</li>
         <li><b>Workspace file browser</b> — Browse, create, edit, and upload files directly from the web UI.</li>
