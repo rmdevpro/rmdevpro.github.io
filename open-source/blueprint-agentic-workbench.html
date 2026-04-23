@@ -135,8 +135,8 @@
     <a class="back" href="../index.html#open-source">← Open source</a>
     <div class="kicker">§ Flagship · Open source · MIT</div>
     <h1>Blueprint Agentic Workbench.</h1>
-    <p class="tagline">Our primary tool. Free, via open source.</p>
-    <p class="sub">A web-based workbench for AI agents. Run Claude Code, Google Gemini, and OpenAI Codex concurrently — organized by project, persistent across sessions, all from a browser. The same workbench we use on every client engagement, published under MIT so you can run it too.</p>
+    <p class="tagline">A multi-agent workbench. Dozens of AI sessions, one browser, coordinated through a shared substrate.</p>
+    <p class="sub">Claude, Gemini, and Codex running together in a single workspace — not as a coding tool, but as a general-purpose tool for any work that can be described in words. The same workbench we use on every engagement, published under MIT so you can run it too.</p>
     <div class="cta">
       <a class="btn" href="#">View on GitHub</a>
       <a class="btn ghost" href="#install">Install guide</a>
@@ -167,52 +167,67 @@
   <div class="detail-section">
     <div class="lbl">§ 01 · Why</div>
     <div>
-      <h2>One browser, every AI.</h2>
-      <p>Every AI coding tool today runs in its own terminal, with its own state, with its own context window, with its own CLI conventions. If you work with more than one, you end up juggling tmux windows, lost sessions, and copy-paste between chats.</p>
-      <p>Blueprint Agentic Workbench is what happens when you take that pain seriously. One browser, multiple AI agents, proper project boundaries, persistent sessions, real file browsing, and integrated task tracking — all self-hosted in Docker, single-user by design.</p>
+      <h2>Not a coding workbench. An agentic one.</h2>
+      <p>Code is the universal substrate of everything on a computer. Opening a file, sending an email, querying an API, drafting a document, running an analysis, searching the web — it all happens through code. An agent that can write and run code can do any of those things.</p>
+      <p>That is why it is an <b>agentic workbench</b>, not a coding workbench. The agent writes code to do the work, but the work itself can be anything. A partial list of what people drive it to do:</p>
+      <ul>
+        <li><b>Business strategy</b> — research markets, pressure-test positioning, produce the slides that result</li>
+        <li><b>Authoring</b> — long-form documents, briefs, investor updates, technical papers</li>
+        <li><b>Job search</b> — curate listings, tailor applications, draft outreach, track activity</li>
+        <li><b>Automation</b> — repetitive ops work that used to eat hours a week</li>
+        <li><b>Research</b> — cross-reference sources, synthesize findings, surface contradictions</li>
+        <li><b>Software</b> — yes, also software. Design, build, review, ship, and operate it.</li>
+      </ul>
+      <p>The working surface is a CLI, which looks intimidating from the outside. It turns out it's not. Claude Code's adoption by product managers, writers, and operators — not just developers — has shown the step up from a chat box is much smaller than anyone expected. The workbench wraps it all in a browser UI with projects, sessions, and task tracking, so the power of the CLI is there when you want it, but you drive from a single organized place.</p>
     </div>
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 02 · Capabilities</div>
+    <div class="lbl">§ 02 · Why three models</div>
+    <div>
+      <h2>Practically eliminates hallucination.</h2>
+      <p>Three model families. Three different training corpora. Three independent ways of being wrong. When Claude, Gemini, and Codex all converge on the same answer, the chance they are hallucinating the <em>same thing</em> at the <em>same time</em> is vanishingly small.</p>
+      <p>That cross-provider consensus is the most reliable practical defense against hallucination we have seen. It requires no eval harness and no fine-tuning — it is a structural property of running three frontier models together. When they agree, you can ship. When they disagree, you see the disagreement, which is also useful: you get the full set of perspectives before you commit.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 03 · Coordination</div>
+    <div>
+      <h2>Dozens of sessions. Coordinated through tmux.</h2>
+      <p>The sessions don't just run in parallel. They share a tmux substrate, which means they can see and call each other. Claude can hand work off to Gemini for a second read. Codex can review Claude's output before it ships. Gemini can run a background research task while Claude drives the primary work. The whole arrangement can scale to <b>dozens of concurrent sessions</b>, each on its own task, each able to reach the others.</p>
+      <p>This is how the workbench stops being a "pair programming" tool and starts being a team — a team of AI workers with different strengths, different training, and a shared workspace that lets them coordinate like colleagues.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="lbl">§ 04 · Capabilities</div>
     <div>
       <h2>What it does.</h2>
       <ul>
-        <li><b>Multi-AI session management</b> — Create, pause, resume, and switch between Claude, Gemini, and Codex sessions. State persists across restarts.</li>
-        <li><b>Browser-based terminal</b> — Full terminal access over WebSocket, powered by xterm.js. No native install, no desktop app.</li>
+        <li><b>Multi-session management</b> — Create, pause, resume, and switch between Claude, Gemini, and Codex sessions. State persists across restarts.</li>
+        <li><b>Browser-based terminal</b> — Full CLI access over WebSocket, powered by xterm.js. No native install, no desktop app, no setup beyond Docker.</li>
         <li><b>Project organization</b> — Group sessions by project. Each gets its own workspace, configuration, and MCP tool registry.</li>
+        <li><b>Shared tmux substrate</b> — All sessions live on a shared tmux backbone, so agents can call and coordinate with each other.</li>
         <li><b>Integrated task tracking</b> — Create and organize tasks inline with your work. Surface what's in-flight at a glance.</li>
-        <li><b>Vector search</b> — Built-in Qdrant vector database for semantic search across your codebase.</li>
+        <li><b>Vector search</b> — Built-in Qdrant vector database for semantic search across files, notes, and conversation history.</li>
         <li><b>Workspace file browser</b> — Browse, create, edit, and upload files directly from the web UI.</li>
-        <li><b>MCP tool integration</b> — Register Model Context Protocol servers per project.</li>
+        <li><b>MCP tool integration</b> — Register Model Context Protocol servers per project. Agents pick up your tools automatically.</li>
         <li><b>Environment safety markers</b> — Deploy as Dev (green) or Pro (red) to prevent prod/dev confusion at a glance.</li>
       </ul>
     </div>
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 03 · Who it's for</div>
-    <div>
-      <h2>For builders, not evaluators.</h2>
-      <p>If you juggle multiple AI coding tools across multiple projects, and you've accepted that tmux pain as normal — this is for you.</p>
-      <ul>
-        <li>Solo developers running several AI agents on different problems in parallel</li>
-        <li>Teams evaluating different models side-by-side under identical conditions</li>
-        <li>Anyone who wants persistent, reproducible agent sessions without chasing terminal windows</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 04 · Stack</div>
+    <div class="lbl">§ 05 · Stack</div>
     <div>
       <h2>Under the hood.</h2>
-      <p>Node.js 22 · Express · SQLite · tmux · node-pty · xterm.js · Qdrant · Docker. No build step in production, no external cloud dependencies, no telemetry.</p>
+      <p>Node.js 22 · Express · SQLite · tmux · node-pty · xterm.js · Qdrant · Docker. No build step in production. No external cloud dependencies. No telemetry.</p>
     </div>
   </div>
 
   <div class="detail-section" id="install">
-    <div class="lbl">§ 05 · Install</div>
+    <div class="lbl">§ 06 · Install</div>
     <div>
       <h2>Run it yourself.</h2>
       <p>One command. You need Docker and <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">docker compose</code>.</p>
@@ -226,7 +241,7 @@
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 06 · Open source</div>
+    <div class="lbl">§ 07 · Open source</div>
     <div>
       <h2>MIT licensed.</h2>
       <p>Fork it, modify it, ship it inside your own product. We accept contributions — bug reports, pull requests, and architectural suggestions alike. The repository is the canonical reference; this page exists only to tell you it exists.</p>
