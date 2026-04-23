@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Milton Hilton — Case Study · BlueprintAgentic</title>
+<meta name="description" content="Full campus technology stack for a 240,000 sq ft multi-tenant commercial building. Network, servers, access control, power, and a 250-ton agentic water-source heat pump HVAC system with full energy recycling.">
+<link rel="icon" href="../assets/logos/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.cs-hero { padding-block: clamp(3rem, 6vw, 5rem); }
+.cs-hero .back {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.75rem;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.cs-hero .back:hover { color: var(--accent); }
+.cs-hero .kicker {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+.cs-hero h1 {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+  max-width: 18ch;
+}
+.cs-hero .tagline {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 55ch;
+  margin-bottom: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.cs-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 62ch; margin-bottom: 2rem; }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-block: 2.5rem;
+}
+.stat-grid > div { padding: 1.25rem 1.5rem; border-right: 1px solid var(--rule); }
+.stat-grid > div:last-child { border-right: none; }
+.stat-grid .k { font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 0.35rem; display: block; }
+.stat-grid .v { font-weight: 500; color: var(--text); font-size: 1.1rem; line-height: 1.15; }
+.stat-grid .v b { font-weight: 700; }
+@media (max-width: 720px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } .stat-grid > div:nth-child(2) { border-right: none; } }
+
+.figure-section {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+}
+.figure {
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  padding: 1rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -30px rgba(9,31,56,0.18);
+}
+.figure img { width: 100%; display: block; height: auto; }
+.figure .cap {
+  display: flex; justify-content: space-between; gap: 1rem;
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--rule);
+}
+.figure .cap .label { color: var(--text); font-weight: 500; }
+
+.cs-section {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 2.5rem;
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.cs-section:last-of-type { border-bottom: none; }
+.cs-section .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; padding-top: 0.35rem; }
+.cs-section h2 { font-size: 1.75rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.cs-section p { max-width: 62ch; margin-bottom: 1rem; color: var(--text-soft); font-size: 1rem; }
+.cs-section p b { color: var(--text); font-weight: 600; }
+.cs-section ul { margin: 0.5rem 0 1rem 1.25rem; max-width: 62ch; }
+.cs-section ul li { margin-bottom: 0.5rem; color: var(--text-soft); }
+.cs-section ul li b { color: var(--text); font-weight: 600; }
+@media (max-width: 720px) { .cs-section { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+.pull-stat {
+  font-family: var(--font-display, 'Mona Sans', sans-serif);
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.pull-stat .unit { font-size: 0.35em; letter-spacing: 0; color: var(--text); font-weight: 500; margin-left: 0.3em; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../index.html" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#open-source">Open Source</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <a class="go" href="../index.html#contact">Contact →</a>
+  </div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← Work</a>
+    <div class="kicker">§ Case study · 01</div>
+    <h1>Milton Hilton.</h1>
+    <p class="tagline">Full campus technology stack for a 240,000 sq ft multi-tenant commercial building.</p>
+    <p class="sub">One partner. Network, servers, security, power, and a 250-ton agentic water-source heat pump HVAC system with full energy recycling. Four co-located tenants run daily operations on the infrastructure we designed and built.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stat-grid">
+    <div><span class="k">Footprint</span><span class="v"><b>240,000</b> sq ft</span></div>
+    <div><span class="k">Tenants</span><span class="v"><b>4</b> co-located</span></div>
+    <div><span class="k">HVAC capacity</span><span class="v"><b>250</b> tons · WSHP</span></div>
+    <div><span class="k">Status</span><span class="v" style="color:var(--accent)">● Operating</span></div>
+  </div>
+
+  <div class="figure-section">
+    <div class="figure">
+      <img src="../assets/case-studies/milton-hilton/mechanical-room.png" alt="Mechanical room design — 3D model of the Milton Hilton HVAC plant showing main distribution headers, 50 HP circulation pumps, and heat pump units">
+      <div class="cap">
+        <span class="label">Fig. 01 — Mechanical room, 3D design model</span>
+        <span>8" Sch 80 PVC headers · 50 HP pumps · 5-micron filtration</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="lbl">§ 01 · HVAC</div>
+    <div>
+      <div class="pull-stat">250<span class="unit">tons · WSHP · full energy recycling</span></div>
+      <p>The core of the Milton Hilton project is a <b>250-ton water-source heat pump system with full energy recycling for both heating and cooling loads</b>. Heat removed from a tenant space that needs cooling is captured in the building's water loop and delivered, in the same moment, to a tenant space that needs heating. Under typical occupancy the building does not buy much net thermal energy at all — it moves what it already has.</p>
+      <p>That is what lets 250 tons serve 240,000 sq ft comfortably — a ratio of roughly one ton per thousand square feet, well beyond what a non-recycling system can deliver.</p>
+      <p>The system is driven by an agentic control stack: sensor networks feed a multi-agent supervisor that continuously negotiates zone comfort targets, energy cost, outside conditions, and equipment health, then issues setpoints to the controllers. Running 24/7.</p>
+    </div>
+  </div>
+
+  <div class="figure-section">
+    <div class="figure">
+      <img src="../assets/case-studies/milton-hilton/board-wiring.png" alt="Control board wiring diagram showing industrial distribution, I/O modules, and the Raspberry Pi controller tied to the heat pump plant via RS485">
+      <div class="cap">
+        <span class="label">Fig. 02 — Control panel wiring diagram</span>
+        <span>Industrial distribution · I/O modules · RS-485 to Pi controller</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="lbl">§ 02 · Control hardware</div>
+    <div>
+      <h2>Designed from the panel out.</h2>
+      <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over RS-485. The supervisor hosts the agentic control software directly.</p>
+      <p>Everything visible in the diagram above was designed by us. Every wire, every module, every addressable point.</p>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="lbl">§ 03 · Full scope</div>
+    <div>
+      <h2>Everything the campus runs on.</h2>
+      <p>Agentic HVAC is the differentiator, but it is not the whole delivery. We built the full technology backbone of the building:</p>
+      <ul>
+        <li><b>Network &amp; WiFi</b> — Campus-wide managed switching, structured cabling, tenant segmentation, full coverage across the 240,000 sq ft footprint.</li>
+        <li><b>Servers &amp; compute</b> — Core services, tenant-shared and tenant-isolated compute, monitoring, and backup.</li>
+        <li><b>Routers &amp; firewalls</b> — Tenant isolation with shared, metered internet egress.</li>
+        <li><b>IP camera system</b> — Full interior, exterior, parking, and loading-dock coverage with archival recording.</li>
+        <li><b>Access control</b> — Card-based entry with tenant-specific profiles, audit logging, and integration with the camera system.</li>
+        <li><b>Power resiliency</b> — UPS capacity for critical loads plus a generator sized to carry the full building through extended outages.</li>
+        <li><b>HVAC</b> — The 250-ton water-source heat pump system and its agentic controller described above.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <div class="lbl">§ 04 · Role</div>
+    <div>
+      <h2>Architect, designer, builder.</h2>
+      <p>We handled every layer of the delivery — from the mechanical and electrical design of the HVAC plant to the racks in the IDF closet to the software running on the control supervisor. One accountable practice for the whole building.</p>
+      <p>Milton Hilton is also the campus for four of our tenant engagements: Bluefox Brands, Evergreen Agriculture Industries, Mass Cannabis Growers Cooperative, and Blossom Flower. Each tenant runs on the same infrastructure we built for the landlord, extended into their leased space.</p>
+    </div>
+  </div>
+</div>
+
+<section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="lbl">§ Work with us</div>
+      <h2>Thinking about something similar?</h2>
+    </div>
+    <p>Whether it is a full campus or a single system, we'd rather talk about the problem than pitch the service. Send a short note with what you're trying to build.</p>
+    <div class="lines">
+      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
+      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+    <ul>
+      <li><a href="mailto:j@blueprintagentic.ai">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/jmorrissette-RMDC" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
