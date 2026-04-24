@@ -126,22 +126,22 @@
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 02 · eMAD Host</div>
+    <div class="lbl">§ 02 · Modular Agent Host</div>
     <div>
-      <h2>Plug-and-play agent orchestration.</h2>
-      <p><b>eMAD</b> stands for <em>ephemeral Modular Agent Daemon</em>. The Host is the runtime that loads them, routes to them, and manages their lifecycle. Install a new agent with <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">pip install</code>, and the Host picks it up — no restart, no monolithic deploy.</p>
+      <h2>Modular Agent Host</h2>
+      <p>Service infrastructure for freestanding modular agents — a host that provides the core background services an agent needs to function on its own, plus the connectivity to reach out to other agents and services to perform its work, managed and extended through its own agent.</p>
 
-      <h3>What it does</h3>
-      <ul>
-        <li><b>Dynamic agent loading</b> — agents register via Python entry points; the Host discovers and routes to them</li>
-        <li><b>Routing by model name</b> — any OpenAI client calling <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">model: my-agent</code> gets dispatched to the my-agent eMAD</li>
-        <li><b>Hot-swap</b> — replace or upgrade an agent without taking the Host down</li>
-        <li><b>Built-in tools</b> — sandboxed scripting, filesystem access, notifications, admin controls</li>
-        <li><b>Optional Context Broker integration</b> — eMADs can offload persistent memory to a Context Broker for conversation continuity</li>
-      </ul>
+      <h3>Modular Agents</h3>
+      <p>Modular agents are self-contained pieces of intelligence. They can be installed into an application or service directly — but more often they live outside any single application, free to reach in and use those applications and services as tools for whatever task they're performing.</p>
+
+      <h3>Service Infrastructure</h3>
+      <p>The Host provides the core background services a modular agent needs to run on its own — the containers and plumbing represented by most of what the deployment ships with — and the connectivity for the agent to reach out to other agents and services to get its work done.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>Like the Context Broker, the Host is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Host's Imperator can load modular agents, create new ones, and modify existing ones in place.</p>
 
       <h3>Stack</h3>
-      <p>Python 3.12 · LangGraph · FastAPI · PostgreSQL · Redis · Nginx.</p>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · PostgreSQL with pgvector · Dkron (scheduling) · Playwright (browser automation) · Nginx.</p>
     </div>
   </div>
 
@@ -149,11 +149,11 @@
     <div class="lbl">§ 03 · Together</div>
     <div>
       <h2>How they fit.</h2>
-      <p>Context Broker and eMAD Host are <b>independent but complementary</b>.</p>
+      <p>Context Broker and Modular Agent Host are <b>independent but complementary</b>.</p>
       <ul>
         <li>Run <b>Context Broker alone</b> if you need durable conversational memory for an existing system.</li>
-        <li>Run <b>eMAD Host alone</b> if you need pluggable agent orchestration but don't need persistent memory.</li>
-        <li>Run <b>both together</b> — eMAD Host points at Context Broker, and every eMAD it hosts gets free durable memory across restarts.</li>
+        <li>Run <b>Modular Agent Host alone</b> if you need pluggable agent orchestration but don't need persistent memory.</li>
+        <li>Run <b>both together</b> — Modular Agent Host points at Context Broker, and every modular agent it hosts gets free durable memory across restarts.</li>
       </ul>
     </div>
   </div>
