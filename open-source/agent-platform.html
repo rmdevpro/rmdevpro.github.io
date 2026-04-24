@@ -140,6 +140,13 @@
       <h3>Imperator Managed Agentic Service</h3>
       <p>Like the Context Broker, the Host is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Host's Imperator can load modular agents, create new ones, and modify existing ones in place.</p>
 
+      <h3>Interfaces</h3>
+      <ul>
+        <li><b>OpenAI-compatible chat endpoint</b> — the primary interface to every hosted agent. The <code>model</code> name is the agent name, so any modular agent — including the Host's Imperator itself — is invoked by calling its name as the model.</li>
+        <li><b>MCP tool interface</b> — hosted agents can expose tools directly</li>
+        <li><b>Bundled chatbot UI</b> — a lightweight web interface for talking to any hosted agent, including the Imperator</li>
+      </ul>
+
       <h3>Stack</h3>
       <p>Python 3.12 · LangGraph + LangChain · FastAPI · PostgreSQL with pgvector · Dkron (scheduling) · Playwright (browser automation) · Nginx.</p>
     </div>
