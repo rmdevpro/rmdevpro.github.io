@@ -16,22 +16,38 @@
 .product-hero .tagline { font-size: 1.25rem; line-height: 1.4; color: var(--text); max-width: 55ch; margin-bottom: 1.75rem; font-weight: 500; letter-spacing: -0.01em; }
 .product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 2rem; }
 
-.two-package {
+.service-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 .package-card {
   background: var(--bg-raised);
   border: 1px solid var(--rule);
-  padding: 1.5rem;
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: border-color 0.15s ease, transform 0.15s ease;
 }
-.package-card .head { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule); }
+.package-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.package-card .head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 0.7rem; color: var(--text-faint); margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); letter-spacing: 0.02em; }
 .package-card .head .v { color: var(--accent); }
-.package-card h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.015em; }
-.package-card p { font-size: 0.95rem; color: var(--text-soft); }
-@media (max-width: 720px) { .two-package { grid-template-columns: 1fr; } }
+.package-card .head .v.concept { color: var(--text-faint); font-style: italic; }
+.package-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; letter-spacing: -0.01em; }
+.package-card p { font-size: 0.82rem; color: var(--text-soft); line-height: 1.35; margin: 0; }
+.service-grid-orphan {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+.service-grid-orphan .package-card:nth-child(1) { grid-column: 1; }
+@media (max-width: 720px) {
+  .service-grid, .service-grid-orphan { grid-template-columns: 1fr; }
+  .service-grid-orphan .package-card:nth-child(1) { grid-column: 1; }
+}
 
 .detail-section { display: grid; grid-template-columns: 7rem 1fr; gap: 2.5rem; padding-block: clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--rule); align-items: start; }
 .detail-section:last-of-type { border-bottom: none; }
@@ -65,23 +81,50 @@
     <h1>Agent Platform.</h1>
     <p class="tagline">Infrastructure for production agentic systems.</p>
     <p class="sub">A family of open-source agentic services for production AI. Each is managed by its own prime agent called the Imperator — not only enabled to perform operational functions but, in many cases, to metacode parts of the service itself. Accessible to people and other agents over an OpenAI-compatible endpoint.</p>
-    <div class="two-package">
-      <div class="package-card">
+    <div class="service-grid">
+      <a class="package-card" href="#context-broker">
         <div class="head"><span>context-broker</span><span class="v">Beta</span></div>
         <h3>Context Broker</h3>
         <p>The memory layer.</p>
-      </div>
-      <div class="package-card">
+      </a>
+      <a class="package-card" href="#modular-agent-host">
         <div class="head"><span>emad-host</span><span class="v">Beta</span></div>
         <h3>Modular Agent Host</h3>
         <p>The runtime.</p>
-      </div>
+      </a>
+      <a class="package-card" href="#inference-broker">
+        <div class="head"><span>inference-broker</span><span class="v">80% to Beta</span></div>
+        <h3>Inference Broker</h3>
+        <p>The inference layer.</p>
+      </a>
+      <a class="package-card" href="#agentic-file-system">
+        <div class="head"><span>agentic-fs</span><span class="v">15% to Beta</span></div>
+        <h3>Agentic File System</h3>
+        <p>The filesystem layer.</p>
+      </a>
+      <a class="package-card" href="#development-cache">
+        <div class="head"><span>development-cache</span><span class="v">75% to Beta</span></div>
+        <h3>Development Cache</h3>
+        <p>The supply-chain wall.</p>
+      </a>
+      <a class="package-card" href="#observability-platform">
+        <div class="head"><span>observability</span><span class="v">75% to Beta</span></div>
+        <h3>Observability Platform</h3>
+        <p>The telemetry layer.</p>
+      </a>
+    </div>
+    <div class="service-grid-orphan">
+      <a class="package-card" href="#conversation-broker">
+        <div class="head"><span>conversation-broker</span><span class="v concept">Concept</span></div>
+        <h3>Conversation Broker</h3>
+        <p>The messaging layer.</p>
+      </a>
     </div>
   </div>
 </section>
 
 <div class="wrap">
-  <div class="detail-section">
+  <div class="detail-section" id="context-broker">
     <div class="lbl">§ 01 · Context Broker</div>
     <div>
       <h2>Context Broker</h2>
@@ -125,7 +168,7 @@
     </div>
   </div>
 
-  <div class="detail-section">
+  <div class="detail-section" id="modular-agent-host">
     <div class="lbl">§ 02 · Modular Agent Host</div>
     <div>
       <h2>Modular Agent Host</h2>
@@ -152,36 +195,173 @@
     </div>
   </div>
 
-  <div class="detail-section">
-    <div class="lbl">§ 03 · Together</div>
+  <div class="detail-section" id="inference-broker">
+    <div class="lbl">§ 03 · Inference Broker</div>
     <div>
-      <h2>How they fit.</h2>
-      <p>Context Broker and Modular Agent Host are <b>independent but complementary</b>.</p>
+      <h2>Inference Broker</h2>
+      <p>A single proxy in front of every model call across the ecosystem — local or cloud — where the call is not to a model but to a named <em>purpose</em>. Behind each name is a hot-pluggable graph that decides, at inference time, what actually runs and how.</p>
+
+      <h3>Aliases as Purpose, Not Pointers</h3>
+      <p>An alias is not a label for a model. It is a named expression of a reusable inference purpose — <code>imperator-strategy</code>, <code>personal-companion</code>, <code>agent-small</code>. Callers declare what kind of reasoning they need; the Broker decides what currently fulfills it. When a better model emerges, the alias is updated in one place. Every caller benefits immediately, with no code change on their end.</p>
+
+      <h3>Hot-Pluggable Logic Behind Every Alias</h3>
+      <p>The logic behind an alias is real code — a hot-pluggable Python module that runs at inference time. It can do whatever the author wires it to do. Typical patterns include rate-limit fallback to a secondary model, size-based routing between local and cloud, format reshaping between providers (OpenAI → Anthropic), content-aware dispatch (code authoring to one model, code testing to another), LoRA adapter selection, and multi-model composition. Because each alias is real code, the range is open.</p>
+
+      <h3>Unified Local and Cloud Inference</h3>
+      <p>Local GPU compute runs on a Ray Serve cluster — V100, P40, and P4 hardware pooled across hosts, with GPU class labels selecting the right hardware for each model. Cloud backends cover Gemini, xAI, OpenAI, Anthropic, and Together. A single request can start local, escalate to cloud, and fall back again — all inside the alias's graph, invisible to the caller.</p>
+
+      <h3>Beyond Chat</h3>
+      <p>The same aliasing surface covers chat completions, embeddings, cross-encoder reranking, and video generation. One proxy, one configuration model, one place where inference policy lives.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Broker is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Imperator metacodes new aliases and the Python modules behind them — write a new purpose in conversation, get a working alias.</p>
+
+      <h3>Modular Hot Loading</h3>
+      <p>Aliases and their graphs can be added, modified, and hot-loaded at runtime. Model swaps are a config edit, a <code>serve deploy</code>, and a SQL upsert against the alias registry — no service restart.</p>
+
+      <h3>Interfaces</h3>
       <ul>
-        <li>Run <b>Context Broker alone</b> if you need durable conversational memory for an existing system.</li>
-        <li>Run <b>Modular Agent Host alone</b> if you need pluggable agent orchestration but don't need persistent memory.</li>
-        <li>Run <b>both together</b> — Modular Agent Host points at Context Broker, and every modular agent it hosts gets free durable memory across restarts.</li>
+        <li><b>OpenAI-compatible API</b> — drop-in replacement; the <code>model</code> field names the alias</li>
+        <li><b>MCP tool interface</b> — <code>llm_chat_completions</code>, <code>llm_embeddings</code>, <code>llm_rerank</code>, <code>video_extend</code></li>
+        <li><b>Bundled chatbot UI</b> — for talking to the Imperator</li>
       </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · Ray Serve · LangGraph + LangChain · FastAPI · PostgreSQL (alias registry) · llama-cpp-python · Diffusers · BGE embeddings &amp; reranker · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="agentic-file-system">
+    <div class="lbl">§ 04 · Agentic File System</div>
+    <div>
+      <h2>Agentic File System</h2>
+      <p>A filesystem for agents, not users. POSIX permissions were designed for a bounded set of humans doing a known set of things; agents act at machine speed, across roles, in combinations no rule author foresaw. The Agentic File System replaces "is this agent allowed to access this path?" with a richer question: how does the intent of the policy reconcile with the intent of the action?</p>
+
+      <h3>Intent-Based Access</h3>
+      <p>Every mutating operation — write, delete, move — carries a stated <b>intent</b>. The agent declares why it is doing what it is doing. Policies are expressed the same way: in terms of purpose, not just path patterns. <em>"Agents must not write to the root of the general storage directory"</em> is a policy about intent; it governs how decisions are made, not just what is literally matched. When the two intents align, access is granted. When they conflict, the system can deny, redirect with a corrective suggestion, or defer for deeper reasoning.</p>
+
+      <h3>Policy as Conversation</h3>
+      <p>Policies are managed in natural language. An administrator says <em>"Always allow the security_engineer role read access to the credentials directory,"</em> and the statement becomes a structured policy record. Rules are added, revised, and retired through continued conversation — no config files, no service restarts, no chmod.</p>
+
+      <h3>Two-Tier Decision Architecture</h3>
+      <p>Routine operations — known agents, known paths, known purposes — are resolved in microseconds by a fast-path Decision Tree Router without any LLM involvement. Novel or low-confidence cases defer to a small, fast policy-enforcement model tuned for rule-following, which reconciles policy intent and action intent and returns a structured decision with an optional corrective suggestion. Constitutional constraints — absolute denials — sit in front of both tiers and cannot be overridden.</p>
+
+      <h3>Knowledge Services</h3>
+      <p>Alongside access management, the filesystem publishes queryable knowledge about what it contains. Code is indexed at function and class granularity for <b>semantic search</b>, and parsed into an AST-derived <b>structural graph</b> so an agent can ask <em>who calls this function</em> or <em>what imports this module</em>. General files combine semantic similarity with a document relationship graph. This is the agent's lens on the filesystem itself — not just storage, but navigable knowledge about the codebase.</p>
+
+      <h3>The Learning Loop</h3>
+      <p>Every access decision is logged to a knowledge graph. A background process watches for statistically significant patterns — repeated deferrals that consistently result in approval — and surfaces them to the Imperator as proposals. Approved proposals promote patterns to the fast-path router. The system becomes faster and more efficient the more it is used, while the administrator governs at the level of principles rather than individual rules.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Agentic File System is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Imperator translates administrator instructions into policy records, proposes new fast-path rules from observed patterns, and handles complex multi-step goals like <em>"find all security vulnerabilities in this project."</em></p>
+
+      <h3>Interfaces</h3>
+      <ul>
+        <li><b>MCP tool interface</b> — knowledge tools (<code>code_search</code>, <code>code_find_callers</code>, <code>code_find_imports</code>, <code>file_search</code>) and filesystem tools (<code>fs_list</code>, <code>fs_find</code>, <code>fs_read</code>, <code>fs_write</code>, <code>fs_delete</code>)</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for policy management and complex filesystem goals</li>
+        <li><b>Bundled chatbot UI</b> — for administrator conversation with the Imperator</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · Qdrant (semantic) · Neo4j (structural + access KG) · PostgreSQL (policy store) · Redis (queue + cache) · tree-sitter · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="development-cache">
+    <div class="lbl">§ 05 · Development Cache</div>
+    <div>
+      <h2>Development Cache</h2>
+      <p>A unified external-dependency cache — one wall between your agentic ecosystem and the public package ecosystem. Transparent proxies for PyPI, NPM, and Docker images mean every build, every container, every agent runtime pulls through a cache you control, not the open internet.</p>
+
+      <h3>Three Proxies, One Surface</h3>
+      <p>A single MAD fronts three caching backends: <b>devpi</b> for PyPI, <b>Verdaccio</b> for NPM, and a private <b>Docker Registry 2.0</b> for images. Agents and CI pipelines configure a couple of environment variables — <code>PIP_INDEX_URL</code>, <code>NPM_CONFIG_REGISTRY</code>, and the Docker daemon's <code>insecure-registries</code> — and all dependency traffic flows through the cache, invisibly.</p>
+
+      <h3>Offline-Capable Builds</h3>
+      <p>Once a package is cached, subsequent builds don't need the internet at all. Pre-warming tools seed the caches from a <code>requirements.txt</code> or a <code>package.json</code>, so a new host, a fresh container, or a disconnected environment comes online already holding everything it needs. This is the supply-chain wall — fast, repeatable, auditable.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Cache is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. Agents that need to warm a cache, list what's stored, or clean up old Docker tags call the Imperator in conversation; the Imperator executes the multi-step cache operation on their behalf.</p>
+
+      <h3>Interfaces</h3>
+      <ul>
+        <li><b>Transparent proxies</b> — PyPI (devpi, port 3141), NPM (Verdaccio, port 4873), Docker (registry:2, port 5000)</li>
+        <li><b>MCP tool interface</b> — cache status, pre-warming, package listing, registry management, Prometheus metrics</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for multi-step cache operations</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · devpi · Verdaccio · Docker Registry 2.0 · Prometheus · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="observability-platform">
+    <div class="lbl">§ 06 · Observability Platform</div>
+    <div>
+      <h2>Observability Platform</h2>
+      <p>A full telemetry pipeline for an agentic ecosystem — metrics, logs, and visualization, wrapped in an agent that can diagnose issues on its own. Historical logs survive container restarts. Metrics outlast the machines that produced them. And the question <em>what's wrong right now?</em> can be answered without a human writing a single query.</p>
+
+      <h3>The Full Stack</h3>
+      <p><b>Prometheus</b> for time-series metrics, <b>Loki</b> for persistent logs, and <b>Grafana</b> for visualization — all isolated on a private network, accessed exclusively through a single MCP gateway. Log shippers run as separate containers per host, tailing Docker logs and pushing them to Loki directly, without mounting <code>docker.sock</code> anywhere it shouldn't be. Grafana's UI is proxied through the same gateway, so the network boundary is never crossed.</p>
+
+      <h3>Agentic Diagnosis</h3>
+      <p>The platform's headline capability is <code>diagnose_issue</code>: an agent that, given a complaint like <em>"checkout is failing,"</em> generates its own PromQL and LogQL queries, executes them, synthesizes a root cause, and reports back. The observability stack becomes a reasoning surface rather than a dashboard — any agent in the ecosystem can ask about ecosystem health and get an answered question, not a pile of graphs.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Platform is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Imperator coordinates diagnosis runs, evolves the query patterns it uses, and serves as the conversational front door to the whole telemetry pipeline.</p>
+
+      <h3>Interfaces</h3>
+      <ul>
+        <li><b>MCP tool interface</b> — <code>query_logs</code> (LogQL), <code>query_metrics</code> (PromQL), <code>diagnose_issue</code> (agentic root-cause synthesis)</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for conversational diagnosis</li>
+        <li><b>Grafana UI</b> — proxied through the gateway for human operators</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · Prometheus · Loki · Grafana · Promtail · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="conversation-broker">
+    <div class="lbl">§ 07 · Conversation Broker</div>
+    <div>
+      <h2>Conversation Broker</h2>
+      <p>Every problem agent-to-agent messaging needs to solve has already been solved — by email. Addressed communication, threading, participant history, delivery notification, loop protection, retry and dead-letter handling. The Conversation Broker applies that proven model directly to agent communication. The concepts transfer; the infrastructure — SMTP, IMAP, MX records — does not. Agent communication is internal, controlled, and known, and it deserves infrastructure that assumes it.</p>
+
+      <h3>The Message Model</h3>
+      <p>Every message carries <b>From</b>, <b>To</b>, <b>CC</b>, a <b>conversation_id</b>, a <b>message_id</b>, and a <b>hop_count</b>. The distinction between To and CC is about <em>obligation</em>, not context: recipients in To are expected to respond; recipients in CC may contribute if they have something relevant, but no response is required. This single structural choice shapes how agents manage optional participation without generating noise.</p>
+
+      <h3>Participants Are an Artifact of the Message</h3>
+      <p>There is no subscription list, no "joining" a conversation. Participation is derived from the message history — who has appeared in From, To, or CC across the thread. An agent that has never been addressed has no membership and receives no notifications. This maps exactly to how email threads work, and it sidesteps an entire class of state-management problems.</p>
+
+      <h3>No Reply-to-All</h3>
+      <p>When an agent responds, the default is to address the original sender only. The CC list from the incoming message is not inherited. The responding agent must explicitly choose to include additional recipients. This is the primary structural safeguard against cascading communication loops — without it, a message to ten agents produces ten responses to ten agents, each producing ten more.</p>
+
+      <h3>The Store Is the Source of Truth</h3>
+      <p>Every message is written to a durable store before any notification fires. Once it's in the store it's safe; the trigger that notifies recipients is a separate, best-effort, disposable signal carrying only the <code>conversation_id</code> and the addressing field — never the content. If a trigger fails, the message is still retrievable by polling. The store sits in the trigger path deliberately: its central position is what makes reliable loop protection possible.</p>
+
+      <h3>Loop Protection</h3>
+      <p>Three mechanisms sit in front of every trigger. <b>Hop counting</b> — borrowed directly from email's Received header model — rejects any message that has been through too many agent hands. <b>Rate limiting</b> throttles agents generating anomalous volumes of messages within a rolling window. <b>Deduplication</b> ensures a trigger is never fired twice for the same message_id, even when a sender retries. Together they make runaway cascades a design-time impossibility, not an operational hope.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Conversation Broker will be an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>, following the pattern established across the platform.</p>
+
+      <h3>Status</h3>
+      <p>Concept stage. Defined in full in the concept paper; no implementation yet. Published here so the architecture can be reviewed ahead of build.</p>
     </div>
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 04 · In Development</div>
+    <div class="lbl">§ 08 · Together</div>
     <div>
-      <h2>Coming next.</h2>
-      <p>Additional agentic services on the roadmap, designed to extend the platform. Concept-stage or early build, not yet shipping.</p>
-      <ul>
-        <li><b>Inference Broker</b> — a single proxy in front of every model call across the ecosystem, local or cloud. Clients invoke a named alias; the alias either points straight at a specific model, or runs through a hot-pluggable Python module that can do whatever the author wires it to do. Typical patterns include rate-limit fallback, size-based local-vs-cloud routing, format reshaping between providers (OpenAI → Anthropic), and content-aware dispatch (code authoring to one model, code testing to another) — but because each alias is real code, the range is open. Its Imperator metacodes new aliases and plugins.</li>
-        <li><b>Conversation Broker</b> — agent-to-agent messaging on an email-style model: addressed communication, threading, participant history, delivery notification, loop protection. Internal, controlled, no SMTP required.</li>
-        <li><b>Agentic File System</b> — intent-based filesystem management. Replaces POSIX permissions with a reconciliation between policy intent and action intent. Every mutation carries a stated reason; policies are expressed in terms of purpose, not just path patterns.</li>
-        <li><b>Development Cache</b> — a shared cache for agentic development work.</li>
-        <li><b>Observability Platform</b> — observability engineered for agentic systems. Reasoning traces, tool-use patterns, cross-agent flows, and quality signals that matter for multi-agent work.</li>
-      </ul>
+      <h2>How they fit.</h2>
+      <p>Every service in the platform is <b>independent and complete</b> on its own. Each one solves a real problem an agentic system faces, and each one ships with its own Imperator, its own OpenAI-compatible endpoint, its own chatbot UI, and its own path to production.</p>
+      <p>But they compose. The Modular Agent Host can point at the Context Broker, and every hosted agent gets durable memory for free. The Context Broker can delegate inference to the Inference Broker, and recipe-level model choices become ecosystem-level policy. The Agentic File System and the Observability Platform both rely on the Inference Broker for their internal reasoning. The Development Cache sits behind all of it, so every build, every container, every pip install flows through one wall.</p>
+      <p>Start with the service that solves your next problem. Add the rest as the problem space grows.</p>
     </div>
   </div>
 
   <div class="detail-section" id="install">
-    <div class="lbl">§ 05 · Install</div>
+    <div class="lbl">§ 09 · Install</div>
     <div>
       <h2>Run it yourself.</h2>
       <div class="code"><span class="comment"># Context Broker</span>
@@ -191,7 +371,7 @@
 <span class="comment"># Modular Agent Host</span>
 <span class="cmd">pip install</span> emad-host
 <span class="cmd">emad-host</span> --config config.yaml</div>
-      <p>Full documentation in each repository.</p>
+      <p>Full documentation in each repository. Additional services ship as they reach beta.</p>
     </div>
   </div>
 </div>
