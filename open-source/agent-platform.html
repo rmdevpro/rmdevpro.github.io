@@ -94,15 +94,6 @@
       <p>A context window is not the conversation truncated to fit. It is a <b>recipe</b> — a purpose-built combination of context engineering techniques that assembles one agent's view of the conversation. We call these recipes <em>build types</em>. A build type can mix any form of compression, compaction, summarization, enrichment, RAG, CAG, or GraphRAG the engineer cares to assemble, to fit any token budget. Every agent gets its own optimized view of an infinite conversation — between one or many participants, human or agent — tuned to what that agent needs to reason well. <b>This recipe-driven approach is the defining feature of the Broker.</b></p>
       <p>Among the ingredients a recipe can draw on are two distinct memory layers. <b>Episodic memory</b> is the conversation record itself, progressively compressed as it ages. <b>Semantic memory</b> is a knowledge graph extracted from conversations in the background — entities, relationships, preferences, and decisions — answering <em>what do I know about X</em> rather than <em>what was said about X</em>. An engineering agent might be weighted toward semantic-dominant context; a persona agent maintaining continuity with a user, toward episodic; a strategy agent, toward injected reference material.</p>
       <p>Assembly is <b>proactive</b>. Context is rebuilt for each participant in the background after every message, during idle time. When an agent reaches for its context, the assembled view is already waiting — no summarization latency at reasoning time. The complexity of compression, graph retrieval, and recipe evaluation is hidden from the agent entirely.</p>
-      <p>Techniques shipped, composable by any recipe:</p>
-      <ul>
-        <li>Three-tier progressive compression (default) — archival summary, chunk summaries, recent verbatim</li>
-        <li>RAG — retrieval-augmented injection of relevant conversation slices</li>
-        <li>GraphRAG — traversal-based retrieval from the knowledge graph</li>
-        <li>Hybrid semantic search — vector similarity, BM25, reciprocal rank fusion, optional reranking</li>
-        <li>Knowledge graph extraction — entities, relationships, preferences, and decisions to Neo4j</li>
-        <li>Document injection — reference material bundles ahead of conversation turns</li>
-      </ul>
 
       <h3>Context Engineering Agents</h3>
       <p>Two <b>Context Engineering Agents</b> ensure that optimal context is created, used, and improved — through contextual fact and knowledge extraction on one side, and direct short-cycle reinforcement learning on the other.</p>
