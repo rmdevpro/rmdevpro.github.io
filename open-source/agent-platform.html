@@ -103,17 +103,16 @@
       <h3>Imperator Managed Agentic Service</h3>
       <p>"Agentic service" means two things. They are both <b>for agents</b>, and each one has a dedicated agent — called an <b>Imperator</b> — that manages the service, making the service itself agentic.</p>
       <p>Among the Imperator's many capabilities is its ability to metacode context window recipes. A person, or another agent, works with the Imperator directly to modify its own code because it knows best how its own system works.</p>
-      <p>The Imperator is accessed either via the OpenAI-compatible endpoint, or with the lightweight chatbot that ships with the Broker.</p>
 
       <h3>Interfaces</h3>
       <ul>
-        <li><b>MCP tool interface</b> — ten-plus tools agents can call directly</li>
+        <li><b>MCP tool interface</b> — ten-plus tools agents can call directly, such as <code>get_context</code> (assemble and return an agent's context window), <code>conv_create_context_window</code> (build a new window from a specific recipe on demand), and <code>knowledge_search</code> (search semantic memory and the knowledge graph)</li>
         <li><b>OpenAI-compatible chat endpoint</b> — the primary access path to the Imperator, provided via the industry-standard OpenAI-compatible endpoint protocol</li>
         <li><b>Bundled chatbot UI</b> — a lightweight web interface shipped with the Broker for talking to the Imperator directly</li>
       </ul>
 
       <h3>Stack</h3>
-      <p>Python 3.12 · LangGraph · FastAPI · PostgreSQL with pgvector · Redis · Neo4j · Nginx.</p>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · PostgreSQL with pgvector · Mem0 · Neo4j · Infinity (embeddings) · Ollama (local inference) · Nginx.</p>
     </div>
   </div>
 
