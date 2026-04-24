@@ -87,19 +87,25 @@
       <h2>The memory layer for AI agents.</h2>
       <p>LLM agents reason inside finite context windows. Real conversations accumulate indefinitely. Context Broker is the service that bridges that gap — the tool that performs <b>context engineering</b>, the discipline of assembling the right informational view from an unbounded conversation substrate for a specific agent, with a specific purpose, within a specific token budget.</p>
       <p>Every conversation — every message, every turn, every participant — is stored completely and indefinitely. This is the <em>infinite conversation</em>: not a log or an audit trail, but the medium through which agents think and accumulate knowledge over time.</p>
-      <p>A context window is not the conversation truncated to fit. It is a <b>purpose-built view</b> constructed by a named <em>build type</em> — progressive compression, sliding window, knowledge-dominant, document injection, or any domain-specific hybrid. Two agents in the same conversation can receive entirely different assembled views, because what each agent needs from that history is different. The build type encodes an agent's purpose at the memory layer.</p>
-      <p>Build types draw on two distinct memory layers in any proportion. <b>Episodic memory</b> is the conversation record itself, progressively compressed as it ages. <b>Semantic memory</b> is a knowledge graph extracted from conversations in the background — entities, relationships, preferences, and decisions — answering <em>what do I know about X</em> rather than <em>what was said about X</em>. An engineering agent might be weighted toward semantic-dominant context; a persona agent maintaining continuity with a user, toward episodic.</p>
-      <p>Assembly is <b>proactive</b>. Context is rebuilt for each participant in the background after every message, during idle time. When an agent reaches for its context, the assembled view is already waiting — no summarization latency at reasoning time. The complexity of compression, graph retrieval, and strategy application is hidden from the agent entirely.</p>
+      <p>A context window is not the conversation truncated to fit. It is a <b>recipe</b> — a purpose-built combination of context engineering techniques that assembles one agent's view of the conversation. We call these recipes <em>build types</em>. A build type can mix any form of compression, compaction, summarization, enrichment, RAG, CAG, or GraphRAG the engineer cares to assemble, to fit any token budget. Every agent gets its own optimized view of an infinite conversation — between one or many participants, human or agent — tuned to what that agent needs to reason well. <b>This recipe-driven approach is the defining feature of the Broker.</b></p>
+      <p>Among the ingredients a recipe can draw on are two distinct memory layers. <b>Episodic memory</b> is the conversation record itself, progressively compressed as it ages. <b>Semantic memory</b> is a knowledge graph extracted from conversations in the background — entities, relationships, preferences, and decisions — answering <em>what do I know about X</em> rather than <em>what was said about X</em>. An engineering agent might be weighted toward semantic-dominant context; a persona agent maintaining continuity with a user, toward episodic; a strategy agent, toward injected reference material.</p>
+      <p>Assembly is <b>proactive</b>. Context is rebuilt for each participant in the background after every message, during idle time. When an agent reaches for its context, the assembled view is already waiting — no summarization latency at reasoning time. The complexity of compression, graph retrieval, and recipe evaluation is hidden from the agent entirely.</p>
 
       <h3>What it provides</h3>
       <ul>
+        <li><b>Configurable build types</b> — the defining feature. Recipes that compose context engineering techniques into a context window purpose-built for one agent, to any token budget. Author new ones per agent, per purpose.</li>
         <li><b>Infinite conversation storage</b> — Postgres + pgvector, every message preserved</li>
-        <li><b>Configurable build types</b> — compose episodic and semantic memory per participant; author custom strategies for domain-specific agents</li>
-        <li><b>Three-tier progressive compression</b> — the default build type: archival summary, chunk summaries, recent verbatim, scaled to any token budget</li>
-        <li><b>Hybrid semantic search</b> — vector similarity, BM25, reciprocal rank fusion, optional reranking</li>
-        <li><b>Knowledge graph extraction</b> — entities, relationships, preferences, and decisions extracted to Neo4j in the background</li>
-        <li><b>Per-participant windows</b> — each LLM participant gets its own build type and token budget, even within the same conversation</li>
-        <li><b>Proactive background assembly</b> — context is rebuilt after each message, ready the moment an agent reaches for it</li>
+        <li><b>Techniques shipped, composable by any recipe</b>
+          <ul>
+            <li>Three-tier progressive compression (default) — archival summary, chunk summaries, recent verbatim</li>
+            <li>RAG — retrieval-augmented injection of relevant conversation slices</li>
+            <li>GraphRAG — traversal-based retrieval from the knowledge graph</li>
+            <li>Hybrid semantic search — vector similarity, BM25, reciprocal rank fusion, optional reranking</li>
+            <li>Knowledge graph extraction — entities, relationships, preferences, and decisions to Neo4j</li>
+            <li>Document injection — reference material bundles ahead of conversation turns</li>
+          </ul>
+        </li>
+        <li><b>Proactive background assembly</b> — context rebuilt after every message, ready the moment an agent reaches for it</li>
         <li><b>MCP tool interface</b> — ten-plus tools agents can call directly</li>
         <li><b>OpenAI-compatible chat endpoint</b> — drop-in for anything that speaks the OpenAI API</li>
       </ul>
