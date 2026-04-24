@@ -171,7 +171,7 @@
       <h2>Coming next.</h2>
       <p>Additional agentic services on the roadmap, designed to extend the platform. Concept-stage or early build, not yet shipping.</p>
       <ul>
-        <li><b>Inference Broker</b> — the inference-side counterpart to the Context Broker. Manages how requests reach models, how those models are configured, and how results are shaped — treating inference as a purposeful act, not just a transactional model call.</li>
+        <li><b>Inference Broker</b> — a proxy for every model call in the ecosystem, local and cloud. An <b>alias, routing, and logic layer</b>: a named alias can route directly to a specific model (<code>gpt-5.4</code> → GPT 5.4), or it can run through a configurable logic layer that shapes and redirects the call. Examples: fall back to a secondary model on a rate-limit error; route small calls to local inference and large ones to the cloud; receive a request in OpenAI format and reshape it for an Anthropic endpoint; dispatch code-authoring requests to one model and code-testing requests to another.</li>
         <li><b>Conversation Broker</b> — agent-to-agent messaging on an email-style model: addressed communication, threading, participant history, delivery notification, loop protection. Internal, controlled, no SMTP required.</li>
         <li><b>Agentic File System</b> — intent-based filesystem management. Replaces POSIX permissions with a reconciliation between policy intent and action intent. Every mutation carries a stated reason; policies are expressed in terms of purpose, not just path patterns.</li>
         <li><b>Development Cache</b> — a shared cache for agentic development work.</li>
