@@ -97,11 +97,6 @@
         <h3>Inference Broker</h3>
         <p>The inference layer.</p>
       </a>
-      <a class="package-card" href="#agentic-file-system">
-        <div class="head"><span>agentic-fs</span><span class="v">15% to Beta</span></div>
-        <h3>Agentic File System</h3>
-        <p>The filesystem layer.</p>
-      </a>
       <a class="package-card" href="#development-cache">
         <div class="head"><span>development-cache</span><span class="v">75% to Beta</span></div>
         <h3>Development Cache</h3>
@@ -111,6 +106,11 @@
         <div class="head"><span>observability</span><span class="v">75% to Beta</span></div>
         <h3>Observability Platform</h3>
         <p>The telemetry layer.</p>
+      </a>
+      <a class="package-card" href="#agentic-file-system">
+        <div class="head"><span>agentic-fs</span><span class="v">15% to Beta</span></div>
+        <h3>Agentic File System</h3>
+        <p>The filesystem layer.</p>
       </a>
     </div>
     <div class="service-grid-orphan">
@@ -231,8 +231,62 @@
     </div>
   </div>
 
+  <div class="detail-section" id="development-cache">
+    <div class="lbl">§ 04 · Development Cache</div>
+    <div>
+      <h2>Development Cache</h2>
+      <p>A unified dependency proxy — one cache in front of every external package your ecosystem pulls. Transparent proxies for PyPI, NPM, and Docker images mean every build, every container, every agent runtime pulls through a cache you control, not the open internet.</p>
+
+      <h3>Four Proxies, One Surface</h3>
+      <p>A single service fronts four caching backends: <b>devpi</b> for PyPI, <b>Verdaccio</b> for NPM, a <b>pull-through Docker registry</b> for public images from Docker Hub, and a <b>private Docker registry</b> for the images your own builds produce. Agents and CI pipelines configure a couple of environment variables — <code>PIP_INDEX_URL</code>, <code>NPM_CONFIG_REGISTRY</code>, and the Docker daemon's <code>insecure-registries</code> — and all dependency traffic flows through the proxy, invisibly.</p>
+
+      <h3>Offline-Capable Builds</h3>
+      <p>Once a package is cached, subsequent builds don't need the internet at all. Pre-warming tools seed the caches from a <code>requirements.txt</code> or a <code>package.json</code>, so a new host, a fresh container, or a disconnected environment comes online already holding everything it needs. Fast, repeatable, auditable.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Cache is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. Agents that need to warm a cache, list what's stored, or clean up old Docker tags call the Imperator in conversation; the Imperator executes the multi-step cache operation on their behalf.</p>
+
+      <h3>Interfaces</h3>
+      <ul>
+        <li><b>Transparent proxies</b> — PyPI (devpi, port 3141), NPM (Verdaccio, port 4873), Docker Hub pull-through mirror (port 5001), private Docker registry for local builds (port 5000)</li>
+        <li><b>MCP tool interface</b> — cache status, pre-warming, package listing, registry management, Prometheus metrics</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for multi-step cache operations</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · devpi · Verdaccio · Docker Registry 2.0 · Prometheus · Nginx.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="observability-platform">
+    <div class="lbl">§ 05 · Observability Platform</div>
+    <div>
+      <h2>Observability Platform</h2>
+      <p>A full telemetry pipeline for an agentic ecosystem — metrics, logs, and visualization, wrapped in an agent that can diagnose issues on its own. Historical logs survive container restarts. Metrics outlast the machines that produced them. And the question <em>what's wrong right now?</em> can be answered without a human writing a single query.</p>
+
+      <h3>The Full Stack</h3>
+      <p><b>Prometheus</b> for time-series metrics, <b>Loki</b> for persistent logs, and <b>Grafana</b> for visualization — all isolated on a private network, accessed exclusively through a single MCP gateway. Log shippers run as separate containers per host, tailing Docker logs and pushing them to Loki directly, without mounting <code>docker.sock</code> anywhere it shouldn't be. Grafana's UI is proxied through the same gateway, so the network boundary is never crossed.</p>
+
+      <h3>Agentic Diagnosis</h3>
+      <p>The platform's headline capability is <code>diagnose_issue</code>: an agent that, given a complaint like <em>"checkout is failing,"</em> generates its own PromQL and LogQL queries, executes them, synthesizes a root cause, and reports back. The observability stack becomes a reasoning surface rather than a dashboard — any agent in the ecosystem can ask about ecosystem health and get an answered question, not a pile of graphs.</p>
+
+      <h3>Imperator Managed Agentic Service</h3>
+      <p>The Platform is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Imperator coordinates diagnosis runs, evolves the query patterns it uses, and serves as the conversational front door to the whole telemetry pipeline.</p>
+
+      <h3>Interfaces</h3>
+      <ul>
+        <li><b>MCP tool interface</b> — <code>query_logs</code> (LogQL), <code>query_metrics</code> (PromQL), <code>diagnose_issue</code> (agentic root-cause synthesis)</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for conversational diagnosis</li>
+        <li><b>Grafana UI</b> — proxied through the gateway for human operators</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Python 3.12 · LangGraph + LangChain · FastAPI · Prometheus · Loki · Grafana · Promtail · Nginx.</p>
+    </div>
+  </div>
+
   <div class="detail-section" id="agentic-file-system">
-    <div class="lbl">§ 04 · Agentic File System</div>
+    <div class="lbl">§ 06 · Agentic File System</div>
     <div>
       <h2>Agentic File System</h2>
       <p>A filesystem for agents, not users. POSIX permissions were designed for a bounded set of humans doing a known set of things; agents act at machine speed, across roles, in combinations no rule author foresaw. The Agentic File System replaces "is this agent allowed to access this path?" with a richer question: how does the intent of the policy reconcile with the intent of the action?</p>
@@ -264,60 +318,6 @@
 
       <h3>Stack</h3>
       <p>Python 3.12 · LangGraph + LangChain · FastAPI · Qdrant (semantic) · Neo4j (structural + access KG) · PostgreSQL (policy store) · Redis (queue + cache) · tree-sitter · Nginx.</p>
-    </div>
-  </div>
-
-  <div class="detail-section" id="development-cache">
-    <div class="lbl">§ 05 · Development Cache</div>
-    <div>
-      <h2>Development Cache</h2>
-      <p>A unified dependency proxy — one cache in front of every external package your ecosystem pulls. Transparent proxies for PyPI, NPM, and Docker images mean every build, every container, every agent runtime pulls through a cache you control, not the open internet.</p>
-
-      <h3>Four Proxies, One Surface</h3>
-      <p>A single service fronts four caching backends: <b>devpi</b> for PyPI, <b>Verdaccio</b> for NPM, a <b>pull-through Docker registry</b> for public images from Docker Hub, and a <b>private Docker registry</b> for the images your own builds produce. Agents and CI pipelines configure a couple of environment variables — <code>PIP_INDEX_URL</code>, <code>NPM_CONFIG_REGISTRY</code>, and the Docker daemon's <code>insecure-registries</code> — and all dependency traffic flows through the proxy, invisibly.</p>
-
-      <h3>Offline-Capable Builds</h3>
-      <p>Once a package is cached, subsequent builds don't need the internet at all. Pre-warming tools seed the caches from a <code>requirements.txt</code> or a <code>package.json</code>, so a new host, a fresh container, or a disconnected environment comes online already holding everything it needs. Fast, repeatable, auditable.</p>
-
-      <h3>Imperator Managed Agentic Service</h3>
-      <p>The Cache is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. Agents that need to warm a cache, list what's stored, or clean up old Docker tags call the Imperator in conversation; the Imperator executes the multi-step cache operation on their behalf.</p>
-
-      <h3>Interfaces</h3>
-      <ul>
-        <li><b>Transparent proxies</b> — PyPI (devpi, port 3141), NPM (Verdaccio, port 4873), Docker Hub pull-through mirror (port 5001), private Docker registry for local builds (port 5000)</li>
-        <li><b>MCP tool interface</b> — cache status, pre-warming, package listing, registry management, Prometheus metrics</li>
-        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for multi-step cache operations</li>
-      </ul>
-
-      <h3>Stack</h3>
-      <p>Python 3.12 · LangGraph + LangChain · FastAPI · devpi · Verdaccio · Docker Registry 2.0 · Prometheus · Nginx.</p>
-    </div>
-  </div>
-
-  <div class="detail-section" id="observability-platform">
-    <div class="lbl">§ 06 · Observability Platform</div>
-    <div>
-      <h2>Observability Platform</h2>
-      <p>A full telemetry pipeline for an agentic ecosystem — metrics, logs, and visualization, wrapped in an agent that can diagnose issues on its own. Historical logs survive container restarts. Metrics outlast the machines that produced them. And the question <em>what's wrong right now?</em> can be answered without a human writing a single query.</p>
-
-      <h3>The Full Stack</h3>
-      <p><b>Prometheus</b> for time-series metrics, <b>Loki</b> for persistent logs, and <b>Grafana</b> for visualization — all isolated on a private network, accessed exclusively through a single MCP gateway. Log shippers run as separate containers per host, tailing Docker logs and pushing them to Loki directly, without mounting <code>docker.sock</code> anywhere it shouldn't be. Grafana's UI is proxied through the same gateway, so the network boundary is never crossed.</p>
-
-      <h3>Agentic Diagnosis</h3>
-      <p>The platform's headline capability is <code>diagnose_issue</code>: an agent that, given a complaint like <em>"checkout is failing,"</em> generates its own PromQL and LogQL queries, executes them, synthesizes a root cause, and reports back. The observability stack becomes a reasoning surface rather than a dashboard — any agent in the ecosystem can ask about ecosystem health and get an answered question, not a pile of graphs.</p>
-
-      <h3>Imperator Managed Agentic Service</h3>
-      <p>The Platform is an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>. The Imperator coordinates diagnosis runs, evolves the query patterns it uses, and serves as the conversational front door to the whole telemetry pipeline.</p>
-
-      <h3>Interfaces</h3>
-      <ul>
-        <li><b>MCP tool interface</b> — <code>query_logs</code> (LogQL), <code>query_metrics</code> (PromQL), <code>diagnose_issue</code> (agentic root-cause synthesis)</li>
-        <li><b>OpenAI-compatible chat endpoint</b> — the Imperator for conversational diagnosis</li>
-        <li><b>Grafana UI</b> — proxied through the gateway for human operators</li>
-      </ul>
-
-      <h3>Stack</h3>
-      <p>Python 3.12 · LangGraph + LangChain · FastAPI · Prometheus · Loki · Grafana · Promtail · Nginx.</p>
     </div>
   </div>
 
