@@ -67,12 +67,12 @@
     <p class="sub">Two independent but complementary open-source services that solve the two hardest problems in deploying real AI agents: remembering things across conversations, and plugging in new agents without breaking the ones already running.</p>
     <div class="two-package">
       <div class="package-card">
-        <div class="head"><span>context-broker</span><span class="v">v0.x</span></div>
+        <div class="head"><span>context-broker</span><span class="v">Beta</span></div>
         <h3>Context Broker</h3>
         <p>The memory layer.</p>
       </div>
       <div class="package-card">
-        <div class="head"><span>emad-host</span><span class="v">v0.x</span></div>
+        <div class="head"><span>emad-host</span><span class="v">Beta</span></div>
         <h3>Modular Agent Host</h3>
         <p>The runtime.</p>
       </div>
@@ -165,8 +165,23 @@
     </div>
   </div>
 
+  <div class="detail-section">
+    <div class="lbl">§ 04 · In Development</div>
+    <div>
+      <h2>Coming next.</h2>
+      <p>Additional agentic services on the roadmap, designed to extend the platform. Concept-stage or early build, not yet shipping.</p>
+      <ul>
+        <li><b>Inference Broker</b> — the inference-side counterpart to the Context Broker. Manages how requests reach models, how those models are configured, and how results are shaped — treating inference as a purposeful act, not just a transactional model call.</li>
+        <li><b>Conversation Broker</b> — agent-to-agent messaging on an email-style model: addressed communication, threading, participant history, delivery notification, loop protection. Internal, controlled, no SMTP required.</li>
+        <li><b>Agentic File System</b> — intent-based filesystem management. Replaces POSIX permissions with a reconciliation between policy intent and action intent. Every mutation carries a stated reason; policies are expressed in terms of purpose, not just path patterns.</li>
+        <li><b>Development Cache</b> — a shared cache for agentic development work.</li>
+        <li><b>Observability Platform</b> — observability engineered for agentic systems. Reasoning traces, tool-use patterns, cross-agent flows, and quality signals that matter for multi-agent work.</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="detail-section" id="install">
-    <div class="lbl">§ 04 · Install</div>
+    <div class="lbl">§ 05 · Install</div>
     <div>
       <h2>Run it yourself.</h2>
       <div class="code"><span class="comment"># Context Broker</span>
