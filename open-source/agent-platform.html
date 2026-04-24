@@ -85,17 +85,23 @@
     <div class="lbl">§ 01 · Context Broker</div>
     <div>
       <h2>The memory layer for AI agents.</h2>
-      <p>LLM agents reason inside finite context windows. Real conversations accumulate indefinitely. Context Broker bridges that gap.</p>
-      <p>It stores every message, embeds it for semantic search, extracts structured knowledge into a graph, and assembles purpose-built context windows on demand — curated views tailored to the specific participant, constructed according to a configured strategy, strictly bound by token budgets.</p>
+      <p>LLM agents reason inside finite context windows. Real conversations accumulate indefinitely. Context Broker is the service that bridges that gap — the tool that performs <b>context engineering</b>, the discipline of assembling the right informational view from an unbounded conversation substrate for a specific agent, with a specific purpose, within a specific token budget.</p>
+      <p>Every conversation — every message, every turn, every participant — is stored completely and indefinitely. This is the <em>infinite conversation</em>: not a log or an audit trail, but the medium through which agents think and accumulate knowledge over time.</p>
+      <p>A context window is not the conversation truncated to fit. It is a <b>purpose-built view</b> constructed by a named <em>build type</em> — progressive compression, sliding window, knowledge-dominant, document injection, or any domain-specific hybrid. Two agents in the same conversation can receive entirely different assembled views, because what each agent needs from that history is different. The build type encodes an agent's purpose at the memory layer.</p>
+      <p>Build types draw on two distinct memory layers in any proportion. <b>Episodic memory</b> is the conversation record itself, progressively compressed as it ages. <b>Semantic memory</b> is a knowledge graph extracted from conversations in the background — entities, relationships, preferences, and decisions — answering <em>what do I know about X</em> rather than <em>what was said about X</em>. An engineering agent might be weighted toward semantic-dominant context; a persona agent maintaining continuity with a user, toward episodic.</p>
+      <p>Assembly is <b>proactive</b>. Context is rebuilt for each participant in the background after every message, during idle time. When an agent reaches for its context, the assembled view is already waiting — no summarization latency at reasoning time. The complexity of compression, graph retrieval, and strategy application is hidden from the agent entirely.</p>
 
-      <h3>What it does</h3>
+      <h3>What it provides</h3>
       <ul>
-        <li><b>Infinite conversation storage</b> with Postgres + pgvector</li>
-        <li><b>Multi-tier progressive compression</b> — archival summaries, chunk summaries, and recent verbatim, assembled to fit any token budget</li>
-        <li><b>Hybrid search</b> — vector similarity, BM25, reciprocal rank fusion, optional reranking</li>
-        <li><b>Knowledge graph</b> — automatic entity and relationship extraction into Neo4j</li>
+        <li><b>Infinite conversation storage</b> — Postgres + pgvector, every message preserved</li>
+        <li><b>Configurable build types</b> — compose episodic and semantic memory per participant; author custom strategies for domain-specific agents</li>
+        <li><b>Three-tier progressive compression</b> — the default build type: archival summary, chunk summaries, recent verbatim, scaled to any token budget</li>
+        <li><b>Hybrid semantic search</b> — vector similarity, BM25, reciprocal rank fusion, optional reranking</li>
+        <li><b>Knowledge graph extraction</b> — entities, relationships, preferences, and decisions extracted to Neo4j in the background</li>
+        <li><b>Per-participant windows</b> — each LLM participant gets its own build type and token budget, even within the same conversation</li>
+        <li><b>Proactive background assembly</b> — context is rebuilt after each message, ready the moment an agent reaches for it</li>
         <li><b>MCP tool interface</b> — ten-plus tools agents can call directly</li>
-        <li><b>OpenAI-compatible chat endpoint</b> — drop-in integration for anything that speaks the OpenAI API</li>
+        <li><b>OpenAI-compatible chat endpoint</b> — drop-in for anything that speaks the OpenAI API</li>
       </ul>
 
       <h3>Stack</h3>
