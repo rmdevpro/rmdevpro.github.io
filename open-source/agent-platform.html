@@ -325,7 +325,13 @@
     <div class="lbl">§ 07 · Conversation Broker</div>
     <div>
       <h2>Conversation Broker</h2>
-      <p>Every problem agent-to-agent messaging needs to solve has already been solved — by email. Addressed communication, threading, participant history, delivery notification, loop protection, retry and dead-letter handling. The Conversation Broker applies that proven model directly to agent communication. The concepts transfer; the infrastructure — SMTP, IMAP, MX records — does not. Agent communication is internal, controlled, and known, and it deserves infrastructure that assumes it.</p>
+      <p>Agent-to-agent communication needs a control mechanism. Point-to-point is easy — any two agents can talk. Multi-agent conversations are where it gets hard, both for making the exchange effective and for preventing cascading loops. The Conversation Broker is that control mechanism: a messaging substrate on an email-style model, plus the agent-side companions that turn a raw message arrival into the right action at the right time.</p>
+
+      <h3>Why Not Just a Message Bus</h3>
+      <p>A pub/sub bus delivers messages. It does not decide who should be in the conversation, who is obligated to respond, how many hops a thread has traveled, or whether this particular update is worth waking a multi-billion-parameter model. All of that has to be built on top — and if it is not built deliberately, multi-agent systems either stall or cascade. The Broker takes the problem seriously at both ends: in the substrate, and in the agents that sit on it.</p>
+
+      <h3>The Email Model as Substrate</h3>
+      <p>Every problem agent-to-agent messaging needs to solve at the transport layer has already been solved — by email. Addressed communication, threading, participant history, delivery notification, loop protection, retry and dead-letter handling. The Broker applies that proven model directly. The concepts transfer; the infrastructure — SMTP, IMAP, MX records — does not. Agent communication is internal, controlled, and known, and it deserves infrastructure that assumes it.</p>
 
       <h3>The Message Model</h3>
       <p>Every message carries <b>From</b>, <b>To</b>, <b>CC</b>, a <b>conversation_id</b>, a <b>message_id</b>, and a <b>hop_count</b>. The distinction between To and CC is about <em>obligation</em>, not context: recipients in To are expected to respond; recipients in CC may contribute if they have something relevant, but no response is required. This single structural choice shapes how agents manage optional participation without generating noise.</p>
@@ -334,13 +340,16 @@
       <p>There is no subscription list, no "joining" a conversation. Participation is derived from the message history — who has appeared in From, To, or CC across the thread. An agent that has never been addressed has no membership and receives no notifications. This maps exactly to how email threads work, and it sidesteps an entire class of state-management problems.</p>
 
       <h3>No Reply-to-All</h3>
-      <p>When an agent responds, the default is to address the original sender only. The CC list from the incoming message is not inherited. The responding agent must explicitly choose to include additional recipients. This is the primary structural safeguard against cascading communication loops — without it, a message to ten agents produces ten responses to ten agents, each producing ten more.</p>
+      <p>When an agent responds, the default is to address the original sender only. The CC list from the incoming message is not inherited. The responding agent must explicitly choose to include additional recipients. This is a structural safeguard against cascading communication loops — without it, a message to ten agents produces ten responses to ten agents, each producing ten more.</p>
+
+      <h3>Broker-Enabled Agents</h3>
+      <p>The substrate alone is not enough. A naïve recipient treats every incoming message as an event and wakes the primary LLM to consider it — the cost compounds fast, and a busy multi-agent conversation becomes an invocation storm. Broker-enabled agents are built differently. Each participating agent carries a <b>moderator companion</b> — a small, fast decision layer that evaluates every arriving message and chooses one of two paths: trigger the primary agent LLM <em>now</em> for action, or simply note that the conversation has been updated and let the LLM pick it up the next time it runs for some other reason. The moderator knows <em>how</em> and <em>when</em> to invoke the agent it serves. That is the difference between an agent that reacts to every ping and an agent that knows when something actually matters.</p>
 
       <h3>The Store Is the Source of Truth</h3>
       <p>Every message is written to a durable store before any notification fires. Once it's in the store it's safe; the trigger that notifies recipients is a separate, best-effort, disposable signal carrying only the <code>conversation_id</code> and the addressing field — never the content. If a trigger fails, the message is still retrievable by polling. The store sits in the trigger path deliberately: its central position is what makes reliable loop protection possible.</p>
 
       <h3>Loop Protection</h3>
-      <p>Three mechanisms sit in front of every trigger. <b>Hop counting</b> — borrowed directly from email's Received header model — rejects any message that has been through too many agent hands. <b>Rate limiting</b> throttles agents generating anomalous volumes of messages within a rolling window. <b>Deduplication</b> ensures a trigger is never fired twice for the same message_id, even when a sender retries. Together they make runaway cascades a design-time impossibility, not an operational hope.</p>
+      <p>Three mechanisms sit in front of every trigger. <b>Hop counting</b> — borrowed directly from email's Received header model — rejects any message that has been through too many agent hands. <b>Rate limiting</b> throttles agents generating anomalous volumes of messages within a rolling window. <b>Deduplication</b> ensures a trigger is never fired twice for the same message_id, even when a sender retries. Together with no-reply-to-all and the moderator layer, runaway cascades are a design-time impossibility, not an operational hope.</p>
 
       <h3>Imperator Managed Agentic Service</h3>
       <p>The Conversation Broker will be an <b>agentic service</b>: for agents, and managed by its own <b>Imperator</b>, following the pattern established across the platform.</p>
@@ -359,33 +368,7 @@
       <p>Start with the service that solves your next problem. Add the rest as the problem space grows.</p>
     </div>
   </div>
-
-  <div class="detail-section" id="install">
-    <div class="lbl">§ 09 · Install</div>
-    <div>
-      <h2>Run it yourself.</h2>
-      <div class="code"><span class="comment"># Context Broker</span>
-<span class="cmd">git clone</span> https://github.com/rmdevpro/context-broker.git
-<span class="cmd">cd</span> context-broker &amp;&amp; <span class="cmd">docker compose up</span> -d
-
-<span class="comment"># Modular Agent Host</span>
-<span class="cmd">git clone</span> https://github.com/rmdevpro/emad-host.git
-<span class="cmd">cd</span> emad-host &amp;&amp; <span class="cmd">docker compose up</span> -d</div>
-      <p>Full documentation in each repository. Additional services ship as they reach beta.</p>
-    </div>
-  </div>
 </div>
-
-<section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
-  <div class="wrap">
-    <div class="section-head"><div class="lbl">§ Work with us</div><h2>Deploying this in production?</h2></div>
-    <p>We stand up Context Broker and Modular Agent Host for clients as part of larger agentic builds. Send us a note.</p>
-    <div class="lines">
-      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
-      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap inner">
