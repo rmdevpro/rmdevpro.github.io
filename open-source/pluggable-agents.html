@@ -60,15 +60,15 @@
     <div class="kicker">§ Agents · Open source</div>
     <h1>Pluggable Agents.</h1>
     <p class="tagline">Drop-in agents for the services your business already runs on.</p>
-    <p class="sub">Every eMAD (ephemeral Modular Agent Daemon) is a Python package that plugs into an eMAD Host. Install it, the Host picks it up, and agents get new capabilities — no downtime, no monolithic redeploy. Two agents are currently published.</p>
+    <p class="sub">Every agent here is a Python package that plugs into the Modular Agent Host. Install it, the Host picks it up, and agents get new capabilities — no downtime, no monolithic redeploy. Two agents are currently published.</p>
     <div class="two-package">
       <div class="package-card">
-        <div class="head"><span>google-workspace-emad</span><span class="v">v0.2</span></div>
+        <div class="head"><span>google-workspace-agent</span><span class="v">v0.2</span></div>
         <h3>Google Workspace</h3>
         <p>Gmail · Drive · Docs · Sheets · Slides · Calendar. 30+ tools.</p>
       </div>
       <div class="package-card">
-        <div class="head"><span>microsoft-365-emad</span><span class="v">v0.2</span></div>
+        <div class="head"><span>microsoft-365-agent</span><span class="v">v0.2</span></div>
         <h3>Microsoft 365</h3>
         <p>Outlook · Calendar · OneDrive. 15+ tools via Microsoft Graph.</p>
       </div>
@@ -81,7 +81,7 @@
     <div class="lbl">§ 01 · Google Workspace</div>
     <div>
       <h2>Full Google Workspace, agent-accessible.</h2>
-      <p>Gmail, Drive, Docs, Sheets, Slides, and Calendar — all callable by agents via a single registered eMAD. Service-account authentication with domain-wide delegation means agents act on behalf of real users, safely.</p>
+      <p>Gmail, Drive, Docs, Sheets, Slides, and Calendar — all callable by agents via a single registered modular agent. Service-account authentication with domain-wide delegation means agents act on behalf of real users, safely.</p>
 
       <h3>Capabilities</h3>
       <div class="caps-grid">
@@ -135,9 +135,9 @@
     <div class="lbl">§ 04 · Install</div>
     <div>
       <h2>Run them yourself.</h2>
-      <div class="code"><span class="comment"># Requires eMAD Host already running</span>
-<span class="cmd">pip install</span> google-workspace-emad
-<span class="cmd">pip install</span> microsoft-365-emad
+      <div class="code"><span class="comment"># Requires Modular Agent Host already running</span>
+<span class="cmd">pip install</span> google-workspace-agent
+<span class="cmd">pip install</span> microsoft-365-agent
 
 <span class="comment"># Restart not required — host discovers on install</span></div>
       <p>Documentation for each agent lives in its repository.</p>
@@ -148,7 +148,7 @@
     <div class="lbl">§ 05 · Build your own</div>
     <div>
       <h2>Agents for your stack, too.</h2>
-      <p>If you need an agent for <b>Slack, Jira, SharePoint, Salesforce, ServiceNow</b>, or your internal APIs — we build those as standard engagements. The eMAD pattern makes it straightforward. The typical agent ships in a week or two depending on API complexity.</p>
+      <p>If you need an agent for <b>Slack, Jira, SharePoint, Salesforce, ServiceNow</b>, or your internal APIs — we build those as standard engagements. The modular-agent pattern makes it straightforward. The typical agent ships in a week or two depending on API complexity.</p>
       <p style="margin-top:1rem"><a class="link" href="../index.html#contact" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">Talk to us →</a></p>
     </div>
   </div>

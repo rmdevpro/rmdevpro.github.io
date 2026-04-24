@@ -88,7 +88,7 @@
         <p>The memory layer.</p>
       </a>
       <a class="package-card" href="#modular-agent-host">
-        <div class="head"><span>emad-host</span><span class="v">Beta</span></div>
+        <div class="head"><span>modular-agent-host</span><span class="v">Beta</span></div>
         <h3>Modular Agent Host</h3>
         <p>The runtime.</p>
       </a>
@@ -274,7 +274,7 @@
       <p>A unified external-dependency cache — one wall between your agentic ecosystem and the public package ecosystem. Transparent proxies for PyPI, NPM, and Docker images mean every build, every container, every agent runtime pulls through a cache you control, not the open internet.</p>
 
       <h3>Three Proxies, One Surface</h3>
-      <p>A single MAD fronts three caching backends: <b>devpi</b> for PyPI, <b>Verdaccio</b> for NPM, and a private <b>Docker Registry 2.0</b> for images. Agents and CI pipelines configure a couple of environment variables — <code>PIP_INDEX_URL</code>, <code>NPM_CONFIG_REGISTRY</code>, and the Docker daemon's <code>insecure-registries</code> — and all dependency traffic flows through the cache, invisibly.</p>
+      <p>A single service fronts three caching backends: <b>devpi</b> for PyPI, <b>Verdaccio</b> for NPM, and a private <b>Docker Registry 2.0</b> for images. Agents and CI pipelines configure a couple of environment variables — <code>PIP_INDEX_URL</code>, <code>NPM_CONFIG_REGISTRY</code>, and the Docker daemon's <code>insecure-registries</code> — and all dependency traffic flows through the cache, invisibly.</p>
 
       <h3>Offline-Capable Builds</h3>
       <p>Once a package is cached, subsequent builds don't need the internet at all. Pre-warming tools seed the caches from a <code>requirements.txt</code> or a <code>package.json</code>, so a new host, a fresh container, or a disconnected environment comes online already holding everything it needs. This is the supply-chain wall — fast, repeatable, auditable.</p>
@@ -369,8 +369,8 @@
 <span class="cmd">cd</span> context-broker &amp;&amp; <span class="cmd">docker compose up</span> -d
 
 <span class="comment"># Modular Agent Host</span>
-<span class="cmd">pip install</span> emad-host
-<span class="cmd">emad-host</span> --config config.yaml</div>
+<span class="cmd">git clone</span> https://github.com/rmdevpro/emad-host.git
+<span class="cmd">cd</span> emad-host &amp;&amp; <span class="cmd">docker compose up</span> -d</div>
       <p>Full documentation in each repository. Additional services ship as they reach beta.</p>
     </div>
   </div>
