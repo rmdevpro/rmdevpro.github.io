@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pluggable Agents — BlueprintAgentic</title>
-<meta name="description" content="Drop-in agents for Google Workspace and Microsoft 365. Gmail, Drive, Calendar, OneDrive — pip install and go.">
+<meta name="description" content="A contract between agents and the systems that run them. Open-source Python agents for any compliant host — the Modular Agent Host, every agentic-service Imperator slot, or your own.">
 <link rel="icon" href="../assets/logos/favicon.ico">
 <link rel="stylesheet" href="../css/style.css">
 <style>
@@ -59,96 +59,86 @@
     <a class="back" href="../index.html#open-source">← Open source</a>
     <div class="kicker">§ Agents · Open source</div>
     <h1>Pluggable Agents.</h1>
-    <p class="tagline">Drop-in agents for the services your business already runs on.</p>
-    <p class="sub">Every agent here is a Python package that plugs into the Modular Agent Host. Install it, the Host picks it up, and agents get new capabilities — no downtime, no monolithic redeploy. Two agents are currently published.</p>
-    <div class="two-package">
-      <div class="package-card">
-        <div class="head"><span>google-workspace-agent</span><span class="v">v0.2</span></div>
-        <h3>Google Workspace</h3>
-        <p>Gmail · Drive · Docs · Sheets · Slides · Calendar. 30+ tools.</p>
-      </div>
-      <div class="package-card">
-        <div class="head"><span>microsoft-365-agent</span><span class="v">v0.2</span></div>
-        <h3>Microsoft 365</h3>
-        <p>Outlook · Calendar · OneDrive. 15+ tools via Microsoft Graph.</p>
-      </div>
-    </div>
+    <p class="tagline">A contract between agents and the systems that run them.</p>
+    <p class="sub">Pluggable agents are Python packages that any compliant host can load. The host hands the agent the resources it needs to do its work — model access, persistent state, tools, identity, an event loop — through a stable protocol. The agent declares what it does, what it needs, and what it exposes. The pattern is open source and the published set is intentionally small. It is a starter, not a catalog — most pluggable agents will be the ones you write.</p>
   </div>
 </section>
 
 <div class="wrap">
-  <div class="detail-section">
-    <div class="lbl">§ 01 · Google Workspace</div>
+  <div class="detail-section" id="contract">
+    <div class="lbl">§ 01 · The contract</div>
     <div>
-      <h2>Full Google Workspace, agent-accessible.</h2>
-      <p>Gmail, Drive, Docs, Sheets, Slides, and Calendar — all callable by agents via a single registered modular agent. Service-account authentication with domain-wide delegation means agents act on behalf of real users, safely.</p>
+      <h2>What the system gives. What the agent declares.</h2>
+      <p>The pluggable-agent contract is small on purpose. The host is responsible for the runtime; the agent is responsible for the work. Both halves are stable and inspectable, which is what makes agents portable across hosts and hosts portable across agents.</p>
 
-      <h3>Capabilities</h3>
-      <div class="caps-grid">
-        <div class="cap"><b>Gmail</b>read · send · search</div>
-        <div class="cap"><b>Drive</b>list · search · create · delete · share · move · copy · rename</div>
-        <div class="cap"><b>Sheets</b>read · write · append · clear · create</div>
-        <div class="cap"><b>Docs</b>read · write · create</div>
-        <div class="cap"><b>Slides</b>get · create</div>
-        <div class="cap"><b>Calendar</b>list · create · update · get events</div>
-      </div>
-
-      <h3>Stack</h3>
-      <p>Python 3.12 · LangGraph · LangChain · google-api-python-client · asyncpg · Prometheus.</p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 02 · Microsoft 365</div>
-    <div>
-      <h2>Full Microsoft 365, agent-accessible.</h2>
-      <p>Outlook mail, Calendar, and OneDrive via the Microsoft Graph API. OAuth2 token lifecycle managed via MSAL.</p>
-
-      <h3>Capabilities</h3>
-      <div class="caps-grid">
-        <div class="cap"><b>Email</b>read · send · search · list folders · mark read</div>
-        <div class="cap"><b>Calendar</b>list events · create · delete</div>
-        <div class="cap"><b>OneDrive</b>list · upload · search · create folders · delete</div>
-        <div class="cap"><b>Auth</b>OAuth2 flow · token status</div>
-      </div>
-
-      <h3>Stack</h3>
-      <p>Python 3.12 · LangGraph · LangChain · MSAL · httpx · asyncpg · Prometheus.</p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 03 · Why "pluggable"</div>
-    <div>
-      <h2>Install and the host picks it up.</h2>
-      <p>Because agents register with their host via Python entry points, you can:</p>
+      <h3>The host provides</h3>
       <ul>
-        <li>Install a new agent with <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">pip install</code> — the host discovers it automatically</li>
-        <li>Upgrade an agent without restarting the host</li>
-        <li>Develop agents independently from the runtime they'll be hosted in</li>
-        <li>Compose agents — a workflow can call Google Workspace, then Microsoft 365, then a custom internal agent, all in one conversation</li>
+        <li><b>Model access</b> — calls into the configured inference layer, with retries, budgets, and fallback handled outside the agent</li>
+        <li><b>State</b> — persistent storage scoped to the agent, with lifecycle managed by the host</li>
+        <li><b>Tools</b> — a tool registry the agent can call into, including tools published by other pluggable agents loaded in the same host</li>
+        <li><b>Identity and secrets</b> — credentials and on-behalf-of context, loaded from the host's secret store rather than the agent's environment</li>
+        <li><b>An event loop</b> — scheduled invocations, message arrivals, and lifecycle hooks delivered uniformly</li>
+      </ul>
+
+      <h3>The agent declares</h3>
+      <ul>
+        <li><b>Entry point</b> — a Python entry point so the host discovers the agent on install</li>
+        <li><b>Capabilities</b> — what the agent does, in machine-readable form, so the host can route work to it</li>
+        <li><b>Required resources</b> — what the agent needs from the host: model class, state schema, secrets, scheduled triggers</li>
+        <li><b>Exposed tools</b> — the callable surface the agent contributes back to the host's tool registry</li>
       </ul>
     </div>
   </div>
 
-  <div class="detail-section" id="install">
-    <div class="lbl">§ 04 · Install</div>
+  <div class="detail-section" id="hosts">
+    <div class="lbl">§ 02 · Hosts</div>
     <div>
-      <h2>Run them yourself.</h2>
-      <div class="code"><span class="comment"># Requires Modular Agent Host already running</span>
-<span class="cmd">pip install</span> google-workspace-agent
-<span class="cmd">pip install</span> microsoft-365-agent
-
-<span class="comment"># Restart not required — host discovers on install</span></div>
-      <p>Documentation for each agent lives in its repository.</p>
+      <h2>Anywhere the contract is satisfied.</h2>
+      <p>The Modular Agent Host is the primary general-purpose host — it loads any number of pluggable agents and exposes them through an OpenAI-compatible endpoint and an MCP tool surface. But it isn't the only host on the platform.</p>
+      <p>Every agentic service in the platform — Context Broker, Inference Broker, Development Cache, Observability Platform, Agentic File System, Conversation Broker — ships with its own <b>Imperator</b>, the on-board manager that can metacode parts of its own service. Each Imperator is itself a pluggable agent. The same contract that loads a Google Workspace agent into the Modular Agent Host also loads an Imperator into its service. That is what makes Imperators swappable, extendable, and testable in isolation.</p>
     </div>
   </div>
 
-  <div class="detail-section">
+  <div class="detail-section" id="why">
+    <div class="lbl">§ 03 · Why pluggable</div>
+    <div>
+      <h2>Install and the host picks it up.</h2>
+      <ul>
+        <li>Install a new agent with <code style="background:var(--bg-raised); padding:2px 5px; font-family:var(--mono); font-size:0.9em;">pip install</code> — the host discovers it through entry points</li>
+        <li>Hot-load — upgrade or replace an agent without restarting the host</li>
+        <li>Develop independently from the runtime that will host it</li>
+        <li>Compose — a workflow can chain agents from different packages in a single conversation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-section" id="starter-set">
+    <div class="lbl">§ 04 · Starter set</div>
+    <div>
+      <h2>A handful, as reference.</h2>
+      <p>Two pluggable agents are currently published as part of the open source project. They exercise the contract end-to-end against real, complex APIs and double as worked examples.</p>
+      <div class="two-package">
+        <div class="package-card">
+          <div class="head"><span>google-workspace-agent</span><span class="v">v0.2</span></div>
+          <h3>Google Workspace</h3>
+          <p>Gmail, Drive, Docs, Sheets, Slides, Calendar — service-account auth with domain-wide delegation. 30+ tools.</p>
+        </div>
+        <div class="package-card">
+          <div class="head"><span>microsoft-365-agent</span><span class="v">v0.2</span></div>
+          <h3>Microsoft 365</h3>
+          <p>Outlook, Calendar, OneDrive via Microsoft Graph. OAuth2 token lifecycle through MSAL. 15+ tools.</p>
+        </div>
+      </div>
+      <p>Read them, fork them, modify them, replace them. They are intentionally small — most teams will write their own.</p>
+    </div>
+  </div>
+
+  <div class="detail-section" id="build">
     <div class="lbl">§ 05 · Build your own</div>
     <div>
-      <h2>Agents for your stack, too.</h2>
-      <p>If you need an agent for <b>Slack, Jira, SharePoint, Salesforce, ServiceNow</b>, or your internal APIs — we build those as standard engagements. The modular-agent pattern makes it straightforward. The typical agent ships in a week or two depending on API complexity.</p>
+      <h2>The system is the point.</h2>
+      <p>The contract is small enough to implement in an afternoon for a new domain. Most of the work is whatever the domain itself requires — authentication, API quirks, schemas, rate limits. The Modular Agent Host and every Imperator slot are waiting on the other side, ready to load it.</p>
+      <p>If you want one built — for Slack, Jira, SharePoint, Salesforce, ServiceNow, or your internal APIs — we do that on standard engagements. Typical pluggable agent ships in a week or two depending on API complexity.</p>
       <p style="margin-top:1rem"><a class="link" href="../index.html#contact" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">Talk to us →</a></p>
     </div>
   </div>
