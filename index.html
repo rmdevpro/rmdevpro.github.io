@@ -16,10 +16,13 @@
   overflow: hidden;
 }
 .hero-split .row {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
   position: relative;
 }
-.hero-split .txt { min-width: 0; max-width: 56ch; }
+.hero-split .txt { min-width: 0; }
 .hero-split .meta {
   font-family: var(--mono);
   font-size: 0.78rem;
@@ -114,6 +117,12 @@
           <a class="btn ghost" href="#work">See the work</a>
         </div>
       </div>
+      <div class="visual" aria-hidden="true">
+        <div class="frame">
+          <img src="assets/workbench-preview.png" alt="">
+          <div class="tag">Blueprint Workbench — home-grown multi-agent environment.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -156,11 +165,13 @@
     </div>
     <div class="flagship">
       <div class="art">
-        <img src="assets/workbench-preview.png" alt="Blueprint Agentic Workbench — multi-agent environment">
+        <img src="assets/logos/logo-blue.png" alt="Blueprint Agentic Workbench">
+        <div class="meta"><span>Claude · Gemini · Codex</span></div>
       </div>
       <div class="copy">
         <h3>A Workbench using teams of agents enabling next level agentics.</h3>
-        <p>A workbench for teams of AI agents working together the way human teams do. Multiple Claude, Gemini, and Codex agents running together — coordinating, communicating, dividing work, collaboratively resolving blockers, guided by standards, process and guidelines.</p>
+        <p>The next step beyond agentic AI is teams of agents working together. Not sub-agents under a primary — experts in their own domain, tuned for optimal operation, combining into something greater than the sum of their parts the way a human team does. Two ingredients: model optimization per role, and cognitive diversity across providers — Claude, Gemini, and the OpenAI line reason differently, and a team that draws on all three thinks more completely than any single-model team can.</p>
+        <p>Built on top of the providers' own first-party CLIs — we leverage their investment and add what they don't do on their own: agentic teaming, shared memory, a common task tree, persistent project context. The same workbench we use for nearly all of our daily task work, and that we deploy at customer sites.</p>
         <a class="link" href="open-source/blueprint-agentic-workbench.html">Read more →</a>
       </div>
     </div>
