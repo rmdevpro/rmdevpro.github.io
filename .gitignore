@@ -1,0 +1,17 @@
+# Local-only planning / session material
+.work/
+
+# Editor / OS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Credentials / env
+*.env
+.env.local
+secrets.yml
+secrets.yaml
+
+# Per-machine Claude settings (not project source of truth)
+.claude/settings.local.json
