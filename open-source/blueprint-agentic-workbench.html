@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Blueprint Agentic Workbench — BlueprintAgentic</title>
-<meta name="description" content="The agentic workbench we use for nearly all of our daily task work, coding or otherwise. Run Claude, Gemini, and Codex concurrently. MIT licensed, self-hosted.">
+<meta name="description" content="A workbench for teams of AI agents working together the way human teams do. The in-house tool we use for our daily work and deploy at customer sites.">
 <link rel="icon" href="../assets/logos/favicon.ico">
 <link rel="stylesheet" href="../css/style.css">
 <style>
@@ -125,8 +125,7 @@
     <ul>
       <li><a href="../index.html#services">Services</a></li>
       <li><a href="../index.html#work">Work</a></li>
-      <li><a href="../index.html#open-source">Open Source</a></li>
-      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#leadership">Leadership</a></li>
     </ul>
     <a class="go" href="../index.html#contact">Contact →</a>
   </div>
@@ -134,15 +133,11 @@
 
 <section class="product-hero">
   <div class="wrap">
-    <a class="back" href="../index.html#open-source">← Open source</a>
-    <div class="kicker">§ Flagship · Open source · MIT</div>
+    <a class="back" href="../index.html">← BlueprintAgentic</a>
+    <div class="kicker">§ Custom Software</div>
     <h1>Blueprint Agentic Workbench.</h1>
-    <p class="tagline">A multi-agent workbench ecosystem. Dozens of AI sessions in one environment, able to communicate, coordinate, and co-work with each other and the user.</p>
-    <p class="sub">Not a coding tool — an agentic workbench. Claude, Gemini, and Codex run together in a single workspace, capable of any work an agent can do. The same workbench we use for nearly all of our daily task work, coding or otherwise — published under MIT so you can run it too.</p>
-    <div class="cta">
-      <a class="btn" href="https://github.com/rmdevpro/agentic-workbench" target="_blank" rel="noopener">View on GitHub</a>
-      <a class="btn ghost" href="#install">Install guide</a>
-    </div>
+    <p class="tagline">A workbench for teams of AI agents working together the way human teams do. Multiple Claude, Gemini, and Codex agents running together — coordinating, communicating, dividing work, collaboratively resolving blockers, guided by standards, process and guidelines.</p>
+    <p class="sub">Not a coding tool — an agentic workbench, capable of any work an agent can do. The same workbench we use for nearly all of our daily task work, and that we deploy at customer sites.</p>
   </div>
 </section>
 
@@ -152,8 +147,8 @@
       <img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface">
     </div>
     <div class="cap">
-      <span>Fig. 01 — Workbench running a Claude Code session</span>
-      <span>Single-user · Self-hosted · Docker</span>
+      <span>Fig. 01 — A team of agents at work in the Workbench</span>
+      <span>Single operator · Self-hosted</span>
     </div>
   </div>
 </section>
@@ -161,7 +156,7 @@
 <div class="wrap">
   <div class="spec-grid">
     <div><span class="k">Name</span><span class="v">blueprint-workbench</span></div>
-    <div><span class="k">License</span><span class="v">MIT</span></div>
+    <div><span class="k">Deployment</span><span class="v">Self-hosted</span></div>
     <div><span class="k">Runtime</span><span class="v">Node.js 22 · Docker</span></div>
     <div><span class="k">Status</span><span class="v accent">● Production</span></div>
   </div>
@@ -246,41 +241,6 @@
     </div>
   </div>
 
-  <div class="detail-section" id="install">
-    <div class="lbl">§ 07 · Install</div>
-    <div>
-      <h2>Run it yourself.</h2>
-      <p>Two deployment paths. Run it locally with Docker for development, or host a private production instance on Hugging Face Spaces for about $5/month.</p>
-
-      <h3><span class="o">Option A</span>Docker · self-hosted</h3>
-      <p>One command. You need Docker and <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">docker compose</code>.</p>
-      <div class="code"><span class="comment"># Clone and run</span>
-<span class="cmd">git clone</span> https://github.com/rmdevpro/agentic-workbench.git
-<span class="cmd">cd</span> agentic-workbench
-<span class="cmd">docker compose up</span> -d</div>
-      <p>Open <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">http://localhost:8080</code>. That's it.</p>
-
-      <h3><span class="o">Option B</span>Hugging Face Spaces · production</h3>
-      <p>A managed, always-on environment that is genuinely production-suitable. The reference Space is published at <a href="https://huggingface.co/spaces/aristotle9/agentic-workbench" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px;">huggingface.co/spaces/aristotle9/agentic-workbench</a>.</p>
-      <ol>
-        <li>Open the reference Space and click <b>Duplicate this Space</b>.</li>
-        <li>Set the duplicated Space to <b>Private</b>.</li>
-        <li>In hardware settings, choose the <b>CPU Upgrade</b> tier ($0.03 / hour, roughly $5 / month).</li>
-        <li>Mount a persistent storage bucket to <code style="background:var(--bg-raised); padding:2px 5px; border-radius:3px; font-family:var(--mono); font-size:0.85em;">/data</code> so projects and session state survive restarts.</li>
-      </ol>
-      <p>Your private Space is live at a Hugging Face URL — use it directly, or put a custom domain in front.</p>
-
-      <p style="margin-top:1.5rem"><a class="link" href="https://github.com/rmdevpro/agentic-workbench#readme" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; font-weight:500;">GitHub — full install guide →</a></p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 08 · Open source</div>
-    <div>
-      <h2>MIT licensed.</h2>
-      <p>Fork it, modify it, ship it inside your own product. We accept contributions — bug reports, pull requests, and architectural suggestions alike. The repository is the canonical reference; this page exists only to tell you it exists.</p>
-    </div>
-  </div>
 </div>
 
 <section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
