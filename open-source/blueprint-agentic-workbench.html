@@ -42,7 +42,15 @@
   font-weight: 500;
   letter-spacing: -0.01em;
 }
-.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 2rem; }
+.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 1rem; }
+.product-hero .principles {
+  font-size: 1rem;
+  color: var(--text-soft);
+  max-width: 60ch;
+  margin: 0 0 2rem 1.5rem;
+  line-height: 1.55;
+}
+.product-hero .principles li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
 .product-hero .cta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 
 .product-preview {
@@ -136,15 +144,23 @@
     <a class="back" href="../index.html">← BlueprintAgentic</a>
     <div class="kicker">§ Custom Software</div>
     <h1>Blueprint Agentic Workbench.</h1>
-    <p class="tagline">The next step beyond agentic AI is teams of agents working together. Not sub-agents under a primary — experts in their own domain, tuned for optimal operation, combining into something greater than the sum of their parts the way a human team does. Two ingredients: model optimization per role, and cognitive diversity across providers — Claude, Gemini, and the OpenAI line reason differently, and a team that draws on all three thinks more completely than any single-model team can.</p>
-    <p class="sub">Built on top of the providers' own first-party CLIs — we leverage their investment and add what they don't do on their own: agentic teaming, shared memory, a common task tree, persistent project context. The same workbench we use for nearly all of our daily task work, and that we deploy at customer sites.</p>
+    <p class="tagline">The next step beyond agents that can call sub-agents is teams of agents working together. Workbench provides an organizing framework that allows native agentic tools like Claude Code or ChatGPT's Codex to team together without sacrificing any part of the native tools, while bolstering their capabilities with add-on tools.</p>
+    <p class="sub">Workbench is built on 6 guiding principles:</p>
+    <ol class="principles">
+      <li>Teams of agents are far more powerful than agents with sub-agents.</li>
+      <li>Native agentic tools are far more powerful when paired with their own models than agentic non-provider tools that utilize their models.</li>
+      <li>Don't re-invent the agentic technologies that Anthropic, OpenAI, and Google have spent billions building &mdash; just use them.</li>
+      <li>Models from different providers both think differently and are good at different things.</li>
+      <li>Don't hide the providers' tools &mdash; it kills economic incentives and vastly increases consumer cost.</li>
+      <li>Growing standardization among providers allows for interoperability of key toolsets.</li>
+    </ol>
   </div>
 </section>
 
 <section class="product-preview">
   <div class="wrap">
     <div class="frame">
-      <img src="../assets/workbench-preview-no-tabs.png" alt="Blueprint Agentic Workbench interface">
+      <img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface">
     </div>
     <div class="cap">
       <span>Fig. 01 — Blueprint Agentic Workbench</span>
