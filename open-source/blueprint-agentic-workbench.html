@@ -39,10 +39,29 @@
 .feature-card ul li { margin-bottom: 0.4rem; }
 .feature-card ul li b { color: var(--text); font-weight: 600; }
 
+.examples-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.examples-intro .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 0.5rem; }
+.examples-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.examples-intro p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+
+.examples-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.examples-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.team-card { padding: 2rem; border: 1px solid var(--rule); background: white; display: flex; flex-direction: column; }
+.team-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.team-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.85rem; }
+.team-card ul { font-size: 0.95rem; color: var(--text-soft); margin: 0.25rem 0 0 1.25rem; padding: 0; line-height: 1.55; }
+.team-card ul li { margin-bottom: 0.4rem; padding-left: 0.25rem; }
+.team-card ul li b { color: var(--text); font-weight: 600; }
+.team-card ul ul { list-style: disc; margin: 0.4rem 0 0.4rem 1.5rem; padding: 0; font-size: 0.9rem; }
+.team-card ul ul li { margin-bottom: 0.3rem; padding-left: 0.25rem; }
+.team-card .quorum { margin-top: auto; padding-top: 0.85rem; border-top: 1px solid var(--rule); font-size: 0.95rem; color: var(--text-soft); }
+.team-card .quorum .q-label { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; display: block; margin-bottom: 0.2rem; }
+
 section + section { border-top: 0; }
 
 @media (max-width: 880px) {
   .categories-grid { grid-template-columns: 1fr; }
+  .examples-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -133,6 +152,79 @@ section + section { border-top: 0; }
           <li>Quorums of cognitively diverse models prevent hallucination, surface diverse perspectives, and find edge cases.</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="examples-intro">
+  <div class="wrap">
+    <div class="lbl">§ Examples</div>
+    <h2>Examples.</h2>
+    <p>Four teams across different domains. In each, the human operator works directly with the team and plays the strategic lead role.</p>
+  </div>
+</section>
+
+<section class="examples-block">
+  <div class="wrap">
+    <div class="examples-grid">
+
+      <div class="team-card">
+        <div class="kicker">Company Operations</div>
+        <h2>Finance.</h2>
+        <ul>
+          <li><b>Controller</b> &mdash; Opus</li>
+          <li><b>Analyst</b> &mdash; GPT</li>
+          <li><b>Reporting</b> &mdash; Sonnet</li>
+          <li><b>Compliance</b> &mdash; Opus</li>
+          <li><b>Taxes</b> &mdash; Gemini Pro</li>
+        </ul>
+        <div class="quorum"><span class="q-label">Audit quorum</span>Haiku · GPT mini · Gemini Flash</div>
+      </div>
+
+      <div class="team-card">
+        <div class="kicker">Company Creative</div>
+        <h2>Marketing.</h2>
+        <ul>
+          <li><b>Program Manager</b> &mdash; Sonnet</li>
+          <li><b>Copywriter</b> &mdash; GPT mini</li>
+          <li><b>Image Creator</b> &mdash; Gemini Pro</li>
+          <li><b>Video Creator</b> &mdash; Gemini Pro</li>
+          <li><b>Audio Creator</b> &mdash; GPT</li>
+          <li><b>Social Media Manager</b> &mdash; Gemini Flash</li>
+          <li><b>Performance Marketing</b> &mdash; Sonnet</li>
+        </ul>
+        <div class="quorum"><span class="q-label">Analyst quorum</span>Opus · GPT · Gemini Pro</div>
+      </div>
+
+      <div class="team-card">
+        <div class="kicker">Research</div>
+        <h2>Ocean Geology.</h2>
+        <ul>
+          <li><b>Research Coordinator</b> &mdash; Sonnet</li>
+          <li><b>Marine Geophysicist</b> &mdash; Gemini Pro</li>
+          <li><b>Sedimentologist</b> &mdash; GPT</li>
+          <li><b>Geochemist</b> &mdash; Opus</li>
+          <li><b>Paleoceanographer</b> &mdash; Gemini Pro</li>
+        </ul>
+        <div class="quorum"><span class="q-label">Research Assistant quorum</span>Opus · GPT · Gemini Pro</div>
+      </div>
+
+      <div class="team-card">
+        <div class="kicker">Engineering</div>
+        <h2>Software Development.</h2>
+        <ul>
+          <li><b>Program Manager</b> &mdash; Opus</li>
+          <li><b>Engineer</b> &mdash; GPT</li>
+          <li><b>SDLC Process Manager</b> &mdash; Haiku
+            <ul>
+              <li><b>Test Runner</b> &mdash; Sonnet</li>
+              <li><b>CICD</b> &mdash; Haiku</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="quorum"><span class="q-label">Reviewers quorum</span>Opus · Haiku · GPT · Gemini</div>
+      </div>
+
     </div>
   </div>
 </section>
