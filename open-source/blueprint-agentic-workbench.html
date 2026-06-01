@@ -59,11 +59,24 @@
 .team-card .reason { font-size: 0.85rem; color: var(--text-faint); margin-top: 0.1rem; line-height: 1.4; }
 .team-card .quorum .reason { margin-top: 0.25rem; }
 
+.deploy-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.deploy-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+
+.deploy-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.deploy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.deploy-card { padding: 2rem; border: 1px solid var(--rule); background: white; display: flex; flex-direction: column; }
+.deploy-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.deploy-card p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+.deploy-card .tag { margin-top: auto; padding-top: 0.85rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; }
+
+.beta-note { margin-top: 2rem; font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; max-width: none; }
+
 section + section { border-top: 0; }
 
 @media (max-width: 880px) {
   .categories-grid { grid-template-columns: 1fr; }
   .examples-grid { grid-template-columns: 1fr; }
+  .deploy-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -227,6 +240,35 @@ section + section { border-top: 0; }
       </div>
 
     </div>
+  </div>
+</section>
+
+<section class="deploy-intro">
+  <div class="wrap">
+    <h2>Deployment Types</h2>
+  </div>
+</section>
+
+<section class="deploy-block">
+  <div class="wrap">
+    <div class="deploy-grid">
+      <div class="deploy-card">
+        <h2>Direct.</h2>
+        <p>Users interact primarily with the Workbench UI for their daily work, utilizing their agent teams directly.</p>
+        <div class="tag">Best for power users</div>
+      </div>
+      <div class="deploy-card">
+        <h2>Connected.</h2>
+        <p>Connected to a primary tool such as Claude Desktop via MCP. Users interact with their primary tool for daily work, utilizing their agent teams through it.</p>
+        <div class="tag">Best for business users</div>
+      </div>
+      <div class="deploy-card">
+        <h2>Server.</h2>
+        <p>Agent teams serve organizations and multiple users more broadly.</p>
+        <div class="tag">Custom deployment · pay-per-use accounts</div>
+      </div>
+    </div>
+    <p class="beta-note">Workbench is currently in Beta.</p>
   </div>
 </section>
 
