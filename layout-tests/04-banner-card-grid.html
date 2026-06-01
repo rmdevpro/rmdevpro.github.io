@@ -11,27 +11,27 @@
 .test-banner a { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
 .test-banner .name { color: var(--text-faint); }
 
-.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem); text-align: center; }
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem); }
 .product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
 .product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
-.product-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; margin: 0 auto 1.25rem; max-width: 18ch; }
-.product-hero .tagline { font-size: 1.2rem; line-height: 1.45; color: var(--text); max-width: 55ch; margin: 0 auto 1.25rem; font-weight: 500; letter-spacing: -0.01em; }
-.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin: 0 auto 0.75rem; }
+.product-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.25rem; }
+.product-hero .tagline { font-size: 1.2rem; line-height: 1.45; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.01em; max-width: none; }
+.product-hero .sub { font-size: 1rem; color: var(--text-soft); margin-bottom: 0.75rem; max-width: none; }
 
 .facts-block { padding-block: clamp(1.5rem, 3vw, 2.5rem); background: var(--bg-raised); border-block: 1px solid var(--rule); }
-.facts-block .heading { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; text-align: center; }
+.facts-block .heading { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; }
 .facts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; counter-reset: fact; }
 .fact { padding: 0; position: relative; }
 .fact::before { counter-increment: fact; content: counter(fact, decimal-leading-zero) "."; font-family: var(--mono); font-size: 0.78rem; color: var(--accent); display: block; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
 .fact p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.5; margin: 0; }
 
-.banner { width: 100%; padding: 0; }
-.banner .frame { width: 100%; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; background: white; }
-.banner .frame img { width: 100%; display: block; max-height: 70vh; object-fit: cover; object-position: top; }
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
 
 .framing-strip { padding-block: clamp(2.5rem, 5vw, 4rem); }
-.framing-strip h2 { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; margin: 0 auto 0.75rem; max-width: 60ch; text-align: center; }
-.framing-strip p { font-size: 1rem; color: var(--text-soft); max-width: 65ch; margin: 0 auto 0.75rem; text-align: center; line-height: 1.55; }
+.framing-strip h2 { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 1rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
 
 .categories-block { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }
 .categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem); }
@@ -82,7 +82,9 @@
 </section>
 
 <section class="banner">
-  <div class="frame"><img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface"></div>
+  <div class="wrap">
+    <div class="frame"><img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface"></div>
+  </div>
 </section>
 
 <section class="framing-strip">
