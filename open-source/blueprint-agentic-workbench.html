@@ -179,100 +179,35 @@
   </div>
 
   <div class="detail-section">
-    <div class="lbl">§ 01 · Why</div>
-    <div>
-      <h2>Not a coding tool. An agentic workbench.</h2>
-      <p>Code is the universal substrate of everything on a computer. Opening a file, sending an email, querying an API, drafting a document, running an analysis, searching the web — it all happens through code. An agent that can write and run code can do any of those things.</p>
-      <p>That is why it is an <b>agentic workbench</b>, not a coding workbench. The agent writes code to do the work, but the work itself can be anything. A partial list of what people drive it to do:</p>
-      <ul>
-        <li><b>Business strategy</b> — research markets, pressure-test positioning, produce the slides that result</li>
-        <li><b>Authoring</b> — long-form documents, briefs, investor updates, technical papers</li>
-        <li><b>Job search</b> — curate listings, tailor applications, draft outreach, track activity</li>
-        <li><b>Automation</b> — repetitive ops work that used to eat hours a week</li>
-        <li><b>Research</b> — cross-reference sources, synthesize findings, surface contradictions</li>
-        <li><b>Software</b> — yes, also software. Design, build, review, ship, and operate it.</li>
-      </ul>
-      <p>The working surface is a CLI, which looks intimidating from the outside. It turns out it's not. Claude Code's adoption by product managers, writers, and operators — not just developers — has shown the step up from a chat box is much smaller than anyone expected. The workbench wraps it all in a browser UI with projects, sessions, and task tracking, so the power of the CLI is there when you want it, but you drive from a single organized place.</p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 02 · Community</div>
+    <div class="lbl">§ Community</div>
     <div>
       <h2>A community of agents.</h2>
-      <p>Dozens of sessions, working as a community. Every session can communicate with, call, observe, or spawn any other. An agent that needs a capability outside its own reaches sideways and gets it. The possible arrangements are endless — a few that come up in real work:</p>
+      <p>Today's provider-native tools provide a powerful construct: full agents with sub-agents. If a full agent is an employee, sub-agents are interns. The Workbench enables higher-order agentics &mdash; full agents communicating and coordinating as teams, and teams in turn coordinating as a community. The structure mimics human organizational hierarchies for essentially the same reasons.</p>
+
+      <h3>Parallel work.</h3>
+      <p>Each agent focuses on its own tasks while the other agents focus on theirs, each with its own automation and triggers &mdash; also true at the team level.</p>
+
+      <h3>Coordination.</h3>
+      <p>Each agent can coordinate its work and share information with other agents &mdash; and so with teams. Your Controller can direct your Analyst. Your Marketing team can work with your Finance team.</p>
+
+      <h3>Specialization.</h3>
       <ul>
-        <li><b>Cost-aware routing</b> — Claude Opus calls a Sonnet session to debug code (cheaper, still massively capable), or a Haiku session to run an automated test runbook. Reserve the expensive thinking for the hard parts.</li>
-        <li><b>Cross-provider specialization</b> — Gemini is excellent at strategy and synthesis but a weak prose writer. The user researches with Gemini; Gemini then calls a Sonnet session to draft the paper.</li>
-        <li><b>Parallel background work</b> — A primary Claude session drives the main task while a Gemini session runs research in the background, reporting findings back as they surface.</li>
-        <li><b>Self-provisioning</b> — When a session needs an MCP tool it doesn't yet have, it asks another session to install it and restart so the tool registers. The caller picks up the result when it's ready.</li>
+        <li>Each agent runs on the model best suited to its specific work.</li>
+        <li>Each agent maintains a chat history and context specific to its domain.</li>
+        <li>Cost savings using lesser models when it makes sense.</li>
+        <li>Each agent can have its own rules, skills, tools, and access levels specific to its domain &mdash; also true at the team level.</li>
       </ul>
-      <p>The workbench does not impose a topology. The agents build one for the job at hand.</p>
-    </div>
-  </div>
 
-  <div class="detail-section">
-    <div class="lbl">§ 03 · Provider CLIs</div>
-    <div>
-      <h2>Built on the CLIs from each provider.</h2>
-      <p>We leverage the command-line interfaces built by each provider — Claude Code (Anthropic), Gemini CLI (Google), Codex (OpenAI). Every agent you spawn in the workbench is running the official first-party tool from its model's team, not a thin wrapper around an API.</p>
-      <p>That means every agent benefits from the collective development of the world's three leading AI providers: all the tools, all the capabilities, all the plugins, all the skills, and provider-optimized context management. When Anthropic, Google, or OpenAI ships a new capability, it lands in the workbench the same day.</p>
-      <p>And it gives the agents a near-infinite ability to customize the environment for you — installing packages, configuring tools, authoring their own plugins, reshaping their substrate — using the same mechanisms the provider engineering teams built for their own users.</p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 04 · Why three models</div>
-    <div>
-      <h2>Practically eliminates hallucination.</h2>
-      <p>Three model families. Three training corpora. Three independent ways of being wrong. On its own, that is interesting. Once the models can talk to each other, it becomes the single best defense against hallucination we have seen.</p>
-      <p>The workbench's shared substrate lets sessions communicate directly. When one model produces a hallucination, the other two see it as non-factual and call it out. They discuss, they correct, and they converge on a single best answer. <b>The anti-hallucination work is done by the models themselves</b> — not by the user cross-checking three separate outputs.</p>
-      <p>Because the three models come from three different providers with three different training runs, the chance they all hallucinate the same thing at the same time is vanishingly small. That is why cross-provider <em>dialogue</em> — not parallel polling — is practical hallucination elimination.</p>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 05 · Capabilities</div>
-    <div>
-      <h2>What it does.</h2>
+      <h3>Checks and balances.</h3>
+      <p>Complementary team members assist each other with better decision-making.</p>
       <ul>
-        <li><b>Multi-session management</b> — Create, pause, resume, and switch between Claude, Gemini, and Codex sessions. State persists across restarts.</li>
-        <li><b>Browser-based terminal</b> — Full CLI access over WebSocket, powered by xterm.js. No native install, no desktop app, no setup beyond Docker.</li>
-        <li><b>Project organization</b> — Group sessions by project. Each gets its own workspace, configuration, and MCP tool registry.</li>
-        <li><b>Git &amp; GitHub integrated</b> — Every file the workbench touches — code, documents, notes, configs — is version-controlled and backed up through real git and real GitHub. Not just for code: strategy docs, briefs, and meeting notes get the same version history and recovery. And because it's real GitHub, you get the standard cross-user collaboration surface for free: pull requests, review, branches, ownership.</li>
-        <li><b>Community coordination</b> — Any session can call, observe, or spawn any other. Agents route work across the community based on what the task needs.</li>
-        <li><b>Integrated task tracking</b> — Create and organize tasks inline with your work. Surface what's in-flight at a glance.</li>
-        <li><b>Semantic search</b> — Find files, notes, and past conversations by what they mean, not which words they contain. Word-matching search returns results only when exact terms appear; semantic search understands intent, so asking for <em>"the pricing decision"</em> surfaces the right thread even if that phrase is nowhere in it.</li>
-        <li><b>Workspace file browser</b> — Browse, create, edit, and upload files directly from the web UI.</li>
-        <li><b>MCP tool integration</b> — Register Model Context Protocol servers per project. Agents pick up your tools automatically.</li>
-        <li><b>Environment safety markers</b> — Deploy as Dev (green) or Pro (red) to prevent prod/dev confusion at a glance.</li>
+        <li><b>Rule adherence.</b> Higher-reasoning models vs. lower-reasoning models. Reasoning models are terrible at following rules &mdash; they often decide they know better and sabotage critical rule-following. A less-reasoning model is often the right choice for rule-following work, and sometimes the right manager <em>for</em> a reasoning model.</li>
+        <li><b>Quorum-based decisions.</b> Cognitive diversity from a cross-model quorum &mdash; prevents hallucination, surfaces diverse perspectives, and forces consideration of edge cases. Quorums may also include models with diverse reasoning levels, combining the powers of both high-reasoning and high-rule-following models for better decision-making.</li>
       </ul>
-    </div>
-  </div>
-
-  <div class="detail-section">
-    <div class="lbl">§ 06 · Stack</div>
-    <div>
-      <h2>Under the hood.</h2>
-      <p>Node.js 22 · Express · SQLite · tmux · node-pty · xterm.js · Qdrant · Docker. No build step in production. No external cloud dependencies. No telemetry.</p>
     </div>
   </div>
 
 </div>
-
-<section id="contact" class="contact" style="padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--rule);">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="lbl">§ Work with us</div>
-      <h2>Need this running in your organization?</h2>
-    </div>
-    <p>We set up Blueprint Agentic Workbench in client environments as part of most engagements. Send us a note.</p>
-    <div class="lines">
-      <a href="mailto:j@blueprintagentic.ai"><span class="k">Email</span>j@blueprintagentic.ai</a>
-      <a href="https://www.linkedin.com/in/jason-morrissette-6704261b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span>jason-morrissette-6704261b</a>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap inner">
