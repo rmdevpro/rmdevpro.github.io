@@ -155,10 +155,6 @@ h3 { font-size: 1.125rem; font-weight: 600; }
 
 /* ---- Section layout ----------------------------------- */
 .section-head {
-  display: grid;
-  grid-template-columns: 7rem 1fr;
-  gap: 2.5rem;
-  align-items: baseline;
   margin-bottom: 2.5rem;
 }
 .section-head .lbl {
@@ -166,11 +162,10 @@ h3 { font-size: 1.125rem; font-weight: 600; }
   font-size: 0.78rem;
   color: var(--text-faint);
   letter-spacing: 0.02em;
+  display: block;
+  margin-bottom: 0.6rem;
 }
 .section-head h2 { max-width: 30ch; }
-@media (max-width: 720px) {
-  .section-head { grid-template-columns: 1fr; gap: 0.4rem; }
-}
 
 /* ---- Services list (non-marketing) ------------------- */
 .services-list {
