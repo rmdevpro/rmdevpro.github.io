@@ -8,39 +8,40 @@
 <link rel="icon" href="../assets/logos/favicon.ico">
 <link rel="stylesheet" href="../css/style.css">
 <style>
-.product-hero { padding-block: clamp(2.5rem, 5vw, 4rem); }
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
 .product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
-.product-hero .back:hover { color: var(--accent); }
 .product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
-.product-hero h1 { font-size: clamp(2.25rem, 4vw, 3.25rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.25rem; max-width: 16ch; }
-.product-hero .tagline { font-size: 1.2rem; line-height: 1.45; color: var(--text); max-width: 60ch; margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.01em; }
-.product-hero .sub { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin-bottom: 0.75rem; }
-.product-hero .principles { font-size: 1rem; color: var(--text-soft); max-width: 60ch; margin: 0 0 1.5rem 1.5rem; line-height: 1.55; }
-.product-hero .principles li { margin-bottom: 0.4rem; padding-left: 0.2rem; }
-.product-hero .principles ul { list-style: disc; margin: 0.4rem 0 0.5rem 1.5rem; padding-left: 0; font-size: 0.95rem; }
-.product-hero .principles ul li { margin-bottom: 0.3rem; padding-left: 0.2rem; }
+.product-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.25rem; }
+.product-hero .tagline { font-size: 1.2rem; line-height: 1.45; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.01em; max-width: none; }
+.product-hero .sub { font-size: 1rem; color: var(--text-soft); margin-bottom: 0.75rem; max-width: none; }
 
-.zone { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }
-.zone .row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
-.zone.flip .row { direction: rtl; }
-.zone.flip .row > * { direction: ltr; }
+.facts-block { padding-block: 0 clamp(2rem, 4vw, 3rem); }
+.facts-list { font-size: 1rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
+.facts-list li { margin-bottom: 0.4rem; padding-left: 0.25rem; }
+.facts-list ul { list-style: disc; margin: 0.4rem 0 0.5rem 1.5rem; padding-left: 0; font-size: 0.95rem; }
+.facts-list ul li { margin-bottom: 0.3rem; padding-left: 0.25rem; }
 
-.zone .frame { border: 1px solid var(--rule); background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); overflow: hidden; }
-.zone .frame img { width: 100%; display: block; }
-.zone .cap { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.78rem; color: var(--text-soft); display: flex; justify-content: space-between; }
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
 
-.zone .text .lbl { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 0.5rem; }
-.zone .text h2 { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-.zone .text p { font-size: 1rem; color: var(--text-soft); max-width: 50ch; margin-bottom: 0.75rem; line-height: 1.55; }
-.zone .text ul { font-size: 1rem; color: var(--text-soft); margin: 0.25rem 0 0 1.25rem; }
-.zone .text ul li { margin-bottom: 0.4rem; }
-.zone .text ul li b { color: var(--text); font-weight: 600; }
+.framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.framing-strip h2 { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 1rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
 
-.zone.pair .row { grid-template-columns: 1fr 1fr; }
+.categories-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); border-top: 0; }
+.categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.feature-card { padding: 2rem; border: 1px solid var(--rule); background: white; }
+.feature-card h2 { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.feature-card p { font-size: 1rem; color: var(--text-soft); max-width: 50ch; margin-bottom: 0.6rem; line-height: 1.55; }
+.feature-card ul { font-size: 1rem; color: var(--text-soft); margin: 0.25rem 0 0 1.25rem; }
+.feature-card ul li { margin-bottom: 0.4rem; }
+.feature-card ul li b { color: var(--text); font-weight: 600; }
+
+section + section { border-top: 0; }
 
 @media (max-width: 880px) {
-  .zone .row { grid-template-columns: 1fr; }
-  .zone.flip .row { direction: ltr; }
+  .categories-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -67,8 +68,13 @@
     <div class="kicker">§ Custom Software</div>
     <h1>Blueprint Agentic Workbench.</h1>
     <p class="tagline">An agent that can call sub-agents is powerful; teams of agents collaborating are more powerful. Workbench provides an organizing framework that allows native agentic tools like Claude Code or ChatGPT's Codex to team together without sacrificing any part of the native tools, while bolstering their capabilities with add-on tools.</p>
-    <p class="sub">Workbench's value proposition is based on 3 key facts:</p>
-    <ol class="principles">
+    <p class="tagline">Workbench is not a coding tool &mdash; it's an agent-teaming framework, built on 3 key facts.</p>
+  </div>
+</section>
+
+<section class="facts-block">
+  <div class="wrap">
+    <ol class="facts-list">
       <li>Teams of agents are far more powerful than agents with sub-agents.</li>
       <li>There are massive advantages to sticking with provider native agentic tools.
         <ul>
@@ -80,51 +86,35 @@
       </li>
       <li>Using a variety of models is crucial because different models both think differently and are good at different things. This is true of models both within a given provider and between providers.</li>
     </ol>
-    <p class="tagline">Workbench is not a coding tool &mdash; it's an agent-teaming framework, capable of nearly anything computer technology can do. It assembles the best agentic tools from the top AI providers into a community of agents that's more than the sum of its parts.</p>
   </div>
 </section>
 
-<section class="zone">
+<section class="banner">
   <div class="wrap">
-    <div class="row">
-      <div class="visual">
-        <div class="frame">
-          <img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface">
-        </div>
-        <div class="cap"><span>Fig. 01 — Blueprint Agentic Workbench</span><span>Single operator · Self-hosted</span></div>
-      </div>
-      <div class="text">
-        <div class="lbl">§ Community of agents</div>
-        <h2>A community of agents.</h2>
-        <p>Today's provider-native tools provide a powerful construct: full agents with sub-agents. If a full agent is an employee, sub-agents are interns.</p>
-        <p>The Workbench enables higher-order agentics &mdash; full agents communicating and coordinating as teams, and teams in turn coordinating as a community. The structure mimics human organizational hierarchies for essentially the same reasons.</p>
-      </div>
-    </div>
+    <div class="frame"><img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface"></div>
   </div>
 </section>
 
-<section class="zone flip pair">
+<section class="framing-strip">
   <div class="wrap">
-    <div class="row">
-      <div class="text">
-        <div class="lbl">§ 01 · Parallel work</div>
+    <h2>A community of agents.</h2>
+    <p>Today's provider-native tools provide a powerful construct: full agents with sub-agents. If a full agent is an employee, sub-agents are interns. The Workbench enables higher-order agentics &mdash; full agents communicating and coordinating as teams, and teams in turn coordinating as a community.</p>
+    <p>The structure mimics human organizational hierarchies for essentially the same reasons.</p>
+  </div>
+</section>
+
+<section class="categories-block">
+  <div class="wrap">
+    <div class="categories-grid">
+      <div class="feature-card">
         <h2>Parallel work.</h2>
         <p>Each agent focuses on its own tasks while the other agents focus on theirs, each with its own automation and triggers &mdash; also true at the team level.</p>
       </div>
-      <div class="text">
-        <div class="lbl">§ 02 · Coordination</div>
+      <div class="feature-card">
         <h2>Coordination.</h2>
         <p>Each agent can coordinate its work and share information with other agents &mdash; and so with teams. Your Controller can direct your Analyst. Your Marketing team can work with your Finance team.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="zone pair">
-  <div class="wrap">
-    <div class="row">
-      <div class="text">
-        <div class="lbl">§ 03 · Specialization</div>
+      <div class="feature-card">
         <h2>Specialization.</h2>
         <ul>
           <li>Each agent runs on the model best suited to its specific work.</li>
@@ -133,13 +123,12 @@
           <li>Each agent can have its own rules, skills, tools, and access levels specific to its domain &mdash; also true at the team level.</li>
         </ul>
       </div>
-      <div class="text">
-        <div class="lbl">§ 04 · Checks and balances</div>
+      <div class="feature-card">
         <h2>Checks and balances.</h2>
         <p>Complementary team members assist each other with better decision-making.</p>
         <ul>
-          <li><b>Rule adherence.</b> Higher-reasoning models vs. lower-reasoning models. Reasoning models are terrible at following rules &mdash; they often decide they know better and sabotage critical rule-following. A less-reasoning model is often the right choice for rule-following work, and sometimes the right manager <em>for</em> a reasoning model.</li>
-          <li><b>Quorum-based decisions.</b> Cognitive diversity from a cross-model quorum &mdash; prevents hallucination, surfaces diverse perspectives, and forces consideration of edge cases. Quorums may also include models with diverse reasoning levels, combining the powers of both high-reasoning and high-rule-following models for better decision-making.</li>
+          <li><b>Rule adherence.</b> Reasoning models are terrible at following rules &mdash; they often decide they know better and sabotage critical rule-following. A less-reasoning model is often the right choice for rule-following work, and sometimes the right manager <em>for</em> a reasoning model.</li>
+          <li><b>Quorum-based decisions.</b> Cognitive diversity from a cross-model quorum &mdash; prevents hallucination, surfaces diverse perspectives, and forces consideration of edge cases. Quorums may also include models with diverse reasoning levels.</li>
         </ul>
       </div>
     </div>
