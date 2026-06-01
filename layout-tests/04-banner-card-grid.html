@@ -19,11 +19,9 @@
 .product-hero .sub { font-size: 1rem; color: var(--text-soft); margin-bottom: 0.75rem; max-width: none; }
 
 .facts-block { padding-block: clamp(1.5rem, 3vw, 2.5rem); background: var(--bg-raised); border-block: 1px solid var(--rule); }
-.facts-block .heading { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; }
-.facts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; counter-reset: fact; }
-.fact { padding: 0; position: relative; }
-.fact::before { counter-increment: fact; content: counter(fact, decimal-leading-zero) "."; font-family: var(--mono); font-size: 0.78rem; color: var(--accent); display: block; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
-.fact p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.5; margin: 0; }
+.facts-block .heading { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1rem; }
+.facts-list { font-size: 1rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
+.facts-list li { margin-bottom: 0.4rem; padding-left: 0.25rem; }
 
 .banner { padding-block: clamp(2rem, 4vw, 3rem); }
 .banner .frame { border: 1px solid var(--rule); overflow: hidden; background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
@@ -70,14 +68,14 @@
 <section class="facts-block">
   <div class="wrap">
     <div class="heading">Workbench's value proposition is based on 6 key facts</div>
-    <div class="facts-grid">
-      <div class="fact"><p>Teams of agents are far more powerful than agents with sub-agents.</p></div>
-      <div class="fact"><p>Native provider agentic tools outperform third-party tools due to integrations with their models.</p></div>
-      <div class="fact"><p>Third-party developers can't match the multi-billion-dollar investments major providers pour into their own agentic tools.</p></div>
-      <div class="fact"><p>Provider subscriptions with native tools cost a fraction of pay-per-use options.</p></div>
-      <div class="fact"><p>Models from different providers both think differently and are good at different things.</p></div>
-      <div class="fact"><p>Growing standardization among providers allows for interoperability of key toolsets.</p></div>
-    </div>
+    <ol class="facts-list">
+      <li>Teams of agents are far more powerful than agents with sub-agents.</li>
+      <li>Native provider agentic tools outperform third-party tools due to integrations with their models.</li>
+      <li>Third-party developers can't match the multi-billion-dollar investments major providers pour into their own agentic tools.</li>
+      <li>Provider subscriptions with native tools cost a fraction of pay-per-use options.</li>
+      <li>Models from different providers both think differently and are good at different things.</li>
+      <li>Growing standardization among providers allows for interoperability of key toolsets.</li>
+    </ol>
   </div>
 </section>
 
