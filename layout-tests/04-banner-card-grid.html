@@ -22,6 +22,8 @@
 .facts-block .heading { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1rem; }
 .facts-list { font-size: 1rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
 .facts-list li { margin-bottom: 0.4rem; padding-left: 0.25rem; }
+.facts-list ul { list-style: disc; margin: 0.4rem 0 0.5rem 1.5rem; padding-left: 0; font-size: 0.95rem; }
+.facts-list ul li { margin-bottom: 0.3rem; padding-left: 0.25rem; }
 
 .banner { padding-block: clamp(2rem, 4vw, 3rem); }
 .banner .frame { border: 1px solid var(--rule); overflow: hidden; background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
@@ -70,11 +72,15 @@
     <div class="heading">Workbench's value proposition is based on 6 key facts</div>
     <ol class="facts-list">
       <li>Teams of agents are far more powerful than agents with sub-agents.</li>
-      <li>Native provider agentic tools outperform third-party tools due to integrations with their models.</li>
-      <li>Third-party developers can't match the multi-billion-dollar investments major providers pour into their own agentic tools.</li>
-      <li>Provider subscriptions with native tools cost a fraction of pay-per-use options.</li>
+      <li>Stick with provider tools as much as possible.
+        <ul>
+          <li>Native provider agentic tools outperform third-party tools due to integrations with their models.</li>
+          <li>Third-party developers can't match the multi-billion-dollar investments major providers pour into their own agentic tools.</li>
+          <li>Provider subscriptions with native tools cost a fraction of pay-per-use options.</li>
+          <li>Global standards and concepts now allow for interoperability between provider tools.</li>
+        </ul>
+      </li>
       <li>Models from different providers both think differently and are good at different things.</li>
-      <li>Growing standardization among providers allows for interoperability of key toolsets.</li>
     </ol>
   </div>
 </section>
