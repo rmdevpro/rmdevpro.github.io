@@ -168,6 +168,11 @@ h3 { font-size: 1.125rem; font-weight: 600; }
 .section-head h2 { max-width: 30ch; }
 .section-head p { font-size: 1rem; color: var(--text-soft); margin-top: 0.6rem; max-width: 60ch; line-height: 1.55; }
 
+/* Work sub-categories (within #work section) */
+.work-cat { margin-bottom: 1.25rem; }
+.work-cat .cat-label { font-size: 1.15rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+.work-cat .cat-lead { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0; max-width: 65ch; }
+
 /* ---- Services list (non-marketing) ------------------- */
 .services-list {
   display: grid; gap: 0;
