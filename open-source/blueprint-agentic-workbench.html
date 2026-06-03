@@ -71,6 +71,15 @@
 
 .beta-note { margin-top: 2rem; font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; max-width: none; }
 
+.rd-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.rd-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0; }
+
+.rd-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.rd-block p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 0.75rem; max-width: none; }
+.rd-block .rd-sub { font-weight: 500; color: var(--text); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+.rd-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 1rem 1.5rem; max-width: none; }
+.rd-block ul li { margin-bottom: 0.3rem; padding-left: 0.25rem; }
+
 section + section { border-top: 0; }
 
 @media (max-width: 880px) {
@@ -283,6 +292,34 @@ section + section { border-top: 0; }
       </div>
     </div>
     <p class="beta-note">Workbench is currently in Beta.</p>
+  </div>
+</section>
+
+<section class="rd-intro">
+  <div class="wrap">
+    <h2>Research and Development</h2>
+  </div>
+</section>
+
+<section class="rd-block">
+  <div class="wrap">
+    <p>Workbench's principles came out of building multiple agentic ecosystems before it &mdash; agent-managed services working in team formats. Components of those fully custom-built ecosystems include Context Brokerage, Inference Brokerage, Conversation Brokerage, Agent Hosts, Meta-Programming Engineering Teams, Digital Content Generators, Policy-Based File Servers, Vector and Graph Knowledge Management, Agentic Monitoring and Observability, and Agentic CI/CD. Several case studies and concept papers document the journey: the possibilities of meta-coding through agentic teams, the efficacy of cross-model quorums, and the principles of ecosystems built from teams of full agents.</p>
+
+    <p class="rd-sub">Concepts applied directly in Workbench:</p>
+    <ul>
+      <li>When to use provider-native agents vs. custom ReAct agents</li>
+      <li>Cognitive diversity through varied models</li>
+      <li>Rule-following models alongside reasoning models</li>
+      <li>Agentic runbook-based UI testing</li>
+    </ul>
+
+    <p class="rd-sub">Concepts that emerged from the same work but are not yet applied in Workbench &mdash; generally applicable to large agentic systems:</p>
+    <ul>
+      <li>Context engineering</li>
+      <li>Agentic memory</li>
+      <li>Metacognition</li>
+      <li>Conversation as both a protocol and a collective memory</li>
+    </ul>
   </div>
 </section>
 
