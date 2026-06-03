@@ -170,7 +170,7 @@ h3 { font-size: 1.125rem; font-weight: 600; }
 
 /* Work sub-categories (within #work section) */
 .work-cat { margin-bottom: 1.25rem; }
-.work-cat .cat-label { font-size: 1.15rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+.work-cat .cat-label { font-size: clamp(1.3rem, 2.2vw, 1.65rem); font-weight: 500; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.2; }
 .work-cat .cat-lead { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0; max-width: 65ch; }
 
 /* ---- Services list (non-marketing) ------------------- */
