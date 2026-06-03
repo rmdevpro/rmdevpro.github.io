@@ -166,6 +166,7 @@ h3 { font-size: 1.125rem; font-weight: 600; }
   margin-bottom: 0.6rem;
 }
 .section-head h2 { max-width: 30ch; }
+.section-head p { font-size: 1rem; color: var(--text-soft); margin-top: 0.6rem; max-width: 60ch; line-height: 1.55; }
 
 /* ---- Services list (non-marketing) ------------------- */
 .services-list {
