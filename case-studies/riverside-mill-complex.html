@@ -120,7 +120,15 @@
     <p>Mechanical and electrical design, hardware specification, and project management of the building-wide HVAC plant serving the general building and all five tenants. Designed, built, installed, and wired in partnership with our plumbing and electrical trades, with us as the integrator from the first sketch through commissioning.</p>
 
     <h3>Control system design and implementation.</h3>
-    <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over RS-485. The supervisor hosts the agentic control software directly &mdash; a multi-agent supervisor that continuously negotiates zone comfort targets, energy cost, outside conditions, and equipment health, then issues setpoints to the controllers. Running 24/7.</p>
+    <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over RS-485. The supervisor hosts the agentic control software directly. The agents handle several distinct jobs:</p>
+    <ul>
+      <li><b>Configuration through conversation.</b> The user does not manipulate the system directly. They chat with the agents, which manage the underlying Node-RED configuration, monitoring, and alerting.</li>
+      <li><b>Failure and overload management</b> through layered, scaled backup. A pump array provides both scale and failover. Internal water-temperature overheats are managed through variable water volumes and cooling-tower fans, with emergency injection of city water into the loop as the final fallback.</li>
+      <li><b>Adjustable flow control</b> across disparate areas of the system based on pressure and temperature, so each WSHP gets exactly the amount of water at exactly the right temperature without wasted pumping or HVAC energy.</li>
+      <li><b>Vapor-pressure-deficit-driven climate control</b> &mdash; temperature, humidity, and airflow tuned to ideal growing conditions for the agricultural tenants.</li>
+      <li><b>Heat recovery and thermal massing</b> through the building's 18&ndash;24" brick walls (exterior and many interior partitions). Across the winters of 2024&ndash;25 and 2025&ndash;26 the system required almost no heat injection &mdash; recovered heat from manufacturing and agricultural loads, combined with thermal mass, kept the building comfortable for free.</li>
+    </ul>
+    <p>This past winter a plumber working on the gas lines accidentally shut off the gas to the boilers. No one noticed for the entire heating season &mdash; the system never called on it.</p>
   </div>
 
   <div class="figure-section">
