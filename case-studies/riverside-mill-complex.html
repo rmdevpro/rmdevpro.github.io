@@ -128,7 +128,7 @@
     <p>Mechanical and electrical design, hardware specification, and project management of the building-wide HVAC plant serving the general building and all five tenants. Designed, built, installed, and wired in partnership with our plumbing and electrical trades, with us as the integrator from the first sketch through commissioning.</p>
 
     <h3>Control system design and implementation.</h3>
-    <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over RS-485. The supervisor hosts the agentic control software directly. The agents handle several distinct jobs:</p>
+    <p>We specified the control hardware, drew the wiring, and built the panel. Industrial breakers and contactors on the power side; I/O modules addressing the sensor and actuator network; a Raspberry-Pi-based supervisor bridged to the rest over Modbus. The supervisor hosts the agentic control software directly. The agents handle several distinct jobs:</p>
     <ul>
       <li><b>Configuration through conversation.</b> The user does not manipulate the system directly. They chat with the agents, which manage the underlying Node-RED configuration, monitoring, and alerting.</li>
       <li><b>Failure and overload management</b> through layered, scaled backup. A pump array provides both scale and failover. Internal water-temperature overheats are managed through variable water volumes and cooling-tower fans, with emergency injection of city water into the loop as the final fallback.</li>
@@ -148,10 +148,10 @@
       </div>
     </div>
     <div class="figure" style="margin-top:1.25rem">
-      <img src="../assets/case-studies/riverside-mill-complex/board-wiring.png" alt="Control board wiring diagram showing industrial distribution, I/O modules, and the Raspberry Pi controller tied to the heat pump plant via RS-485">
+      <img src="../assets/case-studies/riverside-mill-complex/board-wiring.png" alt="Control board wiring diagram showing industrial distribution, I/O modules, and the Raspberry Pi controller tied to the heat pump plant via Modbus">
       <div class="cap">
         <span class="label">Fig. 02 &mdash; Control panel wiring diagram</span>
-        <span>Industrial distribution · I/O modules · RS-485 to Pi controller</span>
+        <span>Industrial distribution · I/O modules · Modbus to Pi controller</span>
       </div>
     </div>
   </div>
