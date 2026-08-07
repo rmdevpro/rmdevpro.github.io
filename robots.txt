@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /recruiter/
 
 Sitemap: https://blueprintagentic.ai/sitemap.xml
