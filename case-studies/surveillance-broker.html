@@ -90,6 +90,16 @@
   border-bottom: 1px solid var(--accent); padding-bottom: 2px;
 }
 .cs-section .link:hover { color: var(--text); border-color: var(--text); }
+.queries { margin: 1.25rem 0 0.5rem; max-width: 72ch; display: flex; flex-direction: column; gap: 0.75rem; }
+.queries .q {
+  background: var(--bg-raised);
+  border-left: 3px solid var(--accent);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+  font-style: italic;
+}
 </style>
 </head>
 <body>
@@ -114,7 +124,7 @@
     <a class="back" href="../index.html#work">← Work</a>
     <h1>Surveillance Broker</h1>
     <p class="tagline">A camera archive you can talk to &mdash; built for the Riverside Mill camera system, now a product.</p>
-    <p class="sub">Finding the right footage across hundreds of cameras and months of retention is a large manual task. Surveillance Broker turns the archive into something you can browse on a true wall-clock timeline, search by what actually happened, and simply ask &mdash; and it opens the exact camera and time in one step.</p>
+    <p class="sub">Finding the right footage across hundreds of cameras and months of retention is a large manual task. Surveillance Broker turns the archive into something you can browse on a true wall-clock timeline, search by what actually happened, and simply ask &mdash; and it opens the exact camera and time in one step. And because it ties the cameras to your access control, inventory, and production systems, you can ask questions about your operation, not just your footage.</p>
   </div>
 </section>
 
@@ -147,6 +157,28 @@
       <li><b>Find a person, not just a time.</b> Facial recognition needs a clear face; our local AI recognizes the whole person &mdash; build, clothing, and behavior &mdash; so you can follow an individual through the building and across cameras even when their face never shows.</li>
       <li><b>One step to the moment.</b> The agent's answers are real recording references, so a result opens directly in the viewer at the right camera and time, ready to export.</li>
     </ul>
+  </div>
+
+  <div class="cs-section">
+    <h2>Answers across every system</h2>
+    <p>Once the local AI understands what is in the footage &mdash; and the footage is tied to the other systems in the building &mdash; the archive stops being a pile of video and becomes a way to answer operational questions.</p>
+
+    <h3>Positive identification.</h3>
+    <p>Surveillance Broker integrates with the <b>access control system</b>. When someone swipes a card on camera, the system ties that swipe to the AI-recognized person &mdash; turning a visual match into a <b>positive, confirmed identity</b>. Whole-person recognition then carries that identity across cameras, even where there is no reader.</p>
+
+    <h3>Watching processes, not just presence.</h3>
+    <p>Because the local models can watch continuously, they can observe specific <b>processes and behaviors</b>, not just who was where: whether products are being packaged correctly, how much time goes into maintaining a machine, whether product is being taken, how inventory went missing. For finer, facility-specific activities that need to be understood precisely, we <b>fine-tune the models with LoRAs</b>.</p>
+
+    <h3>Tied into your operational systems.</h3>
+    <p>Surveillance Broker also connects to <b>operational systems</b> &mdash; inventory, manufacturing, and the like. A single question can cross from the video into the data those systems hold and back, so the answer draws on everything the facility recorded &mdash; not just the cameras.</p>
+
+    <p>The result is questions no camera system could answer on its own:</p>
+    <div class="queries">
+      <div class="q">&ldquo;When John swiped his card and entered at 2&nbsp;PM, did he let anyone in with him?&rdquo;</div>
+      <div class="q">&ldquo;The inventory system logs scale readings &mdash; find every scale entry for Product&nbsp;X today and show who weighed it.&rdquo;</div>
+      <div class="q">&ldquo;When the man in the orange hat took samples today, was he wearing gloves?&rdquo;</div>
+      <div class="q">&ldquo;I think Bob spends a lot of time clearing jams on the number-3 feeder &mdash; maybe it needs a serious repair. How much time did he spend on it this week?&rdquo;</div>
+    </div>
   </div>
 
   <div class="cs-section">
