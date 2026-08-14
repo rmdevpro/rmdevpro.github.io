@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surveillance Broker — Case Study · BlueprintAgentic</title>
+<meta name="description" content="An agentic surveillance archive built for the Riverside Mill camera system and productized as Surveillance Broker: a camera archive you can talk to — find footage by camera and time, search what happened, and open the right clip in one step across hundreds of cameras.">
+<link rel="canonical" href="https://blueprintagentic.ai/case-studies/surveillance-broker.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BlueprintAgentic">
+<meta property="og:url" content="https://blueprintagentic.ai/case-studies/surveillance-broker.html">
+<meta property="og:title" content="Surveillance Broker — Case Study">
+<meta property="og:description" content="A camera archive you can talk to. Built for the Riverside Mill camera system, now a product: find footage by camera and time, search what happened, and open the right clip in one step.">
+<meta property="og:image" content="https://blueprintagentic.ai/assets/case-studies/surveillance-broker/viewer-agent.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Surveillance Broker — Case Study">
+<meta name="twitter:description" content="A camera archive you can talk to — built for the Riverside Mill camera system, now a product.">
+<meta name="twitter:image" content="https://blueprintagentic.ai/assets/case-studies/surveillance-broker/viewer-agent.png">
+<style>
+.cs-hero { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 0; }
+.cs-hero .back {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.cs-hero .back:hover { color: var(--accent); }
+.cs-hero h1 {
+  font-size: clamp(2rem, 3.8vw, 2.85rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.cs-hero .tagline {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  max-width: none;
+}
+.cs-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 0.75rem; max-width: 72ch; }
+
+.figure-section { padding-block: clamp(2rem, 4vw, 3rem); }
+.figure {
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  padding: 1rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -30px rgba(9,31,56,0.18);
+}
+.figure img { width: 100%; display: block; height: auto; }
+.figure .cap {
+  display: flex; justify-content: space-between; gap: 1rem;
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--rule);
+}
+.figure .cap .label { color: var(--text); font-weight: 500; }
+
+.cs-section {
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+}
+.cs-section:first-of-type { padding-top: 1.5rem; }
+.cs-section:last-of-type { border-bottom: none; }
+.cs-section:has(+ .figure-section) { border-bottom: none; padding-bottom: 0.5rem; }
+.cs-section h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.cs-section h3 { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text); }
+.cs-section p { max-width: 72ch; margin-bottom: 0.75rem; color: var(--text-soft); font-size: 0.95rem; line-height: 1.55; }
+.cs-section p b { color: var(--text); font-weight: 600; }
+.cs-section ul { margin: 0.5rem 0 1rem 1.25rem; max-width: 72ch; }
+.cs-section ul li { margin-bottom: 0.4rem; color: var(--text-soft); font-size: 0.95rem; line-height: 1.55; }
+.cs-section ul li b { color: var(--text); font-weight: 600; }
+.cs-section .link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: var(--accent); font-weight: 500; font-size: 0.9375rem;
+  border-bottom: 1px solid var(--accent); padding-bottom: 2px;
+}
+.cs-section .link:hover { color: var(--text); border-color: var(--text); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../index.html" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../index.html#services">What We Do</a></li>
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back" href="../index.html#work">← Work</a>
+    <h1>Surveillance Broker</h1>
+    <p class="tagline">A camera archive you can talk to &mdash; built for the Riverside Mill camera system, now a product.</p>
+    <p class="sub">Finding the right footage across hundreds of cameras and months of retention is a large manual task. Surveillance Broker turns the archive into something you can browse on a true wall-clock timeline, search by what actually happened, and simply ask &mdash; and it opens the exact camera and time in one step.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="cs-section">
+    <h2>From a client system to a product</h2>
+    <p>The Riverside Mill campus runs <b>over 200 cameras with 90 days of full retention</b>. That coverage is only useful if you can find the moment you need &mdash; and on a system that size, running 24/7, that is a genuinely hard problem. We built an intelligence layer over the camera archive so operators could stop scrubbing tape and simply describe what they were looking for.</p>
+    <p>It worked well enough at Riverside Mill that we generalized it into its own product: <b>Surveillance Broker</b>. It is not tied to any one site or camera vendor. It runs today on the live Riverside Mill archive &mdash; thousands of recordings across every camera in the building &mdash; and the same pipeline takes any site's cameras next.</p>
+  </div>
+
+  <div class="figure-section">
+    <div class="figure">
+      <img src="../assets/case-studies/surveillance-broker/viewer-agent.png" alt="Surveillance Broker web interface — a dark camera archive viewer showing a camera list with recording counts, a hallway recording with a burned-in wall-clock timestamp, a 24-hour timeline with recording segments and 1x to 16x playback speed, an export button, and an AI agent panel for finding footage by camera and time">
+      <div class="cap">
+        <span class="label">Blueprint Surveillance Broker &mdash; archive viewer &amp; agent</span>
+        <span>Wall-clock timeline · 1&ndash;16× playback · export · footage-finding agent</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <h2>What it does</h2>
+    <p>Surveillance Broker sits on top of a proven NVR and adds the retrieval, memory, and conversational control that camera systems normally lack.</p>
+    <ul>
+      <li><b>Browse by camera and day on a true wall-clock timeline.</b> Consecutive recordings play as one continuous stream while real gaps stay visible &mdash; you always know what was and was not recorded.</li>
+      <li><b>Review fast.</b> High-speed playback from 1× to 16×, accurate seeking, and bounded, browser-compatible exports for the exact interval you need.</li>
+      <li><b>Self-describing evidence.</b> Every frame carries a burned-in camera name and authoritative date and time, so an exported clip stands on its own.</li>
+      <li><b>Just ask.</b> "Show me the Vault camera from 3:00 to 3:15" resolves through deterministic camera-and-time lookup &mdash; no model guesswork. Harder questions search across what was actually seen in the footage.</li>
+      <li><b>One step to the moment.</b> The agent's answers are real recording references, so a result opens directly in the viewer at the right camera and time, ready to export.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <h2>How it is built</h2>
+    <p>Surveillance Broker is two cooperating systems &mdash; a local system at the site and a cloud system for centralized access &mdash; sharing one domain implementation across every interface.</p>
+
+    <h3>Local: capture, normalize, understand.</h3>
+    <p>A proven open-source NVR handles live cameras, recording, and review; Surveillance Broker builds the intelligence around it rather than reinventing it. Recordings are <b>decoded once</b> into a clean, standardized archive and, in the same pass, sampled for analysis. Lightweight detection runs first; only when something is actually happening do local vision-language models describe the people, activity, objects, and visible text in the scene. Those observations become searchable records, embeddings, and a knowledge graph &mdash; all kept alongside the camera, time, and source frames they came from.</p>
+
+    <h3>Cloud: browse, search, ask.</h3>
+    <p>The cloud system receives authenticated archive uploads and catalogs them immutably. It serves the timeline, playback, and export experience, and runs <b>hybrid search</b> &mdash; relational, full-text, vector, and knowledge-graph retrieval combined and reranked &mdash; behind the conversational agent. Every answer carries stable references that become viewer deep links and export boundaries.</p>
+
+    <h3>Built to be trusted with real work.</h3>
+    <p>Long-running jobs &mdash; import, processing, enrichment, upload, reconciliation &mdash; use durable checkpoints and idempotent operations, so nothing is silently lost and a repeated upload is always safe. A single source of truth holds the authoritative catalog; the knowledge graph is a rebuildable projection on top of it. And there is <b>one implementation behind many front doors</b>: the same operations serve the web UI, scheduled jobs, and other authorized agents over a common tool interface.</p>
+  </div>
+
+  <div class="cs-section">
+    <h2>Privacy and safety by design</h2>
+    <p>A system that understands surveillance footage has to be built carefully. These are architecture decisions, not afterthoughts.</p>
+    <ul>
+      <li><b>Video only.</b> No audio is acquired, archived, analyzed, exported, or transmitted &mdash; ever.</li>
+      <li><b>Closed by default.</b> Only authenticated gateways are reachable. Databases, models, and services stay on a private network with no inbound access.</li>
+      <li><b>Deterministic stays deterministic.</b> Finding a camera and time, playing it back, and choosing an export never depend on a model's guess.</li>
+      <li><b>Identity is a hypothesis until it is not.</b> A person's continuity within a single day is evidence-based; links across days remain explicit, reviewable hypotheses. The system never quietly promotes a model's guess into a confirmed identity.</li>
+      <li><b>Bounded agents, separate admin.</b> Agents get stable identifiers and specific, audited operations &mdash; not arbitrary filesystem, database, or shell access. Raw file inspection and repair stay behind a distinct administrative path.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <h2>Where it came from</h2>
+    <p>Surveillance Broker grew directly out of the camera, network, and security work we delivered at the Riverside Mill Complex &mdash; one of several systems on that campus that started as an engagement and became reusable capability.</p>
+    <a class="link" href="riverside-mill-complex.html">See the Riverside Mill camera system it grew out of →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
