@@ -131,19 +131,20 @@
       <img src="../assets/case-studies/surveillance-broker/viewer-agent.png" alt="Surveillance Broker web interface — a dark camera archive viewer showing a camera list with recording counts, a hallway recording with a burned-in wall-clock timestamp, a 24-hour timeline with recording segments and 1x to 16x playback speed, an export button, and an AI agent panel for finding footage by camera and time">
       <div class="cap">
         <span class="label">Blueprint Surveillance Broker &mdash; archive viewer &amp; agent</span>
-        <span>Wall-clock timeline · 1&ndash;16× playback · export · footage-finding agent</span>
+        <span>Frigate NVR, augmented · local-AI search · person tracking · one-step deep links</span>
       </div>
     </div>
   </div>
 
   <div class="cs-section">
     <h2>What it does</h2>
-    <p>Surveillance Broker sits on top of a proven NVR and adds the retrieval, memory, and conversational control that camera systems normally lack.</p>
+    <p>Surveillance Broker sits on top of Frigate and adds the local-AI retrieval, memory, and conversational control that camera systems normally lack.</p>
     <ul>
       <li><b>Browse by camera and day on a true wall-clock timeline.</b> Consecutive recordings play as one continuous stream while real gaps stay visible &mdash; you always know what was and was not recorded.</li>
       <li><b>Review fast.</b> High-speed playback from 1× to 16×, accurate seeking, and bounded, browser-compatible exports for the exact interval you need.</li>
       <li><b>Self-describing evidence.</b> Every frame carries a burned-in camera name and authoritative date and time, so an exported clip stands on its own.</li>
-      <li><b>Just ask.</b> "Show me the Vault camera from 3:00 to 3:15" resolves through deterministic camera-and-time lookup &mdash; no model guesswork. Harder questions search across what was actually seen in the footage.</li>
+      <li><b>Just ask.</b> "Show me the Product Vault at 1:00 PM" resolves straight to openable clips. Harder questions &mdash; "find all clips showing the man in a bright orange hat" &mdash; search across what the local AI actually saw in the footage.</li>
+      <li><b>Find a person, not just a time.</b> Local vision models track people through a space and across cameras, so you can follow an individual through the building instead of scrubbing each feed by hand.</li>
       <li><b>One step to the moment.</b> The agent's answers are real recording references, so a result opens directly in the viewer at the right camera and time, ready to export.</li>
     </ul>
   </div>
@@ -152,26 +153,15 @@
     <h2>How it is built</h2>
     <p>Surveillance Broker is two cooperating systems &mdash; a local system at the site and a cloud system for centralized access &mdash; sharing one domain implementation across every interface.</p>
 
-    <h3>Local: capture, normalize, understand.</h3>
-    <p>A proven open-source NVR handles live cameras, recording, and review; Surveillance Broker builds the intelligence around it rather than reinventing it. Recordings are <b>decoded once</b> into a clean, standardized archive and, in the same pass, sampled for analysis. Lightweight detection runs first; only when something is actually happening do local vision-language models describe the people, activity, objects, and visible text in the scene. Those observations become searchable records, embeddings, and a knowledge graph &mdash; all kept alongside the camera, time, and source frames they came from.</p>
+    <h3>Local: Frigate, augmented.</h3>
+    <p>We install <b>Frigate</b> &mdash; the widely used, open-source, industry-standard NVR &mdash; to handle live cameras, recording, review, and timeline. Surveillance Broker augments Frigate rather than reinventing it. Recordings are <b>decoded once</b> into a clean, standardized archive and, in the same pass, sampled for analysis.</p>
+    <p>Everything runs on <b>locally installed AI</b>. Lightweight detection runs first; then local vision-language models describe the people, activity, objects, and visible text in each scene. <b>Person tracking is central</b> &mdash; the models follow individuals through a space and across cameras, so you can search for who appears and how they move through the building, not just when a camera was recording. Those observations become searchable records, embeddings, and a knowledge graph, all kept alongside the camera, time, and source frames they came from.</p>
 
     <h3>Cloud: browse, search, ask.</h3>
     <p>The cloud system receives authenticated archive uploads and catalogs them immutably. It serves the timeline, playback, and export experience, and runs <b>hybrid search</b> &mdash; relational, full-text, vector, and knowledge-graph retrieval combined and reranked &mdash; behind the conversational agent. Every answer carries stable references that become viewer deep links and export boundaries.</p>
 
     <h3>Built to be trusted with real work.</h3>
     <p>Long-running jobs &mdash; import, processing, enrichment, upload, reconciliation &mdash; use durable checkpoints and idempotent operations, so nothing is silently lost and a repeated upload is always safe. A single source of truth holds the authoritative catalog; the knowledge graph is a rebuildable projection on top of it. And there is <b>one implementation behind many front doors</b>: the same operations serve the web UI, scheduled jobs, and other authorized agents over a common tool interface.</p>
-  </div>
-
-  <div class="cs-section">
-    <h2>Privacy and safety by design</h2>
-    <p>A system that understands surveillance footage has to be built carefully. These are architecture decisions, not afterthoughts.</p>
-    <ul>
-      <li><b>Video only.</b> No audio is acquired, archived, analyzed, exported, or transmitted &mdash; ever.</li>
-      <li><b>Closed by default.</b> Only authenticated gateways are reachable. Databases, models, and services stay on a private network with no inbound access.</li>
-      <li><b>Deterministic stays deterministic.</b> Finding a camera and time, playing it back, and choosing an export never depend on a model's guess.</li>
-      <li><b>Identity is a hypothesis until it is not.</b> A person's continuity within a single day is evidence-based; links across days remain explicit, reviewable hypotheses. The system never quietly promotes a model's guess into a confirmed identity.</li>
-      <li><b>Bounded agents, separate admin.</b> Agents get stable identifiers and specific, audited operations &mdash; not arbitrary filesystem, database, or shell access. Raw file inspection and repair stay behind a distinct administrative path.</li>
-    </ul>
   </div>
 
   <div class="cs-section">
