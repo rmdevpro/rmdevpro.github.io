@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blueprint Agentic Workbench — BlueprintAgentic</title>
+<meta name="description" content="Blueprint Agentic Workbench is a harness for building durable teams of native AI CLI agents — Claude Code, Codex, Antigravity, Grok Build, Hermes, and OpenCode — turned into specialized agents and specialized teams that work together over time.">
+<link rel="canonical" href="https://blueprintagentic.ai/products/blueprint-agentic-workbench.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BlueprintAgentic">
+<meta property="og:url" content="https://blueprintagentic.ai/products/blueprint-agentic-workbench.html">
+<meta property="og:title" content="Blueprint Agentic Workbench">
+<meta property="og:description" content="A harness for building durable teams of native AI CLI agents. Not a swarm, a wrapper, or a generic framework — an agentic organization with durable teams, context, memories, and tools.">
+<meta property="og:image" content="https://blueprintagentic.ai/assets/workbench-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blueprint Agentic Workbench">
+<meta name="twitter:description" content="A harness for building durable teams of native AI CLI agents.">
+<meta name="twitter:image" content="https://blueprintagentic.ai/assets/workbench-preview.png">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
+.product-hero h1 { margin-bottom: 1.25rem; line-height: 1; }
+.product-hero h1 img { display: block; height: clamp(58px, 8vw, 82px); width: auto; max-width: 100%; }
+.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: none; }
+.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: none; }
+.product-hero .sub b { color: var(--text); font-weight: 600; }
+
+.framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.framing-strip h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+.framing-strip p b { color: var(--text); font-weight: 600; }
+
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
+
+.cards-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.cards-grid.two { grid-template-columns: 1fr 1fr; }
+.feature-card { padding: 2rem; border: 1px solid var(--rule); background: white; }
+.feature-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.feature-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.feature-card p { font-size: 0.95rem; color: var(--text-soft); max-width: none; margin-bottom: 0.6rem; line-height: 1.55; }
+.feature-card p:last-child { margin-bottom: 0; }
+.feature-card p b { color: var(--text); font-weight: 600; }
+
+.section-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.section-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: none; }
+
+.list-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.list-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
+.list-block ul li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
+.list-block ul li b { color: var(--text); font-weight: 600; }
+
+.callout { padding-bottom: clamp(2rem, 4vw, 3rem); }
+.callout .box { border: 1px solid var(--rule); border-left: 3px solid var(--accent); background: var(--bg-raised); padding: 1.5rem 1.75rem; }
+.callout .box p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 0.6rem; max-width: none; }
+.callout .box p:last-child { margin-bottom: 0; }
+.callout .box b { color: var(--text); font-weight: 600; }
+
+.examples-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.examples-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.examples-intro p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+
+.examples-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.examples-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.team-card { padding: 2rem; border: 1px solid var(--rule); background: white; display: flex; flex-direction: column; }
+.team-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.team-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.85rem; }
+.team-card ul { font-size: 0.95rem; color: var(--text-soft); margin: 0.25rem 0 0 1.25rem; padding: 0; line-height: 1.55; }
+.team-card ul li { margin-bottom: 0.4rem; padding-left: 0.25rem; }
+.team-card ul li b { color: var(--text); font-weight: 600; }
+.team-card ul ul { list-style: disc; margin: 0.4rem 0 0.4rem 1.5rem; padding: 0; font-size: 0.9rem; }
+.team-card ul ul li { margin-bottom: 0.3rem; padding-left: 0.25rem; }
+.team-card .quorum { margin-top: auto; padding-top: 0.85rem; border-top: 1px solid var(--rule); font-size: 0.95rem; color: var(--text-soft); }
+.team-card .quorum .q-label { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; display: block; margin-bottom: 0.2rem; }
+.team-card .reason { font-size: 0.85rem; color: var(--text-faint); margin-top: 0.1rem; line-height: 1.4; }
+.team-card .quorum .reason { margin-top: 0.25rem; }
+
+.deploy-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.deploy-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.deploy-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: none; }
+
+.deploy-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.deploy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.deploy-card { padding: 2rem; border: 1px solid var(--rule); background: white; display: flex; flex-direction: column; }
+.deploy-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.deploy-card p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+.deploy-card .tag { margin-top: auto; padding-top: 0.85rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; }
+
+.status-block { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.status-block h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.status-block p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 0.75rem; max-width: none; }
+.status-block p b { color: var(--text); font-weight: 600; }
+
+section + section { border-top: 0; }
+@media (max-width: 880px) {
+  .cards-grid, .cards-grid.two { grid-template-columns: 1fr; }
+  .examples-grid { grid-template-columns: 1fr; }
+  .deploy-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../#services">What We Do</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../#work">← Work</a>
+    <div class="kicker">Blueprint Agentic technology</div>
+    <h1><img src="../assets/logos/workbench-wordmark-blue.png" alt="Blueprint Agentic Workbench"></h1>
+    <p class="tagline">A harness for building durable teams of native AI CLI agents.</p>
+    <p class="sub">Workbench turns interactive tools like <b>Claude Code, Codex, Antigravity, Grok Build, Hermes, and OpenCode</b> into specialized agents &mdash; and specialized agents into durable teams that work together over time. Each agent keeps its native CLI capabilities, memory, skills, hooks, authentication, and conversational interface. Workbench adds the missing operating layer: controlled launch profiles, persistent sessions, a shared workspace, team-to-team communication, scheduling, GitHub integration, and human oversight.</p>
+    <p class="sub">The result is not a swarm, a wrapper, or a generic agent framework. It is an <b>agentic organization</b>: durable teams with their own context, responsibilities, memories, and tools.</p>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Why teams.</h2>
+    <p>Single agents are useful. Sub-agent trees are better. But the strongest pattern we have found is a <b>team of fully empowered, durable agents</b> that can freely exchange context, challenge each other, specialize by role, and draw on cognitively diverse model families &mdash; while still operating inside the native CLIs each provider has invested in.</p>
+    <p>Most agent systems settle for less. They run a single agent, lock into a single provider, wrap shallow orchestration around one model, or turn many identical agents loose as a swarm. Each gives up something: durability, cognitive diversity, real specialization, or the native capabilities the CLI vendors are pouring billions into. Workbench keeps all of it.</p>
+  </div>
+</section>
+
+<section class="banner">
+  <div class="wrap">
+    <div class="frame"><img src="../assets/workbench-preview.png" alt="Blueprint Agentic Workbench interface — multiple native AI CLI agents running in a web terminal environment"></div>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>From agents to an organization.</h2>
+    <p>Three layers, each durable, each built from the native tools rather than around them.</p>
+  </div>
+</section>
+
+<section class="cards-block">
+  <div class="wrap">
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="kicker">Agents</div>
+        <h2>Durable role agents.</h2>
+        <p>A general-purpose CLI becomes a specific, controllable agent through its launch profile, system prompt, skill files, durable memory, hooks, and session &mdash; a Reviewer, an SRE, a Controller &mdash; that persists across sessions instead of resetting each run.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Teams</div>
+        <h2>Specialized durable teams.</h2>
+        <p>Role agents combine into durable teams. A software product team carries engineering, review, root-cause analysis, testing, orchestration, and &mdash; where it fits &mdash; program management, documentation, and release. The team is summonable and keeps its context.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Organization</div>
+        <h2>Teams that call teams.</h2>
+        <p>Teams talk to other teams. A product team that needs infrastructure contacts the infrastructure team. The work &mdash; and its durable memory &mdash; stays attached to the team that owns it, so responsibility and context don&rsquo;t leak.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>How agents talk.</h2>
+    <p>Agents communicate the way a person would talk to them: by sending an <b>identity-tagged prompt through the same conversational interface a human uses</b>. Nothing is bolted on the side. Because the message arrives as a normal turn inside the native CLI, it automatically carries that CLI&rsquo;s durable memory, compaction, session context, and tools. Agent-to-agent and team-to-team communication reuse the exact machinery each provider already built &mdash; they don&rsquo;t work around it.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Why native CLIs.</h2>
+    <p>Workbench runs the native interactive CLIs, visibly, in a web terminal. It does not replace or modify them &mdash; and that is the point.</p>
+  </div>
+</section>
+
+<section class="cards-block">
+  <div class="wrap">
+    <div class="cards-grid two">
+      <div class="feature-card">
+        <h2>Any model, any location.</h2>
+        <p>Through the CLI layer, a team can run any model, cloud or local, one provider or many &mdash; Claude Code, Codex, Antigravity, Grok Build, Hermes, OpenCode &mdash; and mix cognitively diverse model families, because different models think differently and are good at different things.</p>
+      </div>
+      <div class="feature-card">
+        <h2>Provider investment, preserved.</h2>
+        <p>You get each vendor&rsquo;s best agentic tool, updated on their schedule, not a third-party approximation. No CLI modification, no disguised UI, no hidden auth automation, and no batch invocations standing in for an API &mdash; users authenticate normally through OAuth subscriptions, and the CLIs update normally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What Workbench controls.</h2>
+    <p>Workbench never reaches inside an agent&rsquo;s reasoning. It controls how agents are spawned and operated, and what surrounds the team.</p>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>The agent.</b> Launch parameters and agent profiles, system prompts, skill files, durable memories, CLI hooks, compaction, and session files &mdash; the settings that turn a general-purpose CLI into a durable, controllable role agent.</li>
+      <li><b>The team.</b> A shared workspace, identity-tagged team-to-team communication, and human oversight of the whole organization.</li>
+      <li><b>The rhythm.</b> A common scheduler and reminder layer that can prompt an agent through a normal prompt even when its session is idle &mdash; the agents automate themselves from there.</li>
+      <li><b>The system of record.</b> Full GitHub integration; tasking and issues live in GitHub and the native CLIs rather than a separate task system.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Collective memory.</h2>
+    <p>Each CLI increasingly ships its own durable memory, profile, skill, and session concepts. Workbench uses those <b>native mechanisms</b> rather than forcing all continuity through a retrieval layer. Because the agents are durable and the teams are durable, a team accumulates <b>collective memory</b> &mdash; the context of its work stays attached to the team that owns it, and compounds.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Teams that call teams &mdash; an example.</h2>
+  </div>
+</section>
+
+<section class="callout">
+  <div class="wrap">
+    <div class="box">
+      <p>An <b>Infrastructure team</b> owns DNS, PXE, networking, containers, observability, and cloud. Each software product has its own summonable, durable team &mdash; engineers, reviewers, root-cause analysis, testing, and orchestration, plus technical program management, documentation, and release where they fit.</p>
+      <p>When a product team needs infrastructure, it <b>contacts the infrastructure team directly</b>, agent to agent, through the normal conversational interface. The request participates in each team&rsquo;s native memory and tools &mdash; and when it&rsquo;s done, the work and its durable memory stay with the team that owns it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="examples-intro">
+  <div class="wrap">
+    <h2>Agentic team examples.</h2>
+    <p>Four durable teams across different domains. In each, the human operator works directly with the team and plays the strategic lead role. Model choices are illustrative &mdash; every agent runs inside a native CLI, and the team mixes model families on purpose.</p>
+  </div>
+</section>
+
+<section class="examples-block">
+  <div class="wrap">
+    <div class="examples-grid">
+
+      <div class="team-card">
+        <div class="kicker">Operations</div>
+        <h2>Finance.</h2>
+        <ul>
+          <li><b>Controller</b> &mdash; Claude Opus 4.7<div class="reason">Senior oversight, multi-report reasoning across Finance functions</div></li>
+          <li><b>Analyst</b> &mdash; GPT-5.5<div class="reason">Heavy data analysis; top-tier reasoner</div></li>
+          <li><b>Reporting</b> &mdash; Claude Sonnet 4.6<div class="reason">Structured periodic generation; no reasoning premium needed</div></li>
+          <li><b>Compliance</b> &mdash; Claude Opus 4.7<div class="reason">Careful regulatory interpretation, low error tolerance</div></li>
+          <li><b>Taxes</b> &mdash; Gemini 3.1 Pro<div class="reason">Rules and interpretation; long-context reasoning</div></li>
+          <li><b>Process Manager</b> &mdash; Claude Haiku 4.5<div class="reason">Process orchestration and routing</div>
+            <ul>
+              <li><b>Email Sub-Agent</b> &mdash; Claude Haiku 4.5<div class="reason">Checks team email and routes to the appropriate team member</div></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="quorum"><span class="q-label">Audit quorum</span>Claude Haiku 4.5 · GPT-5.4 Mini · Gemini 3.5 Flash<div class="reason">Hard rules to facts; strict instruction-followers, not reasoners.</div></div>
+      </div>
+
+      <div class="team-card">
+        <div class="kicker">Creative</div>
+        <h2>Marketing.</h2>
+        <ul>
+          <li><b>Program Manager</b> &mdash; Claude Sonnet 4.6<div class="reason">Process and coordination; balance of reasoning and rule following</div></li>
+          <li><b>Copywriter</b> &mdash; GPT-5.4 Mini<div class="reason">GPT family leads direct-response copy and headlines</div></li>
+          <li><b>Image Creator</b> &mdash; Gemini 3.1 Pro<div class="reason">Nano Banana 2 leads image-gen leaderboards</div></li>
+          <li><b>Video Creator</b> &mdash; Gemini 3.1 Pro<div class="reason">Veo 3.1 leads cinematic quality, 4K, native audio</div></li>
+          <li><b>Audio Creator</b> &mdash; GPT-5.5<div class="reason">Leads audio reasoning benchmarks</div></li>
+          <li><b>Social Media Manager</b> &mdash; Gemini 3.5 Flash<div class="reason">Cheapest and fastest for high-volume posting</div></li>
+          <li><b>Performance Marketing</b> &mdash; Claude Sonnet 4.6<div class="reason">Analytical reasoning, structured campaign briefs</div></li>
+        </ul>
+        <div class="quorum"><span class="q-label">Analyst quorum</span>Claude Opus 4.7 · GPT-5.5 · Gemini 3.1 Pro<div class="reason">Top-tier strategy peers, one per provider.</div></div>
+      </div>
+
+      <div class="team-card">
+        <div class="kicker">Research</div>
+        <h2>Ocean Geology.</h2>
+        <ul>
+          <li><b>Research Coordinator</b> &mdash; Claude Sonnet 4.6<div class="reason">Process and scheduling; balance of reasoning and rule following</div>
+            <ul>
+              <li><b>Email Sub-Agent</b> &mdash; Claude Haiku 4.5<div class="reason">Manages communications between agents and team members</div></li>
+              <li><b>Document Manager Sub-Agent</b> &mdash; Claude Haiku 4.5<div class="reason">Keeps research materials organized and up to date</div></li>
+            </ul>
+          </li>
+          <li><b>Marine Geophysicist</b> &mdash; Gemini 3.1 Pro<div class="reason">Leads grad-level science reasoning; 1M-token context for survey data</div></li>
+          <li><b>Sedimentologist</b> &mdash; GPT-5.5<div class="reason">Balanced reasoner; strong descriptive synthesis and writing</div></li>
+          <li><b>Geochemist</b> &mdash; Claude Opus 4.7<div class="reason">Leads tool-using scientific workflows; multi-step isotope reasoning</div></li>
+          <li><b>Paleoceanographer</b> &mdash; Gemini 3.1 Pro<div class="reason">Same grad-level lead; long context for deep-time synthesis</div></li>
+        </ul>
+        <div class="quorum"><span class="q-label">Research Assistant quorum</span>Claude Opus 4.7 · GPT-5.5 · Gemini 3.1 Pro<div class="reason">Expertise-grade peers, one per provider.</div></div>
+      </div>
+
+      <div class="team-card">
+        <div class="kicker">Engineering</div>
+        <h2>Software Development.</h2>
+        <ul>
+          <li><b>Program Manager</b> &mdash; Claude Opus 4.7<div class="reason">Senior architectural oversight, cross-system coordination</div></li>
+          <li><b>Product Engineer</b> &mdash; Codex<div class="reason">Code synthesis and direct execution</div></li>
+          <li><b>Test Engineer</b> &mdash; Claude Opus 4.7<div class="reason">Cognitive diversity vs. Product Engineer; deep test design and edge-case reasoning</div></li>
+          <li><b>Tech Writer</b> &mdash; Claude Opus 4.7<div class="reason">Long-form technical documentation; precise writing</div></li>
+          <li><b>SDLC Process Manager</b> &mdash; Claude Haiku 4.5<div class="reason">Strict process operation; rule-follower over reasoner</div>
+            <ul>
+              <li><b>Code Test Runner Sub-Agent</b> &mdash; Claude Haiku 4.5<div class="reason">Runs code-based tests such as mocks and integration</div></li>
+              <li><b>UI Test Runner Sub-Agent</b> &mdash; Claude Sonnet 4.6<div class="reason">Uses a runbook to test the UI via browsers or desktop control, as a user would</div></li>
+              <li><b>CICD Sub-Agent</b> &mdash; Claude Haiku 4.5<div class="reason">Deterministic pipeline orchestration</div></li>
+              <li><b>Git Records Sub-Agent</b> &mdash; Claude Sonnet 4.6<div class="reason">Maintains issues, PRs, milestones, and related Git records</div></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="quorum"><span class="q-label">Reviewers quorum</span>Claude Sonnet 4.6 · Codex · Gemini 3.1 Pro · Claude Haiku 4.5<div class="reason">Sonnet, Codex, and Gemini Pro for coding expertise. Haiku for compliance with policy, standards, and requirements.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="deploy-intro">
+  <div class="wrap">
+    <h2>Deployment types.</h2>
+  </div>
+</section>
+
+<section class="deploy-block">
+  <div class="wrap">
+    <div class="deploy-grid">
+      <div class="deploy-card">
+        <h2>Direct.</h2>
+        <p>Users work primarily in the Workbench UI, operating their agent teams directly in the web terminal.</p>
+        <div class="tag">Best for power users</div>
+      </div>
+      <div class="deploy-card">
+        <h2>Connected.</h2>
+        <p>Connected to a primary tool such as Claude Desktop via MCP. Users work in their primary tool and reach their agent teams through it.</p>
+        <div class="tag">Best for business users</div>
+      </div>
+      <div class="deploy-card">
+        <h2>Server.</h2>
+        <p>Agent teams serve an organization and multiple users more broadly, often using email or messaging as the interface between people and the teams.</p>
+        <div class="tag">Organization-wide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="status-block">
+  <div class="wrap">
+    <h2>Availability.</h2>
+    <p>Blueprint Agentic Workbench is <b>proprietary BlueprintAgentic technology</b>, built with correctly licensed open-source components. It is not open source and is not publicly distributed.</p>
+    <p>It is the tool the practice uses for its own daily work and deploys within client engagements. To talk about using it, <a href="../#contact" style="color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:1px;">start a conversation</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
