@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Camera Feed Lab — BlueprintAgentic</title>
+<meta name="description" content="Camera Feed Lab — an open-source tool that serves configurable virtual RTSP security-camera feeds (synthetic patterns or approved recordings) so you can develop and test an NVR, VMS, video wall, player, or analytics service without wiring real cameras. Includes the Chain Monitor verifier.">
+<link rel="canonical" href="https://blueprintagentic.ai/open-source/camera-feed-lab.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BlueprintAgentic">
+<meta property="og:url" content="https://blueprintagentic.ai/open-source/camera-feed-lab.html">
+<meta property="og:title" content="Camera Feed Lab">
+<meta property="og:description" content="Open-source: a roomful of virtual RTSP security cameras without buying or wiring hardware — plus Chain Monitor to prove the video actually arrived, advanced, and rendered.">
+<meta property="og:image" content="https://blueprintagentic.ai/assets/open-source/camera-feed-lab/social.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Camera Feed Lab">
+<meta name="twitter:description" content="Open-source virtual RTSP camera feeds for testing NVRs, VMSs, video walls, players, and analytics — with end-to-end delivery verification.">
+<meta name="twitter:image" content="https://blueprintagentic.ai/assets/open-source/camera-feed-lab/social.png">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
+.product-hero h1 { font-size: clamp(2rem, 3.8vw, 2.85rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.25rem; }
+.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: 70ch; }
+.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1.25rem; max-width: 72ch; }
+.gh-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+.gh-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #fff;
+  font-size: 0.9375rem; font-weight: 500;
+  padding: 0.6rem 1.1rem; border: 1px solid var(--accent);
+}
+.gh-btn:hover { background: transparent; color: var(--accent); }
+.gh-meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; }
+
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
+
+.framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.framing-strip h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: 72ch; }
+.framing-strip p b { color: var(--text); font-weight: 600; }
+
+.cards-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.feature-card { padding: 2rem; border: 1px solid var(--rule); background: white; }
+.feature-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.feature-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.feature-card p { font-size: 0.95rem; color: var(--text-soft); max-width: 52ch; margin-bottom: 0.6rem; line-height: 1.55; }
+.feature-card ul { font-size: 0.95rem; color: var(--text-soft); margin: 0.25rem 0 0 1.25rem; line-height: 1.55; }
+.feature-card ul li { margin-bottom: 0.4rem; }
+.feature-card ul li b { color: var(--text); font-weight: 600; }
+
+.section-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.section-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: 72ch; }
+
+.list-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.list-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: 74ch; }
+.list-block ul li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
+.list-block ul li b { color: var(--text); font-weight: 600; }
+
+.closing { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.closing h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.closing p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: 72ch; }
+.closing p b { color: var(--text); font-weight: 600; }
+
+section + section { border-top: 0; }
+@media (max-width: 880px) { .cards-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../#services">What We Do</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../#work">← Work</a>
+    <div class="kicker">Open source · MIT · v0.2.0</div>
+    <h1>Camera Feed Lab.</h1>
+    <p class="tagline">A roomful of virtual security cameras without buying or wiring a single one &mdash; plus the tool that proves the video actually made it through.</p>
+    <p class="sub">Camera Feed Lab serves configurable RTSP camera feeds from generated test patterns or approved recordings, so you can develop and test an NVR, VMS, video wall, player, analytics service, or any other RTSP consumer as though real cameras were attached. The same configuration runs on a laptop, in CI, or as a shared lab feeder.</p>
+    <div class="gh-row">
+      <a class="gh-btn" href="https://github.com/rmdevpro/camera-feed-lab" target="_blank" rel="noopener">View on GitHub →</a>
+      <span class="gh-meta">github.com/rmdevpro/camera-feed-lab</span>
+    </div>
+  </div>
+</section>
+
+<section class="banner">
+  <div class="wrap">
+    <div class="frame"><img src="../assets/open-source/camera-feed-lab/social.png" alt="Blueprint Camera Feed Lab"></div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>The problem it solves.</h2>
+    <p>Software that consumes surveillance video is hard to develop and test without a stable camera estate. Physical cameras are finite, location-dependent, privacy-sensitive, and prone to changes outside the test. A directory of video files is reproducible, but it does not exercise RTSP connections, stream startup, fan-out, pacing, readiness, process lifecycle, or time-aligned replay. Hand-written FFmpeg commands fill the gap for one experiment, but they are hard to review, repeat, scale, and carry between environments.</p>
+    <p>Camera Feed Lab packages those concerns into <b>one controlled test fixture</b>. The portable default needs no media files &mdash; it produces a site-neutral set of synthetic camera feeds immediately. More realistic tests mount local or shared media read-only and replay it without embedding footage or deployment details in the image or repository.</p>
+  </div>
+</section>
+
+<section class="cards-block">
+  <div class="wrap">
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="kicker">Part one</div>
+        <h2>Feed server.</h2>
+        <p>Validates a JSON manifest, supervises MediaMTX and FFmpeg, and publishes the requested RTSP/TCP camera paths.</p>
+        <ul>
+          <li><b>1&ndash;64 source streams</b>, each with a stable ID, unique RTSP path, activation mode, and explicit video/audio handling.</li>
+          <li><b>Synthetic or recorded.</b> Deterministic test patterns and tones, or real-time replay of approved MPEG-PS/TS, MP4/MOV, and MXF files.</li>
+          <li><b>Wall-clock day replay.</b> A looped full-day recording seeks to the current time of day so historical footage tracks real time.</li>
+          <li><b>Validate before start.</b> Strict JSON contract, rooted media confinement, shell-free FFmpeg planning, and a machine-readable <span style="font-family:var(--mono)">/health</span> readiness endpoint.</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Part two</div>
+        <h2>Chain Monitor.</h2>
+        <p>The verification half. It observes what a test consumer actually receives rather than assuming a healthy simulator means a healthy end-to-end system.</p>
+        <ul>
+          <li><b>Delivery probes.</b> Rotating RTSP/TCP probes measure delivered frames against monotonic time.</li>
+          <li><b>Display liveness.</b> In-memory PNG/JPEG comparisons verify that each region of a physical display is advancing &mdash; not dark or frozen &mdash; with per-tile masks so moving UI chrome can&rsquo;t hide a frozen video surface.</li>
+          <li><b>Telemetry-aware.</b> Typed collectors fold in application health, reader state, and event counts from generic JSON endpoints.</li>
+          <li><b>Runs independently.</b> Use the feed server alone when end-to-end observation isn&rsquo;t needed.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Who it&rsquo;s for.</h2>
+    <p>Anyone building or testing software that expects network cameras.</p>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>NVR, VMS, and video-analytics developers</b> &mdash; a controlled set of RTSP sources for ingest, recording, restreaming, transcoding, motion/object detection, indexing, or playback, with no dependence on physical hardware.</li>
+      <li><b>QA and CI engineers</b> &mdash; repeatable synthetic fixtures with a machine-readable readiness contract; start, assert, tear down, retain nothing.</li>
+      <li><b>Capacity and performance engineers</b> &mdash; vary stream count, resolution, frame rate, codec, activation, and reader fan-out to drive ingest, PID, memory, network, decoder, and concurrency tests.</li>
+      <li><b>Video-wall and player developers</b> &mdash; many simultaneous tiles, codec transitions, stall handling, and reconnection, with Chain Monitor correlating delivery to per-region display advancement.</li>
+      <li><b>Integrators and support engineers</b> &mdash; reproduce a timing, container, codec, or lifecycle failure from a scrubbed manifest and approved sample, without access to the original camera estate.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What it isn&rsquo;t.</h2>
+    <p>Camera Feed Lab is deliberately narrower than a real NVR &mdash; it is the stream-serving and verification side of a camera/NVR test environment.</p>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li>It does not discover or control cameras, record footage, manage retention, run analytics, or emulate a vendor&rsquo;s management API.</li>
+      <li>Its consumer-facing protocol is RTSP; it does not emulate ONVIF or proprietary camera/NVR APIs. The portable hardened container supports RTSP/TCP.</li>
+      <li>No footage, credentials, host addresses, or site mappings ship in the repository or image &mdash; users provide approved media and deployment configuration separately.</li>
+      <li>Manifest limits are not performance promises; capacity must be measured on the target host and workload.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Open source.</h2>
+    <p>Camera Feed Lab is <b>MIT-licensed</b> and released as open source at <b>v0.2.0</b>. A Go supervisor wraps pinned MediaMTX and FFmpeg in a hardened, non-root, read-only container. The default Compose stack is self-contained: clone the repository, build, and it generates a site-neutral synthetic profile with no footage or credentials required.</p>
+    <div class="gh-row">
+      <a class="gh-btn" href="https://github.com/rmdevpro/camera-feed-lab" target="_blank" rel="noopener">View on GitHub →</a>
+      <span class="gh-meta">MIT · Go · MediaMTX + FFmpeg</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
