@@ -24,9 +24,10 @@
 .product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
 .product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
 .product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
-.product-hero h1 { font-size: clamp(2rem, 3.8vw, 2.85rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.25rem; }
-.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: 70ch; }
-.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1.25rem; max-width: 72ch; }
+.product-hero h1 { margin-bottom: 1.25rem; line-height: 1; }
+.product-hero h1 img { display: block; height: clamp(58px, 8vw, 82px); width: auto; max-width: 100%; }
+.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: none; }
+.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1.25rem; max-width: none; }
 .gh-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
 .gh-btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -43,7 +44,7 @@
 
 .framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
 .framing-strip h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: 72ch; }
+.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
 .framing-strip p b { color: var(--text); font-weight: 600; }
 
 .cards-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
@@ -58,16 +59,16 @@
 
 .section-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
 .section-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: 72ch; }
+.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: none; }
 
 .list-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
-.list-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: 74ch; }
+.list-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
 .list-block ul li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
 .list-block ul li b { color: var(--text); font-weight: 600; }
 
 .closing { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 .closing h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-.closing p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: 72ch; }
+.closing p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: none; }
 .closing p b { color: var(--text); font-weight: 600; }
 
 section + section { border-top: 0; }
@@ -95,13 +96,9 @@ section + section { border-top: 0; }
   <div class="wrap">
     <a class="back" href="../#work">← Work</a>
     <div class="kicker">Open source · MIT · v0.2.0</div>
-    <h1>Camera Feed Lab.</h1>
+    <h1><img src="../assets/open-source/camera-feed-lab/wordmark-blue.png" alt="Camera Feed Lab"></h1>
     <p class="tagline">A roomful of virtual security cameras without buying or wiring a single one &mdash; plus the tool that proves the video actually made it through.</p>
     <p class="sub">Camera Feed Lab serves configurable RTSP camera feeds from generated test patterns or approved recordings, so you can develop and test an NVR, VMS, video wall, player, analytics service, or any other RTSP consumer as though real cameras were attached. The same configuration runs on a laptop, in CI, or as a shared lab feeder.</p>
-    <div class="gh-row">
-      <a class="gh-btn" href="https://github.com/rmdevpro/camera-feed-lab" target="_blank" rel="noopener">View on GitHub →</a>
-      <span class="gh-meta">github.com/rmdevpro/camera-feed-lab</span>
-    </div>
   </div>
 </section>
 
