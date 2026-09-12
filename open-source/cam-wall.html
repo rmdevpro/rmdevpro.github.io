@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agentic Cam-Wall — BlueprintAgentic</title>
+<meta name="description" content="Agentic Cam-Wall is an open-source camera-wall appliance with an embedded agent, Grace, that can operate the wall, configure the system, and drive your NVR through the same web interface a person would use. Engage by voice, chat, GUI, MCP, or an external agent.">
+<link rel="canonical" href="https://blueprintagentic.ai/open-source/cam-wall.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BlueprintAgentic">
+<meta property="og:url" content="https://blueprintagentic.ai/open-source/cam-wall.html">
+<meta property="og:title" content="Agentic Cam-Wall">
+<meta property="og:description" content="An open-source camera-wall appliance with an embedded agent that can operate the wall and drive your NVR. A regular camera wall is passive — this one can act.">
+<meta property="og:image" content="https://blueprintagentic.ai/assets/open-source/cam-wall/wall.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agentic Cam-Wall">
+<meta name="twitter:description" content="An open-source camera-wall appliance with an embedded agent that can operate the wall and drive your NVR.">
+<meta name="twitter:image" content="https://blueprintagentic.ai/assets/open-source/cam-wall/wall.png">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
+.product-hero h1 { margin-bottom: 1.25rem; line-height: 1; }
+.product-hero h1 img { display: block; height: clamp(58px, 8vw, 82px); width: auto; max-width: 100%; }
+.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: none; }
+.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1.25rem; max-width: none; }
+.product-hero .sub b { color: var(--text); font-weight: 600; }
+.gh-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+.gh-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #fff;
+  font-size: 0.9375rem; font-weight: 500;
+  padding: 0.6rem 1.1rem; border: 1px solid var(--accent);
+}
+.gh-btn:hover { background: transparent; color: var(--accent); }
+.gh-meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; }
+
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
+
+.framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.framing-strip h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+.framing-strip p b { color: var(--text); font-weight: 600; }
+
+.cards-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.feature-card { padding: 2rem; border: 1px solid var(--rule); background: white; }
+.feature-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.feature-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.feature-card p { font-size: 0.95rem; color: var(--text-soft); max-width: none; margin-bottom: 0.6rem; line-height: 1.55; }
+.feature-card p:last-child { margin-bottom: 0; }
+.feature-card p b { color: var(--text); font-weight: 600; }
+
+.section-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.section-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: none; }
+
+.list-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.list-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
+.list-block ul li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
+.list-block ul li b { color: var(--text); font-weight: 600; }
+
+.closing { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.closing h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.closing p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: none; }
+.closing p b { color: var(--text); font-weight: 600; }
+
+section + section { border-top: 0; }
+@media (max-width: 880px) { .cards-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../#services">What We Do</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../#work">← Work</a>
+    <div class="kicker">Open source · MIT · v0.2.1</div>
+    <h1><img src="../assets/open-source/cam-wall/wordmark-blue.png" alt="Agentic Cam-Wall"></h1>
+    <p class="tagline">A live camera wall with an agent that can operate it.</p>
+    <p class="sub">Agentic Cam-Wall turns a small PC and a display into a reliable wall of live security-camera feeds &mdash; tiled layouts, named views, rotation, single-camera mode, and stream self-healing that keeps the wall running unwatched. What makes it different is <b>Grace</b>: an agent on the appliance that understands what you want, operates the wall, configures the system, and drives connected surveillance systems. A regular camera wall is passive. This one can act.</p>
+    <div class="gh-row">
+      <a class="gh-btn" href="https://github.com/rmdevpro/cam-wall" target="_blank" rel="noopener">View on GitHub →</a>
+      <span class="gh-meta">github.com/rmdevpro/cam-wall</span>
+    </div>
+  </div>
+</section>
+
+<section class="banner">
+  <div class="wrap">
+    <div class="frame"><img src="../assets/open-source/cam-wall/wall.png" alt="Agentic Cam-Wall — a 16-camera live wall with Grace's chat overlay operating it: 'Solo camera 7 please' resolves to a tool call, then 'go back to the full wall view'"></div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>A wall that can act.</h2>
+    <p>Ask for the outcome and Grace handles the operational steps. <b>&ldquo;Solo camera 7.&rdquo; &ldquo;Back to the full wall.&rdquo; &ldquo;Pull up the loading dock from this morning.&rdquo;</b> The request can be typed, spoken, or sent by another agent &mdash; Grace reasons over it, uses its tools, and operates the wall or your connected systems on your behalf.</p>
+    <p>The principle is simple: if you can do it with a mouse and keyboard, Grace can do it for you.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What&rsquo;s on the appliance.</h2>
+    <p>A dependable camera wall, an agent that operates it, and a browser the agent can drive.</p>
+  </div>
+</section>
+
+<section class="cards-block">
+  <div class="wrap">
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="kicker">The wall</div>
+        <h2>Reliable by default.</h2>
+        <p>Up to 16 live streams in tiled views, with named views, timed rotation, zoom, and single-camera mode. Information bands you author in markdown render as top and bottom overlays. A wedged stream is detected and re-initialized automatically &mdash; it works out of the gate and keeps working, unwatched.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Grace</div>
+        <h2>The embedded agent.</h2>
+        <p>An operator that reasons over requests and uses tools, with full GUI/agent parity &mdash; anything you can do by hand, Grace can do for you. Operator-editable site knowledge and explicit durable memories. Privileged actions are admin-gated behind a PIN captured out-of-band, announced, and audited.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Browser driving</div>
+        <h2>An agentic NVR operator.</h2>
+        <p>The appliance bundles a visible browser Grace can operate. Bring up your web-based NVR and have Grace search, navigate, review, and display footage through the same UI a person would use &mdash; no need to replace the NVR to make it agentic. Credentials are typed host-side only, never into model context.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Ask Grace, any way.</h2>
+    <p>Voice is one way to engage Grace from the room where the wall lives &mdash; say the wake phrase (&ldquo;wake up Grace&rdquo;) to enter Conversation Mode &mdash; but it&rsquo;s only one path. The same agent answers from the GUI, from keyboard chat, over <b>MCP</b>, or from an <b>external agent system</b>, so a stronger agent like Claude can use Agentic Cam-Wall as a surveillance workstation. Voice is an input; the screen is the output.</p>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>A selectable brain.</h2>
+    <p>Grace&rsquo;s LLM is selectable, and the two brains are never blended. A configured external endpoint &mdash; a cloud provider or your own local inference server &mdash; runs the full tool-calling loop; a small <b>on-device fallback</b> interprets a closed command vocabulary when no endpoint is reachable, and is structurally denied shell, browser, and destructive tools.</p>
+    <p>New endpoints go through <b>Stage → Test → Apply</b>: a candidate is tested with a real request before it ever becomes Grace&rsquo;s active brain, and a failed first use rolls back to last known-good.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Built like an appliance.</h2>
+    <p>Install it and it runs &mdash; and keeps running.</p>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>First-boot install.</b> An idempotent installer takes a stock OS on a small PC to a working appliance; first boot brings up the wall.</li>
+      <li><b>Kiosk runtime.</b> A compositor and browser lifecycle present the wall fullscreen, with hardware-accelerated decode where available.</li>
+      <li><b>Self-recovery.</b> A hardware watchdog is armed from boot, so a hard-hung appliance recovers itself.</li>
+      <li><b>One-click cameras.</b> Auto-discovery over ONVIF and an RTSP sweep, plus NVR-channel or direct-URL sources with per-camera credentials.</li>
+      <li><b>Closed by default.</b> The appliance binds to loopback until you choose to open the UI and/or MCP to the network &mdash; two independent operator switches.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Private by design.</h2>
+    <p>A local appliance, closed to the network by default. Exactly two access controls exist &mdash; an optional config password and the admin PIN &mdash; and opening a surface adds nothing beyond them. Secrets (camera and NVR credentials, API keys, PINs, WiFi passwords) are captured and used <b>out-of-band</b>: never displayed, never in chat, model context, logs, or transcripts.</p>
+    <p>No user is identified anywhere in the product, and ambient audio is never retained &mdash; the only long-term record is the chat, and it identifies no one.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Who it&rsquo;s for.</h2>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>Security camera viewing</b> &mdash; for managers and security personnel, using industry-standard connectivity, for both security and operational awareness.</li>
+      <li><b>An agentic surveillance workstation</b> &mdash; live cameras in flexible layouts, plus an operator that can act on the wall and drive your NVR for search, playback, review, and display.</li>
+      <li><b>Common-area feedback</b> &mdash; show your team what the camera sees: the loading dock, the front door, the places worth keeping an eye on.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What it isn&rsquo;t.</h2>
+    <p>Agentic Cam-Wall is not an NVR &mdash; it doesn&rsquo;t record footage, manage retention, or run analytics. It displays live streams and, through Grace, operates your own NVR&rsquo;s web interface for those functions. It&rsquo;s environment-agnostic: your network, your cameras, your cloud or local inference &mdash; no blessed hardware.</p>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Open source.</h2>
+    <p>Agentic Cam-Wall is <b>MIT-licensed</b> and open source, released at <b>v0.2.1</b>. Install the release on a stock small PC connected to a display; first boot brings up the wall.</p>
+    <div class="gh-row">
+      <a class="gh-btn" href="https://github.com/rmdevpro/cam-wall" target="_blank" rel="noopener">View on GitHub →</a>
+      <span class="gh-meta">MIT · appliance install · Grace agent</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
