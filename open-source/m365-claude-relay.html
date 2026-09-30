@@ -85,6 +85,16 @@
 .closing p b { color: var(--text); font-weight: 600; }
 .closing code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-raised); padding: 0.05em 0.35em; }
 
+.compare-block { padding-top: 0.5rem; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.compare-scroll { overflow-x: auto; border: 1px solid var(--rule); background: white; }
+.compare { width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.5; min-width: 640px; }
+.compare th, .compare td { text-align: left; vertical-align: top; padding: 0.85rem 1rem; border-bottom: 1px solid var(--rule); color: var(--text-soft); }
+.compare thead th { background: var(--bg-raised); color: var(--text); font-weight: 600; font-size: 0.85rem; }
+.compare tbody th { color: var(--text); font-weight: 600; width: 18%; }
+.compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: none; }
+.compare td.ours { color: var(--text); }
+.sources { margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-faint); line-height: 1.55; }
+.sources a { color: var(--text-soft); border-bottom: 1px solid var(--rule); }
 section + section { border-top: 0; }
 @media (max-width: 880px) { .cards-grid { grid-template-columns: 1fr; } }
 </style>
@@ -121,6 +131,37 @@ section + section { border-top: 0; }
   <div class="wrap">
     <div class="frame"><img src="../assets/open-source/m365-claude-relay/permissions-readonly.png" alt="Claude connector settings for the Microsoft 365 relay — tool permissions list with 53 read-only tools set to Always allow"></div>
     <div class="cap">The relay as a Claude custom connector: read-only Microsoft 365 tools, set to Always allow.</div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Why this exists.</h2>
+    <p>We built it because Claude&rsquo;s native Microsoft 365 connector can&rsquo;t send, forward, or draft mail with attachments. A user on a managed tenant needed Claude to work with their mail &mdash; and the mail had attachments.</p>
+    <p>Anthropic&rsquo;s documentation is explicit: &ldquo;Attachments aren&rsquo;t supported in write tools, so sending, forwarding, and drafting all reject messages with attachments,&rdquo; and &ldquo;Claude can&rsquo;t attach files to the drafts it creates.&rdquo; The relay reads any attachment as a real file and sends, forwards, and drafts with files up to <b>150 MB</b> &mdash; on mail and on calendar events.</p>
+    <p>The native connector is also limited to a fixed set of tools chosen by Anthropic, refuses personal Microsoft accounts, and requires a Global Administrator to consent to Anthropic&rsquo;s app for the whole tenant. The relay lets you run the open-source Softeria M365 MCP Server yourself, with your own app registration and your own scope list, and adds the hardening a public endpoint needs.</p>
+  </div>
+</section>
+
+<section class="compare-block">
+  <div class="wrap">
+    <div class="compare-scroll">
+      <table class="compare">
+        <thead>
+          <tr><th></th><th>Claude&rsquo;s native Microsoft 365 connector</th><th>M365 Claude Relay</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Email attachments</th><td>Not supported: sending, forwarding, and drafting with attachments are rejected; Claude can&rsquo;t attach files to drafts</td><td class="ours">Read any attachment as a real file; send, forward, and draft with files up to 150&nbsp;MB</td></tr>
+          <tr><th>Calendar event attachments</th><td>Not supported</td><td class="ours">Supported (attendees receive the update)</td></tr>
+          <tr><th>Tools</th><td>A fixed set chosen by Anthropic &mdash; about 40 listed in its security guide (7 read/search, the rest write)</td><td class="ours">337 in the catalog; your scope list decides what is exposed (139 with the default mail, calendar, contacts, and files scopes)</td></tr>
+          <tr><th>Areas</th><td>SharePoint/OneDrive search and file writes, Outlook mail and calendar, Teams chat and calendar</td><td class="ours">The same areas in depth, plus contacts, calendar sharing and delegation, mailbox rules, OneDrive file operations and Excel workbooks, To Do, OneNote, Planner, groups, rooms, presence, meeting transcripts and recordings, and webhook subscriptions (some need additional or work-tenant scopes)</td></tr>
+          <tr><th>Accounts</th><td>Work or school only; personal accounts (outlook.com, hotmail.com, live.com) refused</td><td class="ours">Work tenants and personal accounts</td></tr>
+          <tr><th>Consent</th><td>Tenant-wide consent to Anthropic&rsquo;s app (&ldquo;M365 MCP Server for Claude&rdquo;, about 30 delegated permissions) by a Global Administrator</td><td class="ours">Your own app registration; users consent to exactly the scopes you list</td></tr>
+          <tr><th>Where it runs</th><td>Anthropic-hosted</td><td class="ours">A container you run, behind your ingress</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sources">Sources, as of September 2026: Anthropic, <a href="https://claude.com/docs/connectors/microsoft/365" target="_blank" rel="noopener">&ldquo;Microsoft 365 connector&rdquo;</a>; <a href="https://support.claude.com/en/articles/12542951-set-up-the-microsoft-365-connector" target="_blank" rel="noopener">&ldquo;Set up the Microsoft 365 connector&rdquo;</a>; <a href="https://support.claude.com/en/articles/12684923-microsoft-365-connector-security-guide" target="_blank" rel="noopener">&ldquo;Microsoft 365 connector security guide&rdquo;</a>.</p>
   </div>
 </section>
 
