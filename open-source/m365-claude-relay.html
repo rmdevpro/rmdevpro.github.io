@@ -156,8 +156,9 @@ section + section { border-top: 0; }
           <tr><th>Tools</th><td>A fixed set chosen by Anthropic &mdash; about 40 listed in its security guide (7 read/search, the rest write)</td><td class="ours">337 in the catalog; your scope list decides what is exposed (139 with the default mail, calendar, contacts, and files scopes)</td></tr>
           <tr><th>Areas</th><td>SharePoint/OneDrive search and file writes, Outlook mail and calendar, Teams chat and calendar</td><td class="ours">The same areas in depth, plus contacts, calendar sharing and delegation, mailbox rules, OneDrive file operations and Excel workbooks, To Do, OneNote, Planner, groups, rooms, presence, meeting transcripts and recordings, and webhook subscriptions (some need additional or work-tenant scopes)</td></tr>
           <tr><th>Accounts</th><td>Work or school only; personal accounts (outlook.com, hotmail.com, live.com) refused</td><td class="ours">Work tenants and personal accounts</td></tr>
-          <tr><th>Consent</th><td>Tenant-wide consent to Anthropic&rsquo;s app (&ldquo;M365 MCP Server for Claude&rdquo;, about 30 delegated permissions) by a Global Administrator</td><td class="ours">Your own app registration; users consent to exactly the scopes you list</td></tr>
+          <tr><th>Consent</th><td>Tenant-wide consent to Anthropic&rsquo;s app (&ldquo;M365 MCP Server for Claude&rdquo;) by a Global Administrator</td><td class="ours">Your own app registration; users consent to exactly the scopes you list</td></tr>
           <tr><th>Where it runs</th><td>Anthropic-hosted</td><td class="ours">A container you run, behind your ingress</td></tr>
+          <tr><th>Source</th><td>Anthropic-operated; source not published</td><td class="ours">Open source (MIT): Softeria&rsquo;s M365 MCP Server, pinned and reviewed, behind a minimal public-endpoint gate</td></tr>
         </tbody>
       </table>
     </div>
