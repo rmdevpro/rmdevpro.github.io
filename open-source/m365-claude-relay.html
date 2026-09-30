@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M365 Claude Relay — BlueprintAgentic</title>
+<meta name="description" content="M365 Claude Relay: Microsoft 365 for Claude custom connectors, where each user acts as themselves. Give Claude your users' own Outlook mail, calendar, contacts and OneDrive through one small service you run — Microsoft sign-in (On-Behalf-Of), no stored credentials, and exactly the tools your chosen Graph scopes cover. Open source, MIT.">
+<link rel="canonical" href="https://blueprintagentic.ai/open-source/m365-claude-relay.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BlueprintAgentic">
+<meta property="og:url" content="https://blueprintagentic.ai/open-source/m365-claude-relay.html">
+<meta property="og:title" content="M365 Claude Relay">
+<meta property="og:description" content="Microsoft 365 for Claude custom connectors — each user acts as themselves. One small service you run; Microsoft sign-in, no stored credentials, exactly the tools your Graph scopes cover.">
+<meta property="og:image" content="https://blueprintagentic.ai/assets/open-source/m365-claude-relay/permissions-readonly.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="M365 Claude Relay">
+<meta name="twitter:description" content="Microsoft 365 for Claude custom connectors — each user acts as themselves.">
+<meta name="twitter:image" content="https://blueprintagentic.ai/assets/open-source/m365-claude-relay/permissions-readonly.png">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
+.product-hero h1 { font-size: clamp(2rem, 3.8vw, 2.85rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.25rem; }
+.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: none; }
+.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1.25rem; max-width: none; }
+.product-hero .sub b { color: var(--text); font-weight: 600; }
+.gh-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+.gh-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--accent); color: #fff;
+  font-size: 0.9375rem; font-weight: 500;
+  padding: 0.6rem 1.1rem; border: 1px solid var(--accent);
+}
+.gh-btn:hover { background: transparent; color: var(--accent); }
+.gh-meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; }
+
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; background: white; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
+.banner .cap { margin-top: 0.7rem; font-family: var(--mono); font-size: 0.75rem; color: var(--text-faint); letter-spacing: 0.02em; }
+
+.framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.framing-strip h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+.framing-strip p b { color: var(--text); font-weight: 600; }
+.framing-strip a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+
+.cards-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.feature-card { padding: 2rem; border: 1px solid var(--rule); background: white; }
+.feature-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.feature-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.feature-card p { font-size: 0.95rem; color: var(--text-soft); max-width: none; margin-bottom: 0.6rem; line-height: 1.55; }
+.feature-card ol, .feature-card ul { font-size: 0.95rem; color: var(--text-soft); margin: 0.25rem 0 0 1.25rem; line-height: 1.55; }
+.feature-card li { margin-bottom: 0.4rem; }
+.feature-card b { color: var(--text); font-weight: 600; }
+
+.section-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.section-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: none; }
+.section-intro a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+
+.list-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.list-block ul, .list-block ol { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
+.list-block li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
+.list-block li b { color: var(--text); font-weight: 600; }
+.list-block a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+.list-block code, .framing-strip code, .feature-card code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-raised); padding: 0.05em 0.35em; }
+
+.code-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.code-block pre {
+  font-family: var(--mono); font-size: 0.8rem; line-height: 1.6;
+  background: #0f1622; color: #d6dde8;
+  padding: 1.25rem 1.5rem; overflow-x: auto;
+  border: 1px solid var(--rule);
+}
+
+.closing { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.closing h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.closing p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: none; }
+.closing p b { color: var(--text); font-weight: 600; }
+.closing code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-raised); padding: 0.05em 0.35em; }
+
+section + section { border-top: 0; }
+@media (max-width: 880px) { .cards-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../#services">What We Do</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../software/">Software</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../software/">← Software</a>
+    <div class="kicker">Open source · MIT · v1.0.0</div>
+    <h1>M365 Claude Relay.</h1>
+    <p class="tagline">Microsoft 365 for Claude custom connectors &mdash; each user acts as themselves.</p>
+    <p class="sub">Give Claude your users&rsquo; own Outlook mail, calendar, contacts and OneDrive through one small service you run. Sign-in is Microsoft&rsquo;s own (Entra On-Behalf-Of): the relay never holds a password, never stores a token on disk, and exposes <b>exactly the tools your chosen Graph scopes cover</b>. Works with Claude on the web and desktop, on Free, Pro, Team, and Enterprise plans.</p>
+  </div>
+</section>
+
+<section class="banner">
+  <div class="wrap">
+    <div class="frame"><img src="../assets/open-source/m365-claude-relay/permissions-readonly.png" alt="Claude connector settings for the Microsoft 365 relay — tool permissions list with 53 read-only tools set to Always allow"></div>
+    <div class="cap">The relay as a Claude custom connector: read-only Microsoft 365 tools, set to Always allow.</div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>What it is.</h2>
+    <p>A prebuilt, hardened container image. Nearly all of it is off the shelf: <a href="https://github.com/Softeria/ms-365-mcp-server" target="_blank" rel="noopener">Softeria&rsquo;s ms-365-mcp-server</a> (MIT), pinned to a reviewed version and run in On-Behalf-Of mode, behind a minimal, reviewed gate. Softeria handles the OAuth exchange, Microsoft Graph, and the tool surface. The gate adds only what upstream can&rsquo;t do yet &mdash; inbound token validation, an attachment upload bridge, two sign-in fixes, and a start-time scope derivation &mdash; and each of those pieces is tracked upstream and retires once Softeria covers it.</p>
+  </div>
+</section>
+
+<section class="cards-block">
+  <div class="wrap">
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="kicker">Identity</div>
+        <h2>Each user acts as themselves.</h2>
+        <ol>
+          <li>The Claude connector points at your relay. Claude sends the user through Microsoft sign-in with the relay&rsquo;s app registration, and the user consents to the configured Graph scopes.</li>
+          <li>Microsoft issues Claude a token for the relay, which Claude keeps and refreshes.</li>
+          <li>On every call the gate validates that token, then exchanges it On-Behalf-Of the user for a Graph token, held in memory, and calls Graph <b>as that user</b>.</li>
+        </ol>
+        <p style="margin-top:0.75rem;">The relay has no standing access to any mailbox.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Scopes</div>
+        <h2>Scopes decide the tool surface.</h2>
+        <p>The policy is a list of Microsoft Graph scopes. Every tool whose required scopes that list covers is exposed; users consent to exactly those scopes at sign-in. The default seven &mdash; profile, mail, send, calendars, contacts, mailbox settings, and OneDrive &mdash; expose <b>139 tools</b> on a personal account.</p>
+        <p>Scopes are runtime configuration: change <code>MS365_MCP_ALLOWED_SCOPES</code> and restart, no rebuild. On a work tenant, admin-consented scopes unlock Teams, SharePoint, shared mailboxes, Planner, and directory tools.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Claude stays in charge of each tool.</h2>
+    <p>Once connected, Claude&rsquo;s own per-tool permissions decide what each user can actually use: <b>Always allow</b>, <b>Needs approval</b>, or <b>Blocked</b>, with an org-admin ceiling on Team and Enterprise. A blocked tool is removed from Claude&rsquo;s tool set entirely, and anything the account itself lacks simply fails at Microsoft &mdash; nothing runs that the scope does not allow.</p>
+  </div>
+</section>
+
+<section class="banner" style="padding-top:1rem;">
+  <div class="wrap">
+    <div class="frame"><img src="../assets/open-source/m365-claude-relay/permissions-write.png" alt="Claude connector tool permissions for write tools such as create-calendar-event and create-draft-email, set to Needs approval"></div>
+    <div class="cap">Write tools &mdash; creating events, drafts, folders &mdash; set to Needs approval.</div>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Deploy it.</h2>
+    <p>Three steps. Full instructions are in the <a href="https://github.com/rmdevpro/m365-claude-relay" target="_blank" rel="noopener">repository</a>.</p>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ol>
+      <li><b>Register an Entra app</b> (about ten minutes) &mdash; you need the client id, tenant id, and a secret. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/entra.md" target="_blank" rel="noopener">docs/entra.md</a></li>
+      <li><b>Run the image</b> behind your TLS ingress on port 7860. For a work tenant, add <code>-e MS365_MCP_ORG_MODE=true</code>. <code>/health</code> reports the running scopes and tool count.</li>
+      <li><b>Add the connector in Claude</b> and upload the included skill. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/claude.md" target="_blank" rel="noopener">docs/claude.md</a></li>
+    </ol>
+  </div>
+</section>
+
+<section class="code-block">
+  <div class="wrap">
+<pre>docker run -d --name m365-claude-relay --read-only --security-opt no-new-privileges \
+  --tmpfs /dev/shm:rw,size=64m -p 7860:7860 \
+  -e MS365_MCP_CLIENT_ID=&lt;client id&gt; -e MS365_MCP_CLIENT_SECRET=&lt;secret&gt; \
+  -e MS365_MCP_TENANT_ID=&lt;tenant id or consumers&gt; \
+  -e MS365_MCP_PUBLIC_URL=https://relay.example.com \
+  -e MS365_MCP_ATTACHMENT_URL_BASE=https://relay.example.com \
+  -e MS365_MCP_ATTACHMENT_URL_KEY=&lt;32+ random hex&gt; \
+  -e MS365_MCP_ALLOWED_SCOPES="User.Read Mail.ReadWrite Mail.Send Calendars.ReadWrite Contacts.ReadWrite MailboxSettings.ReadWrite Files.ReadWrite" \
+  ghcr.io/rmdevpro/m365-claude-relay:1.0.0</pre>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Built for a public endpoint.</h2>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>Strict token validation.</b> Relay tokens are checked against Microsoft&rsquo;s keys &mdash; issuer, audience, tenant, expiry, and scope &mdash; with an optional user allowlist.</li>
+      <li><b>Nothing written to disk.</b> Graph tokens live in memory; logs live on tmpfs. Attachment download and upload links are single-use and expire within five minutes.</li>
+      <li><b>Minimal surface.</b> Exact open routes only, dynamic client registration off, no CORS, and strict security headers on every response.</li>
+      <li><b>Metadata-only logs, plus an audit trail.</b> One structured line per request with no bodies or tokens, and one audit event per tool call identifying the user, tool, and status.</li>
+      <li><b>Safety switches can&rsquo;t be weakened.</b> Fixed constraints &mdash; such as mail attachments going only to unsent drafts &mdash; live in the image&rsquo;s policy file; conflicting environment settings abort startup.</li>
+      <li><b>Supply chain.</b> Digest-pinned base image, a CycloneDX SBOM, a build that fails on critical advisories, and a multi-arch, cosign-signed release image.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What it isn&rsquo;t.</h2>
+    <p>M365 Claude Relay is not a hosted service &mdash; you run it, with your own Entra app registration. It holds no standing access to anyone&rsquo;s mailbox, and it does not decide which tools a person may use: that is your scope list plus Claude&rsquo;s tool permissions.</p>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Open source.</h2>
+    <p>M365 Claude Relay is <b>MIT-licensed</b> and released at <b>v1.0.0</b> as the container image <code>ghcr.io/rmdevpro/m365-claude-relay</code>. Support is best effort through GitHub issues, with no SLA.</p>
+    <div class="gh-row">
+      <a class="gh-btn" href="https://github.com/rmdevpro/m365-claude-relay" target="_blank" rel="noopener">View on GitHub →</a>
+      <span class="gh-meta">MIT · container image · best-effort support</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
