@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCP Video Wall — BlueprintAgentic</title>
+<meta name="description" content="MCP Video Wall is a camera-wall appliance your own AI agent can operate. Every function of the wall is an MCP tool, so Claude Code or any MCP-capable agent can show cameras, change layouts, configure the appliance, and drive your NVR's web interface.">
+<link rel="canonical" href="https://blueprintagentic.ai/software/mcp-video-wall.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BlueprintAgentic">
+<meta property="og:url" content="https://blueprintagentic.ai/software/mcp-video-wall.html">
+<meta property="og:title" content="MCP Video Wall">
+<meta property="og:description" content="A live camera wall your agent can operate. Every function is an MCP tool — point Claude Code or any MCP-capable agent at the wall and it can run the wall and your NVR.">
+<meta property="og:image" content="https://blueprintagentic.ai/assets/software/mcp-video-wall/wall.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MCP Video Wall">
+<meta name="twitter:description" content="A live camera wall your agent can operate, over MCP.">
+<meta name="twitter:image" content="https://blueprintagentic.ai/assets/software/mcp-video-wall/wall.jpg">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 0; }
+.product-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); letter-spacing: 0.02em; margin-bottom: 1.25rem; display: inline-block; }
+.product-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
+.product-hero h1 { font-size: clamp(2rem, 3.8vw, 2.85rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.25rem; }
+.product-hero .tagline { font-size: 1.0625rem; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; font-weight: 500; letter-spacing: -0.005em; max-width: none; }
+.product-hero .sub { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1.25rem; max-width: none; }
+.product-hero .sub b { color: var(--text); font-weight: 600; }
+
+.banner { padding-block: clamp(2rem, 4vw, 3rem); }
+.banner .frame { border: 1px solid var(--rule); overflow: hidden; box-shadow: 0 20px 50px -20px rgba(9,31,56,0.2); }
+.banner .frame img { width: 100%; display: block; }
+
+.framing-strip { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.framing-strip h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.framing-strip p { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 0.75rem; line-height: 1.55; max-width: none; }
+.framing-strip p b { color: var(--text); font-weight: 600; }
+.framing-strip code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-raised); padding: 0.05em 0.35em; }
+
+.cards-block { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.feature-card { padding: 2rem; border: 1px solid var(--rule); background: white; }
+.feature-card .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.feature-card h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+.feature-card p { font-size: 0.95rem; color: var(--text-soft); max-width: none; margin-bottom: 0.6rem; line-height: 1.55; }
+.feature-card p:last-child { margin-bottom: 0; }
+.feature-card p b { color: var(--text); font-weight: 600; }
+
+.section-intro { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 1rem; }
+.section-intro h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.section-intro p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; max-width: none; }
+
+.list-block { padding-top: 0; padding-bottom: clamp(2rem, 4vw, 3rem); }
+.list-block ul { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin: 0 0 0 1.5rem; max-width: none; }
+.list-block ul li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
+.list-block ul li b { color: var(--text); font-weight: 600; }
+
+.closing { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.closing h2 { font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.closing p { font-size: 0.95rem; color: var(--text-soft); line-height: 1.55; margin-bottom: 1rem; max-width: none; }
+.closing p b { color: var(--text); font-weight: 600; }
+
+section + section { border-top: 0; }
+@media (max-width: 880px) { .cards-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../#services">What We Do</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../software/">Software</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="product-hero">
+  <div class="wrap">
+    <a class="back" href="../software/">← Software</a>
+    <div class="kicker">Blueprint Agentic technology</div>
+    <h1>MCP Video Wall.</h1>
+    <p class="tagline">A live camera wall your agent can operate.</p>
+    <p class="sub">MCP Video Wall turns a small PC and a display into a live security-camera wall: tiled layouts, named views, rotation, single-camera mode, and kiosk operation. The difference is that every one of those functions is also an <b>MCP tool</b>. Point your own agent &mdash; Claude Code, or any agent that speaks MCP &mdash; at the wall, and it can show cameras, change layouts, configure the appliance, and operate your NVR for you. A regular camera wall is passive. This one can be operated by your agent.</p>
+  </div>
+</section>
+
+<section class="banner">
+  <div class="wrap">
+    <div class="frame"><img src="../assets/software/mcp-video-wall/wall.jpg" alt="MCP Video Wall — a live camera wall of security feeds"></div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>A wall your agent can operate.</h2>
+    <p>Ask your agent for the outcome and it handles the steps. <b>&ldquo;Show the loading dock.&rdquo; &ldquo;Switch to the 3x3 view.&rdquo; &ldquo;Find the clip of the delivery truck this morning.&rdquo;</b> The agent calls the wall&rsquo;s tools, and screenshots come back as real images, so it sees what it is acting on.</p>
+    <p>The principle is simple: if a person can do it with a mouse and keyboard, your agent can do it over MCP. The wall runs no AI model of its own &mdash; the agent is yours. That keeps the appliance small and predictable, and lets you use whatever agent and model you already trust.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What&rsquo;s on the appliance.</h2>
+    <p>The live wall, a full set of agent tools, a browser your agent can drive, and the appliance itself.</p>
+  </div>
+</section>
+
+<section class="cards-block">
+  <div class="wrap">
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="kicker">The wall</div>
+        <h2>The live wall.</h2>
+        <p>Up to 16 live streams in tiled views, with named views, timed rotation, zoom, and single-camera mode. Information bands you author in markdown render as top and bottom overlays, so the display can carry context as well as video. A stalled stream is detected and restarted automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">MCP</div>
+        <h2>Every function is a tool.</h2>
+        <p>Cameras, views, display modes, rotation, discovery, configuration, system settings, uploads, backup and restore, screenshots, and the browser &mdash; all available to your agent over MCP. Anything you can do in the wall&rsquo;s interface, your agent can do too.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Browser driving</div>
+        <h2>NVR Agent.</h2>
+        <p>The appliance includes a visible browser your agent can operate. Bring up your web-based NVR and have the agent search, navigate, review, and display footage through the same screens a person would use. NVRs are easier to operate when an agent does it.</p>
+      </div>
+      <div class="feature-card">
+        <div class="kicker">Appliance</div>
+        <h2>Manages itself.</h2>
+        <p>Hostname, time, network and WiFi, display power schedule, uploads, and backup &mdash; from the GUI or by your agent. The appliance applies each setting itself and shows whether it took, and a network change that would take the wall off the network is undone automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Connect your agent.</h2>
+    <p>Point any MCP-capable agent on your network at <code>https://&lt;wall&gt;/mcp</code> &mdash; Claude Code, any MCP agent framework, or the Claude desktop app through a local connector. If you set the wall&rsquo;s optional password, the agent presents it as its access token. The MCP endpoint is always on; it is how the wall is meant to be operated.</p>
+    <p>Because the wall lives on your local network, cloud-hosted chat products that call connectors from their own servers, such as claude.ai on the web, can&rsquo;t reach it.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Built like an appliance.</h2>
+    <p>Designed to run as a dedicated camera-wall appliance.</p>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>Simple install.</b> Install it on a small PC connected to a display; first boot brings up the wall.</li>
+      <li><b>Fullscreen appliance mode.</b> The wall comes up fullscreen and is meant to stay there.</li>
+      <li><b>Automatic recovery.</b> If the appliance hangs, it restarts itself instead of waiting for someone to notice.</li>
+      <li><b>One-click cameras.</b> Discover compatible cameras on the network, or add cameras from an NVR channel or direct stream URL.</li>
+      <li><b>Nothing changes on its own.</b> The wall updates only when you install a new release.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="framing-strip">
+  <div class="wrap">
+    <h2>Secure by default.</h2>
+    <p>MCP Video Wall keeps one simple rule: either you can control the wall or you can&rsquo;t. A single optional password guards every change, from the interface and from every agent alike. The wall&rsquo;s interface is closed to the network unless you open it, and everything that leaves the box is encrypted &mdash; the wall acts as its own small certificate authority, or uses your organisation&rsquo;s certificate.</p>
+    <p>Camera credentials, NVR credentials, the password, and WiFi passwords are handled separately from the agent: never displayed, never in logs, and never passed to the agent as a tool parameter.</p>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>Who it&rsquo;s for.</h2>
+  </div>
+</section>
+
+<section class="list-block">
+  <div class="wrap">
+    <ul>
+      <li><b>Security camera viewing</b> &mdash; for managers and security personnel, using industry-standard connectivity, for both security and operational awareness.</li>
+      <li><b>An agent-operated surveillance workstation</b> &mdash; live cameras in flexible layouts, operated by your own agent, which can also drive your NVR for search, playback, review, and display.</li>
+      <li><b>Common-area feedback</b> &mdash; show your team what the camera sees: the loading dock, the front door, the places worth keeping an eye on.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section-intro">
+  <div class="wrap">
+    <h2>What it isn&rsquo;t.</h2>
+    <p>MCP Video Wall is not an NVR. It does not record footage, manage retention, or run analytics. It displays live streams and, through your agent, operates your own NVR&rsquo;s web interface for those functions. It runs no AI model of its own and has no built-in assistant, chat, or voice control &mdash; the intelligence is your agent.</p>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Get it as an appliance.</h2>
+    <p>BlueprintAgentic builds and sells MCP Video Wall as a ready-to-run appliance &mdash; a <b>Dell OptiPlex Micro PC</b>, configured and ready to power on. <a href="../#contact" style="color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:1px;">Start a conversation</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>

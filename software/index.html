@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Software — BlueprintAgentic</title>
-<meta name="description" content="Custom agentic software from BlueprintAgentic: agent tools including Blueprint Agentic Workbench, and agentic video surveillance — Surveillance Broker, Agentic Cam-Wall, and Camera Feed Lab.">
+<meta name="description" content="Custom agentic software from BlueprintAgentic: agent tools including Blueprint Agentic Workbench, and agentic video surveillance — Surveillance Broker, MCP Video Wall, and Camera Feed Lab.">
 <link rel="canonical" href="https://blueprintagentic.ai/software/">
 <link rel="icon" href="../assets/logos/favicon.ico">
 
@@ -20,6 +20,16 @@
 <meta name="twitter:description" content="Agent tools and agentic video surveillance software from BlueprintAgentic.">
 <meta name="twitter:image" content="https://blueprintagentic.ai/assets/og-card.png">
 <link rel="stylesheet" href="../css/style.css">
+<style>
+/* Software page: text on the left, screenshot on the right */
+@media (min-width: 881px) { .flagship .art { order: 2; } }
+.project-list { margin-top: 1.5rem; }
+.project-list .item { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4rem; row-gap: 0; padding-bottom: clamp(1.75rem, 3.5vw, 2.5rem); }
+.project-list .item > * { grid-column: 1; }
+.project-list .item h3 { margin-bottom: 0.6rem; }
+.project-list .item p { font-size: 1rem; color: var(--text-soft); line-height: 1.55; margin: 0; max-width: none; }
+@media (max-width: 880px) { .project-list .item { grid-template-columns: 1fr; gap: 0; } }
+</style>
 </head>
 <body>
 
@@ -58,7 +68,7 @@
       <div class="copy">
         <h3>Blueprint Agentic Workbench</h3>
         <p>A harness for building durable teams of native AI CLI agents. Workbench turns interactive tools like Claude Code, Codex, Antigravity, Grok Build, Hermes, and OpenCode into specialized agents — and specialized agents into durable teams that work together over time, each keeping its native memory, skills, and tools. Not a swarm or a wrapper: an agentic organization.</p>
-        <a class="link" href="../products/blueprint-agentic-workbench.html">Read more →</a>
+        <a class="link" href="../software/workbench.html">Read more →</a>
       </div>
     </div>
 
@@ -69,7 +79,7 @@
       <div class="copy">
         <h3>M365 Claude Relay</h3>
         <p>Microsoft 365 for Claude custom connectors — each user acts as themselves. Give Claude your users' own Outlook mail, calendar, contacts and OneDrive through one small service you run; Microsoft sign-in (On-Behalf-Of), no stored credentials, and exactly the tools your chosen Graph scopes cover. Open-source (MIT), shipped as a hardened, prebuilt container image. Built because Claude's native Microsoft 365 connector can't send, forward, or draft with attachments — this one can, on mail and calendar, with the full 337-tool catalog behind it.</p>
-        <a class="link" href="../open-source/m365-claude-relay.html">Read more →</a>
+        <a class="link" href="../software/m365-claude-relay.html">Read more →</a>
       </div>
     </div>
 
@@ -85,18 +95,18 @@
       <div class="copy">
         <h3>Surveillance Broker</h3>
         <p>A camera archive you can talk to. Browse hundreds of cameras on a wall-clock timeline, search by what actually happened in the footage, and ask an agent to open the exact camera and time. Built on Frigate, the industry-standard open-source NVR, and augmented with locally installed AI — including person tracking — plus cross-system search that ties the cameras to your access control, inventory, and production systems.</p>
-        <a class="link" href="../case-studies/surveillance-broker.html">Read more →</a>
+        <a class="link" href="../software/surveillance-broker.html">Read more →</a>
       </div>
     </div>
 
     <div class="flagship" style="margin-top: clamp(2.5rem, 5vw, 4rem);">
       <div class="art">
-        <img src="../assets/open-source/cam-wall/wall-home.jpg" alt="Agentic Cam-Wall — a live camera wall with Grace's chat overlay operating it">
+        <img src="../assets/software/mcp-video-wall/wall-home.jpg" alt="MCP Video Wall — a live camera wall of security feeds">
       </div>
       <div class="copy">
-        <h3>Agentic Cam-Wall</h3>
-        <p>A live camera wall with an agent that can operate it. Turn a small PC and a display into a live security-camera wall of up to 64 feeds — with Grace, the agentic operator on the appliance, who operates the wall, configures the system, and drives your NVR through the same web interface a person would use. Ask Grace by voice, chat, GUI, or an outside agent through MCP. A regular camera wall is passive; this one can act.</p>
-        <a class="link" href="../open-source/cam-wall.html">Read more →</a>
+        <h3>MCP Video Wall</h3>
+        <p>A live camera wall your agent can operate. Turn a small PC and a display into a live security-camera wall of up to 16 feeds, where every function is also an MCP tool &mdash; so Claude Code or any MCP-capable agent can show cameras, change layouts, configure the appliance, and drive your NVR through the same web interface a person would use. The wall runs no AI of its own; the agent is yours.</p>
+        <a class="link" href="../software/mcp-video-wall.html">Read more →</a>
       </div>
     </div>
 
@@ -107,7 +117,43 @@
       <div class="copy">
         <h3>Camera Feed Lab</h3>
         <p>A roomful of virtual security cameras without buying or wiring a single one. Open-source (MIT): serve configurable RTSP camera feeds from synthetic test patterns or approved recordings to develop and test any NVR, VMS, video wall, player, or analytics service — with the companion Chain Monitor to prove the video actually arrived, advanced, and rendered.</p>
-        <a class="link" href="../open-source/camera-feed-lab.html">Read more →</a>
+        <a class="link" href="../software/camera-feed-lab.html">Read more →</a>
+      </div>
+    </div>
+
+    <div class="work-cat" id="other-projects" style="margin-top: clamp(3rem, 6vw, 5rem);">
+      <div class="cat-label">Other Projects</div>
+      <p class="cat-lead">More systems the practice has built and runs.</p>
+    </div>
+
+    <div class="project-list">
+      <div class="item">
+        <h3>MCP CAD</h3>
+        <p>A containerized FreeCAD system any MCP-capable agent operates over MCP, with GPU-accelerated rendering and a browser (noVNC) view so the operator can watch or take the controls. Imports DWG/DXF, produces dimensioned TechDraw drawings and STEP/STL/DXF for fabrication.</p>
+      </div>
+      <div class="item">
+        <h3>Video recovery from a failed NVR</h3>
+        <p>After a catastrophic NVR failure, recovered 90 days of footage from 70 cameras &mdash; 80&nbsp;TB in a proprietary format with massive image corruption &mdash; and delivered it in H.265. An agent-driven pipeline transcoded and remuxed every file, realigned metadata by reading the on-screen timestamps with OCR, corrected and filtered damaged frames, verified quality with a vision-language model, and generated clip descriptions for lookup. Ran four weeks unattended without a failure; 100% of the footage recovered.</p>
+      </div>
+      <div class="item">
+        <h3>Cache Broker</h3>
+        <p>The caching layer for production and development: npm (Verdaccio), PyPI (Devpi), a Docker Hub mirror, and a private Docker registry. It hosts the artifact cache that every build and deploy pulls from, so builds are fast, repeatable, and work offline. Agent-operable over MCP for cache status and pre-warming from a requirements or package file.</p>
+      </div>
+      <div class="item">
+        <h3>Context Broker</h3>
+        <p>A self-contained context engineering and conversational-memory service for LLM agents. Stores every message, embeds for hybrid search, extracts knowledge into a graph, and assembles multi-tier context on demand; exposed over MCP and an OpenAI-compatible chat endpoint. Runs fully local (Ollama, Infinity) or against cloud providers.</p>
+      </div>
+      <div class="item">
+        <h3>Inference Broker</h3>
+        <p>One OpenAI-compatible endpoint in front of many models, local GPU and cloud, selected by alias. The router resolves an alias to a backend (llama.cpp containers on free GPUs, or OpenAI, Gemini, xAI, Anthropic, Together); model containers spin up and down on demand without changing any caller&rsquo;s configuration. Prometheus metrics, health, embeddings and rerank pass-through.</p>
+      </div>
+      <div class="item">
+        <h3>Agent-controlled infrastructure</h3>
+        <p>Infrastructure-as-code for a multi-host estate run by agents: DNS (CoreDNS), PXE network-boot provisioning, Tailscale mesh with ACLs, USB/IP KVM, identity sync, scheduling, fan control, and per-server configuration, with agent seats responsible for deploys and farm registration.</p>
+      </div>
+      <div class="item">
+        <h3>MCP Remote Desktop</h3>
+        <p>Human-like desktop automation for agents: kernel-level input injection via /dev/uinput that appears as real hardware, with human timing profiles, Bezier mouse paths, screenshots and template matching, and X11 window management, all exposed as MCP tools. Built for bot-sensitive surfaces where browser automation is detected.</p>
       </div>
     </div>
   </div>
