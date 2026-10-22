@@ -401,3 +401,40 @@ footer .inner {
 footer ul { list-style: none; display: flex; gap: 1.5rem; }
 footer ul a { color: var(--text-faint); }
 footer ul a:hover { color: var(--accent); }
+
+/* Product pages (body.product): a divider above each section heading and one even
+   rhythm — 36px from the previous content to the line, 36px from the line to the heading. */
+body.product .framing-strip,
+body.product .section-intro,
+body.product .examples-intro,
+body.product .deploy-intro,
+body.product .closing { padding-top: 0; margin-top: 36px; }
+body.product .framing-strip > .wrap::before,
+body.product .section-intro > .wrap::before,
+body.product .examples-intro > .wrap::before,
+body.product .deploy-intro > .wrap::before,
+body.product .closing > .wrap::before {
+  content: ""; display: block;
+  border-top: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+body.product .banner,
+body.product .cards-block,
+body.product .categories-block,
+body.product .list-block,
+body.product .callout,
+body.product .code-block,
+body.product .compare-block,
+body.product .examples-block,
+body.product .facts-block,
+body.product .deploy-block { padding-bottom: 0; }
+/* Surveillance Broker keeps its own section borders; match the rhythm */
+body.product .cs-section { padding-block: 36px; }
+body.product .figure-section { padding-block: 36px; }
+body.product .cs-section > :last-child { margin-bottom: 0; }
+/* Two text sections in a row: the first's bottom padding (meant for a following
+   body block) already supplies most of the space, so trim the divider margin. */
+body.product :is(.framing-strip, .section-intro, .examples-intro, .deploy-intro)
+  + :is(.framing-strip, .section-intro, .examples-intro, .deploy-intro, .closing) { margin-top: 8px; }
+body.product .section-intro
+  + :is(.framing-strip, .section-intro, .examples-intro, .deploy-intro, .closing) { margin-top: 20px; }
