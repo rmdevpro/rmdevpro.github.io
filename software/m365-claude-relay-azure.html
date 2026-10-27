@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M365 Claude Relay on Azure — BlueprintAgentic</title>
+<meta name="description" content="Step-by-step guide, with screenshots, to running M365 Claude Relay on Azure Container Apps: Entra app registration, Container App configuration, connecting Claude, reading the logs and troubleshooting sign-in errors.">
+<link rel="canonical" href="https://blueprintagentic.ai/software/m365-claude-relay-azure.html">
+<link rel="icon" href="../assets/logos/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* Guide layout: one reading column, figures full column width, steps separated by hairlines. Site tokens from style.css. */
+:root { --ann: #C2560F; --code-bg: #F2F0E8; --log-bg: #0F1720; --log-fg: #D9DEE5; --log-info: #6FB3E8; --log-warn: #E8B35A; --mark: #FFE7A3; }
+.g-hero { padding-block: clamp(2rem, 4vw, 3.5rem) 1.5rem; }
+.g-hero .back { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); display: inline-block; margin-bottom: 1.25rem; }
+.g-hero .kicker { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 0.6rem; }
+.g-hero h1 { font-size: clamp(2rem, 3.8vw, 2.85rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; text-wrap: balance; }
+.g-hero .lede { font-size: 1.0625rem; color: var(--text); max-width: 62ch; margin-bottom: 1.5rem; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.facts > div { background: white; padding: 0.9rem 1rem; font-size: 0.9rem; color: var(--text); min-width: 0; }
+.facts span { display: block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.25rem; }
+.toc { padding-block: 0.5rem 1.5rem; }
+.toc ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; counter-reset: t; font-size: 0.9rem; }
+.toc li { counter-increment: t; }
+.toc li::before { content: counter(t); font-family: var(--mono); font-size: 0.75rem; color: var(--text-faint); margin-right: 0.4rem; }
+.toc a { color: var(--accent); border-bottom: 1px solid transparent; }
+.toc a:hover { border-bottom-color: var(--accent); }
+.g-sec { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }
+.g-sec > .wrap { max-width: 880px; }
+.g-sec h2 { margin-bottom: 1rem; display: flex; align-items: baseline; gap: 0.75rem; text-wrap: balance; }
+.g-sec h2 .n { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); border: 1px solid var(--accent); padding: 0.1rem 0.45rem; letter-spacing: 0; }
+.g-sec p { max-width: 68ch; margin-bottom: 0.9rem; }
+.g-sec p + p { margin-top: 0; }
+.g-sec a { color: var(--accent); border-bottom: 1px solid var(--accent-soft); }
+.step { padding-top: 1.75rem; margin-top: 1.75rem; border-top: 1px dashed var(--rule); }
+.step h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.6rem; font-variant-numeric: tabular-nums; }
+code { font-family: var(--mono); font-size: 0.84em; background: var(--code-bg); padding: 0.05em 0.3em; overflow-wrap: anywhere; }
+pre.code { font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; background: var(--code-bg); border: 1px solid var(--rule); padding: 0.9rem 1rem; margin: 0.25rem 0 1rem; overflow-x: auto; white-space: pre; color: var(--text); }
+pre.code.log { background: var(--log-bg); color: var(--log-fg); border-color: var(--log-bg); white-space: pre-wrap; overflow-wrap: anywhere; }
+pre.log .i { color: var(--log-info); } pre.log .w { color: var(--log-warn); }
+pre.log mark { background: transparent; color: var(--mark); border-bottom: 1px solid var(--mark); }
+figure { margin: 0.75rem 0 1.25rem; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--rule); background: white; box-shadow: 0 14px 34px -22px rgba(9,31,56,0.35); }
+figure.narrow img { max-width: min(100%, 560px); }
+figcaption { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.74rem; color: var(--text-faint); letter-spacing: 0.01em; max-width: 80ch; }
+.tbl { overflow-x: auto; margin: 0.5rem 0 1.25rem; border: 1px solid var(--rule); background: white; }
+.tbl table { border-collapse: collapse; width: 100%; font-size: 0.88rem; min-width: 560px; }
+.tbl th { text-align: left; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); font-weight: 500; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); background: var(--bg-raised); }
+.tbl td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top; color: var(--text-soft); }
+.tbl tr:last-child td { border-bottom: 0; }
+.tbl td:first-child { color: var(--text); }
+.trouble td:first-child { width: 30%; } .trouble td:nth-child(2) { width: 34%; }
+dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1rem; margin: 0.25rem 0 1rem; font-size: 0.9rem; }
+dl.kv dt { color: var(--text-faint); } dl.kv dd { min-width: 0; color: var(--text); }
+.note { font-size: 0.85rem; color: var(--text-faint); border-left: 2px solid var(--ann); padding-left: 0.75rem; }
+.ops { list-style: none; display: grid; gap: 0.9rem; margin-bottom: 1.25rem; }
+.ops li { color: var(--text-soft); font-size: 0.95rem; max-width: 72ch; padding-left: 1rem; border-left: 1px solid var(--rule); }
+.ops b { color: var(--text); }
+.more { font-size: 0.9rem; }
+@media (max-width: 560px) { dl.kv { grid-template-columns: 1fr; } dl.kv dd { margin-bottom: 0.4rem; } }
+</style>
+</head>
+<body class="product">
+
+<header class="nav">
+  <div class="wrap inner">
+    <a class="brand" href="../" aria-label="BlueprintAgentic">
+      <img src="../assets/logos/wordmark-blue.png" alt="Blueprint">
+      <span class="after">Agentic</span>
+    </a>
+    <ul>
+      <li><a href="../#services">What We Do</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../software/">Software</a></li>
+      <li><a href="../#team">Team</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="g-hero">
+  <div class="wrap">
+    <a class="back" href="m365-claude-relay.html">← M365 Claude Relay</a>
+    <p class="kicker">Deployment guide · Azure Container Apps</p>
+    <h1>Run M365 Claude Relay on Azure</h1>
+    <p class="lede">A step-by-step guide, with screenshots, for putting the relay into your own Microsoft 365 tenant on Azure Container Apps, connecting it to Claude, and reading its logs when something goes wrong.</p>
+    <div class="facts">
+      <div><span>Parts</span>Entra app · Container App · Claude</div>
+      <div><span>Image</span>Softeria <code>ms-365-mcp-server</code> 0.170.2, unmodified</div>
+      <div><span>Cost</span>One 0.5 vCPU / 1 GiB replica, always on</div>
+      <div><span>Tested</span>October 2026, Microsoft 365 Business tenant, Claude web</div>
+    </div>
+  </div>
+</section>
+
+<nav class="toc wrap" aria-label="Contents">
+  <ol>
+    <li><a href="#before">Before you start</a></li>
+    <li><a href="#entra">Register the Entra app</a></li>
+    <li><a href="#container">Create the Container App</a></li>
+    <li><a href="#claude">Connect Claude</a></li>
+    <li><a href="#skills">Install the skills</a></li>
+    <li><a href="#verify">Verify, stage by stage</a></li>
+    <li><a href="#logs">Read the logs</a></li>
+    <li><a href="#troubleshoot">Troubleshooting</a></li>
+    <li><a href="#operate">Operating it</a></li>
+  </ol>
+</nav>
+
+<section id="before" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">1</span>Before you start</h2>
+    <p>Three people are usually involved. In a small organisation they may be the same person.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Who</th><th>Needs</th><th>Does</th></tr></thead>
+      <tbody>
+        <tr><td>Tenant admin</td><td>Application Administrator or Global Administrator in Entra</td><td>Registers the app, grants admin consent, assigns users (section 2)</td></tr>
+        <tr><td>Azure operator</td><td>Contributor on a resource group</td><td>Creates and runs the Container App (section 3)</td></tr>
+        <tr><td>Claude owner</td><td>Owner of the Claude Team or Enterprise organisation (or the user, on an individual plan)</td><td>Adds the connector and the allowed domain (section 4)</td></tr>
+      </tbody>
+    </table></div>
+    <p>Keep these four values together as you go. Each later step uses them.</p>
+    <div class="tbl"><table class="worksheet">
+      <thead><tr><th>Value</th><th>Where it comes from</th><th>Where it goes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Client id</b></td><td>Entra app, Overview (step 2.1)</td><td><code>MS365_MCP_CLIENT_ID</code>; Claude's OAuth Client ID</td></tr>
+        <tr><td><b>Tenant id</b></td><td>Entra app, Overview (step 2.1)</td><td><code>MS365_MCP_TENANT_ID</code> and <code>MS365_MCP_OBO_ALLOWED_TENANTS</code></td></tr>
+        <tr><td><b>Client secret Value</b></td><td>Entra app, Certificates &amp; secrets (step 2.5). Shown once.</td><td>The Container App secret <code>client-secret</code> only</td></tr>
+        <tr><td><b>Relay host</b></td><td>Container App, Application Url (step 3.1)</td><td><code>MS365_MCP_PUBLIC_URL</code>, <code>MS365_MCP_ATTACHMENT_URL_BASE</code>, Claude's connector URL and allowed domain</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Identifiers in the screenshots are replaced with placeholders such as <code>&lt;client id&gt;</code>. Orange outlines mark the settings that matter.</p>
+  </div>
+</section>
+
+<section id="entra" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">2</span>Register the Entra app</h2>
+    <p>One app registration is both the OAuth client Claude signs users in with and the API that Claude's token is issued for. The relay then exchanges that token on behalf of the user (On-Behalf-Of) for a Microsoft Graph token. Work in the Microsoft Entra admin center or the Azure portal, under <b>App registrations</b>.</p>
+
+    <div class="step">
+      <h3>2.1 New registration</h3>
+      <p><b>App registrations → New registration.</b> Name it anything users will recognise on the consent screen (here, <i>M365 Claude relay</i>). Supported account types: <b>Accounts in this organizational directory only</b>. Copy the <b>Application (client) ID</b> and the <b>Directory (tenant) ID</b> from the Overview.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e1-overview.png" alt="App registration overview showing display name, client id, object id and tenant id" loading="lazy"><figcaption>App registration → Overview. The client id and tenant id go into the container and into Claude.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>2.2 Redirect URI</h3>
+      <p><b>Authentication → Add Redirect URI → Web</b>, value <code>https://claude.ai/api/mcp/auth_callback</code>. It must be the <b>Web</b> platform, not Single-page application or Mobile and desktop.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e2-authentication.png" alt="Authentication blade with one Web redirect URI to claude.ai" loading="lazy"><figcaption>Authentication → Redirect URI configuration: one Web entry for Claude's callback.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>2.3 Expose an API</h3>
+      <p><b>Expose an API → Application ID URI → Add</b>, and accept the default <code>api://&lt;client id&gt;</code>. Then <b>Add a scope</b>: name <code>access_as_user</code>, who can consent <b>Admins and users</b>, any display text, state Enabled.</p>
+      <p>Then open <b>Manifest</b> and set <code>"requestedAccessTokenVersion": 2</code> (inside <code>api</code>), and save.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e3-expose-api.png" alt="Expose an API blade with the Application ID URI and the access_as_user scope" loading="lazy"><figcaption>Expose an API: the Application ID URI and the <code>access_as_user</code> scope.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>2.4 API permissions and admin consent</h3>
+      <p><b>API permissions → Add a permission → Microsoft Graph → Delegated permissions.</b> Add exactly the scopes you will list in <code>MS365_MCP_ALLOWED_SCOPES</code>, plus <code>offline_access</code>. The default set is:</p>
+      <pre class="code">User.Read  Mail.ReadWrite  Mail.Send  Calendars.ReadWrite
+Contacts.ReadWrite  MailboxSettings.ReadWrite  Files.ReadWrite  offline_access</pre>
+      <p>Then click <b>Grant admin consent for &lt;your organisation&gt;</b>. Every row should show a green <i>Granted</i> status.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e4-api-permissions.png" alt="API permissions with eight delegated Microsoft Graph permissions, all granted" loading="lazy"><figcaption>Eight delegated Graph permissions, all granted for the organisation.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>2.5 Client secret</h3>
+      <p><b>Certificates &amp; secrets → Client secrets → New client secret.</b> Pick an expiry and note the date. Copy the <b>Value</b> immediately: the portal shows it only once. The <b>Secret ID</b> next to it is a different thing and does not work as the secret.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e5-secrets.png" alt="Client secrets tab showing one secret with its expiry, a masked value and the secret id" loading="lazy"><figcaption>After you leave the page, only the first characters of the Value are shown. If you lose it, create a new secret.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>2.6 Who may sign in</h3>
+      <p>Open <b>Enterprise applications</b> and find the app by name. Under <b>Properties</b>, set <b>Assignment required?</b> to <b>Yes</b> and save. Under <b>Users and groups</b>, add the users or a group who should use the relay. Conditional Access and MFA apply as usual.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e6-assignment-required.png" alt="Enterprise application properties with Assignment required set to Yes" loading="lazy"><figcaption>Enterprise applications → the app → Properties.</figcaption></figure>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/e7-users-groups.png" alt="Users and groups list with one assigned user" loading="lazy"><figcaption>Users and groups: everyone who will connect Claude must be listed here, directly or through a group.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="container" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">3</span>Create the Container App</h2>
+    <p>Create a Container App (<b>Create a resource → Container App</b>) in a resource group and Container Apps environment of your choice. The screenshots below show the finished app's settings, which are also where you change them later.</p>
+
+    <div class="step">
+      <h3>3.1 Overview and the relay host</h3>
+      <p>Once created, the <b>Application Url</b> on the Overview is your relay host, for example <code>https://&lt;app&gt;.&lt;env&gt;.&lt;region&gt;.azurecontainerapps.io</code>. It goes into two environment variables and into Claude.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c1-overview.png" alt="Container App overview with the Application Url" loading="lazy"><figcaption>Container App → Overview.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>3.2 Container: image and arguments</h3>
+      <p><b>App → Containers → Properties.</b> Image source <b>Docker Hub or other registries</b>, image type <b>Public</b>:</p>
+      <dl class="kv">
+        <dt>Registry login server</dt><dd><code>ghcr.io</code></dd>
+        <dt>Image and tag</dt><dd><code>softeria/ms-365-mcp-server@sha256:0e063c40f809448c184d55597db2b7a879a14d279f11c9cde881e411fbe056ec</code></dd>
+        <dt>Arguments override</dt><dd><code>-v, --http, 0.0.0.0:3000, --enable-attachment-urls</code></dd>
+        <dt>CPU / memory</dt><dd>0.5 / 1 Gi</dd>
+      </dl>
+      <p><code>-v</code> sends the relay's log to the container's console, which is what Azure collects. Without it the relay writes only to a file inside the container, and Azure's logs stay empty (see <a href="#logs">Read the logs</a>).</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c2-container-props.png" alt="Container properties: ghcr.io, the pinned Softeria image digest and the arguments" loading="lazy"><figcaption>Containers → Properties. Pin the digest, not a moving tag.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>3.3 Secrets</h3>
+      <p><b>Security → Secrets → Add</b> two secrets:</p>
+      <dl class="kv">
+        <dt><code>client-secret</code></dt><dd>the client secret <b>Value</b> from step 2.5</dd>
+        <dt><code>attach-key</code></dt><dd>a random string that signs the attachment links, for example the output of <code>openssl rand -hex 32</code></dd>
+      </dl>
+      <p>Microsoft's own note on this page applies: <i>changing secrets will not create a new revision</i>. A running container keeps the old value until it restarts. After you change a secret, restart the revision (step 3.6).</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c4-secrets.png" alt="Secrets page listing attach-key and client-secret" loading="lazy"><figcaption>Security → Secrets.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>3.4 Environment variables</h3>
+      <p><b>App → Containers → Environment variables.</b> Add these as <b>Manual entry</b>, with your own values in the angle brackets:</p>
+<pre class="code">MS365_MCP_OBO                  true
+MS365_MCP_CLIENT_ID            &lt;client id&gt;
+MS365_MCP_TENANT_ID            &lt;tenant id&gt;
+MS365_MCP_ORG_MODE             true
+MS365_MCP_PUBLIC_URL           https://&lt;relay host&gt;
+MS365_MCP_ATTACHMENT_URL_BASE  https://&lt;relay host&gt;
+MS365_MCP_ATTACHMENT_URL_TTL_S 300
+MS365_MCP_ALLOWED_SCOPES       User.Read Mail.ReadWrite Mail.Send Calendars.ReadWrite Contacts.ReadWrite MailboxSettings.ReadWrite Files.ReadWrite
+MS365_MCP_EXTRA_SCOPES         (the same list as MS365_MCP_ALLOWED_SCOPES)
+ENABLED_TOOLS                  ^(?!(?:download-bytes|download-bytes-to-file|get-mail-attachment-content|add-mail-attachment|create-mail-attachment-upload-session|add-calendar-event-attachment|create-calendar-event-attachment-upload-session|graph-batch)$)
+MS365_MCP_OBO_ALLOWED_TENANTS  &lt;tenant id&gt;
+MS365_MCP_ALLOWED_REDIRECT_URIS https://claude.ai/api/mcp/auth_callback
+MS365_MCP_DISABLE_DCR          true
+MS365_MCP_TRUST_PROXY_HOPS     1</pre>
+      <p>Then add the two secrets as <b>Reference a secret</b>, never as manual entries:</p>
+<pre class="code">MS365_MCP_CLIENT_SECRET        → secret client-secret
+MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c3-env-secretref.png" alt="The last two environment variables set to Reference a secret, pointing at client-secret and attach-key" loading="lazy"><figcaption>The two secret-backed variables. Source must read <b>Reference a secret</b>.</figcaption></figure>
+      <p>Saving here creates a new revision, which starts with the new settings.</p>
+    </div>
+
+    <div class="step">
+      <h3>3.5 Ingress and scale</h3>
+      <p><b>Networking → Ingress:</b> enabled, <b>Accepting traffic from anywhere</b> (Claude's servers call the relay over the internet), type HTTP, target port <b>3000</b>.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c9-ingress.png" alt="Ingress settings: accepting traffic from anywhere, HTTP, target port 3000" loading="lazy"><figcaption>Networking → Ingress.</figcaption></figure>
+      <p><b>App → Scale:</b> min replicas <b>1</b>, max replicas <b>1</b>. One replica, because attachment links are held in that replica's memory. At least one, so the relay is always running: a relay scaled to zero has to start when Claude calls it, which takes 10 to 20 seconds or more, and a sign-in can time out while it does.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c8-scale.png" alt="Scale settings with min and max replicas both 1" loading="lazy"><figcaption>App → Scale: 1 and 1.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>3.6 Revisions, and how to restart</h3>
+      <p><b>App → Revisions and replicas</b> lists the running revision and when it was created. Click it to open its details, which have <b>Restart revision</b> and a <b>Logs</b> tab. Use Restart after changing a secret.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c5-revisions.png" alt="Active revisions list with one running revision" loading="lazy"><figcaption>Revisions and replicas: one active revision, 100% of traffic.</figcaption></figure>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c6-revision-details.png" alt="Revision details with the Restart revision button and the time created" loading="lazy"><figcaption>Revision details: Restart revision, and the time it was created.</figcaption></figure>
+      <p>A restart or a new revision does not interrupt users: Azure keeps the old replica serving until the new one is ready. In our measurements a new replica took 11 to 22 seconds to be ready, almost all of it Azure preparing the container; the relay itself starts in under a second.</p>
+    </div>
+
+    <div class="step">
+      <h3>3.7 Check it from outside</h3>
+      <p>From any machine:</p>
+<pre class="code">curl -s https://&lt;relay host&gt;/.well-known/oauth-authorization-server</pre>
+      <p>A healthy relay answers with JSON whose <code>scopes_supported</code> is <code>["&lt;client id&gt;/access_as_user"]</code>. If it lists Graph scopes such as <code>Mail.Read</code> instead, <code>MS365_MCP_OBO</code> is not <code>true</code> in the running revision. <code>/register</code> should answer 404 and <code>/mcp</code> without a token 401.</p>
+    </div>
+  </div>
+</section>
+
+<section id="claude" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">4</span>Connect Claude</h2>
+    <p>On Team and Enterprise plans the organisation owner adds the connector once (<b>Organization settings → Connectors</b>) and members then connect it for themselves. On individual plans, use <b>Customize → Connectors</b>. The form is the same.</p>
+
+    <div class="step">
+      <h3>4.1 Add the connector</h3>
+      <p><b>Add custom connector.</b> Name it (users see this name), and set the URL to <code>https://&lt;relay host&gt;/mcp</code>. Continue.</p>
+      <figure class="narrow"><img src="../assets/open-source/m365-claude-relay/azure/k1-add-connector.png" alt="Add custom connector dialog with a name and the relay URL" loading="lazy"><figcaption>Name and MCP server URL.</figcaption></figure>
+      <p>On the next screen keep <b>Sign in now</b>. Under OAuth client choose <b>Use your own OAuth client</b>, paste the <b>client id</b>, and leave the client secret <b>empty</b>. The secret lives only in the container.</p>
+      <figure class="narrow"><img src="../assets/open-source/m365-claude-relay/azure/k2-oauth-client.png" alt="OAuth client section with Use your own OAuth client selected and the client id entered" loading="lazy"><figcaption>Your own OAuth client: client id only, no secret.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>4.2 Connect</h3>
+      <p>Click <b>Connect</b> and sign in with an assigned Microsoft account. When it works, the connector shows <b>Disconnect</b> and its tool list. Tools default to <i>Needs approval</i>; set read-only tools to <i>Always allow</i> if you wish, and leave sending and deleting on <i>Needs approval</i>.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/k3-connected.png" alt="Connected connector page showing Disconnect and the tool permissions list" loading="lazy"><figcaption>Connected: the tool list loaded from the relay.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>4.3 Allow the relay for file transfers</h3>
+      <p>Claude moves attachments with <code>curl</code> from its code sandbox, so the sandbox must be allowed to reach the relay. <b>Settings → Capabilities → Code execution → Additional allowed domains</b> (on Team and Enterprise, an organisation setting): add the relay host without <code>https://</code>. Without it, mail and calendar work but attachments do not.</p>
+      <figure class="narrow"><img src="../assets/open-source/m365-claude-relay/azure/k4-allowed-domains.png" alt="Additional allowed domains list with the relay host added" loading="lazy"><figcaption>The relay host in the allowed domains.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">5</span>Install the skills</h2>
+    <p>Skills teach Claude how to use the connector well. Install them once for the whole organisation; users then have them without doing anything.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Skill</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/rmdevpro/m365-claude-relay/tree/main/claude-skill/microsoft-365"><code>microsoft-365</code></a></td><td>Mail, calendar, contacts and OneDrive through the connector: the attachment links, reading mail without the clutter, writing mail as HTML, and when to stop and ask. Install this one.</td></tr>
+        <tr><td><a href="https://github.com/rmdevpro/m365-claude-relay/tree/main/claude-skill/email-management"><code>email-management</code></a></td><td>Optional. Works through a user's inbox with them. The first time, Claude interviews the user and saves their triage rules to Claude's memory; see <a href="m365-claude-relay-email-rules.html">Your email rules, set up by interview</a>.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="step">
+      <h3>5.1 Prerequisites (Team and Enterprise)</h3>
+      <p>An organisation owner checks two settings:</p>
+      <ul class="ops">
+        <li><b>Organization settings → Plugins &amp; skills → Policy:</b> <i>Code execution and file creation</i> and <i>Skills</i> both on.</li>
+        <li><b>Organization settings → Capabilities → Memory:</b> on, if you install <code>email-management</code>. Users' rules live in their memory. Turning memory off for the organisation deletes everyone's memory, including those rules.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <h3>5.2 Install for everyone</h3>
+      <p>Download each skill's folder from the repository and zip it, so the zip holds the folder with <code>SKILL.md</code> inside (for <code>email-management</code>, its other files too). Then <b>Organization settings → Plugins &amp; skills → Add → Upload a skill</b>, once per skill. Anthropic: an uploaded skill is "immediately provisioned to all users in your organization" and is on by default; users can switch individual skills off.</p>
+      <p>On Enterprise, to give skills to only some people, bundle them in a plugin and assign the plugin to a group.</p>
+    </div>
+
+    <div class="step">
+      <h3>5.3 Updates</h3>
+      <p>When a skill changes on GitHub, upload the new version the same way. When an owner approves a new version, everyone who uses it gets the update. Users' email rules are in their own memory and are not affected.</p>
+    </div>
+
+    <div class="step">
+      <h3>5.4 Individual plans</h3>
+      <p>On Free, Pro and Max, each user uploads the zips under <b>Customize → Skills → Upload skill</b>, and turns on <i>Generate memory from chats</i> (Settings → Memory) for <code>email-management</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="verify" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">6</span>Verify, stage by stage</h2>
+    <p>Run these in order in a new chat. Each stage depends on the one before, so the first one that fails tells you where to look.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Stage</th><th>Do</th><th>Passes when</th></tr></thead>
+      <tbody>
+        <tr><td>Outside</td><td>Step 3.7</td><td><code>scopes_supported</code> is your <code>access_as_user</code> scope</td></tr>
+        <tr><td>Connect</td><td>Step 4.2</td><td>The connector shows Disconnect and a tool list</td></tr>
+        <tr><td>Identity</td><td>"Use get-current-user"</td><td>Your own name and address</td></tr>
+        <tr><td>Mail</td><td>"List the 3 most recent messages in my inbox"</td><td>Your own messages</td></tr>
+        <tr><td>Files</td><td>"Create a small PDF and print its sha256, attach it to a draft to me with get-upload-url and curl, download it back with get-download-url and curl, print its sha256"</td><td>The two sha256 values match</td></tr>
+        <tr><td>Approval</td><td>"Send me a short test email"</td><td>Claude asks for approval first, then the mail arrives</td></tr>
+      </tbody>
+    </table></div>
+    <figure><img src="../assets/open-source/m365-claude-relay/azure/k5-roundtrip.png" alt="Claude's answer showing matching sha256 values before upload and after download" loading="lazy"><figcaption>The file stage passing: the same sha256 before upload and after download.</figcaption></figure>
+  </div>
+</section>
+
+<section id="logs" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">7</span>Read the logs</h2>
+    <p>Every sign-in Claude makes passes through the relay's <code>/token</code> endpoint, and the relay logs what Microsoft answered. That one line usually names the problem. The relay must be running with <code>-v</code> (step 3.2) for these lines to reach Azure.</p>
+
+    <div class="step">
+      <h3>7.1 Live, in the portal</h3>
+      <p><b>App → Revisions and replicas →</b> click the revision <b>→ Logs</b>. Choose <b>Real-time</b> and <b>Application</b>. Leave it open and connect from Claude; the lines appear as it happens.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c7-live-logs.png" alt="Revision Logs tab set to Real-time and Application" loading="lazy"><figcaption>Revision details → Logs: Real-time, Application.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <h3>7.2 History, in Log Analytics</h3>
+      <p>For anything older, open the Container Apps environment's <b>Log Analytics workspace → Logs</b> and run:</p>
+<pre class="code">ContainerAppConsoleLogs_CL
+| where ContainerAppName_s == "&lt;container app name&gt;"
+| where TimeGenerated &gt; ago(1d)
+| where Log_s has "Token endpoint" or Log_s has "Secrets Check"
+| project TimeGenerated, RevisionName_s, Log_s
+| order by TimeGenerated desc</pre>
+      <p>Lines arrive a few minutes after the event. Platform events (replica scheduled, image pulled, container started) are in <code>ContainerAppSystemLogs_CL</code>. If your environment sends logs through Azure Monitor diagnostic settings instead, the tables are <code>ContainerAppConsoleLogs</code> and <code>ContainerAppSystemLogs</code>, and the text column is <code>Log</code>.</p>
+    </div>
+
+    <div class="step">
+      <h3>7.3 What healthy looks like</h3>
+      <p>At startup the relay reports whether it has a client secret, without showing it:</p>
+<pre class="code log"><span class="i">info:</span> Microsoft 365 MCP Server starting...
+<span class="i">info:</span> Secrets Check: {"CLIENT_ID":"&lt;first 8 characters&gt;...",<mark>"CLIENT_SECRET":"SET"</mark>,"NODE_ENV":"production","TENANT_ID":"&lt;tenant id&gt;"}
+<span class="i">info:</span> OBO allowlist: 1 tenant(s), 0 user(s)
+<span class="i">info:</span>   - Attachment URLs: https://&lt;relay host&gt;/attachment (ttl 300s, signed, key id 1)
+<span class="i">info:</span> Server listening on all interfaces (0.0.0.0:3000)</pre>
+      <p>Each sign-in from Claude then logs the exchange. <code>hasClientSecret</code> must be <code>true</code>:</p>
+<pre class="code log"><span class="i">info:</span> Token endpoint called {"grant_type":"authorization_code","method":"POST","url":"/token"}
+<span class="i">info:</span> Token endpoint: authorization_code exchange {"clientId":"&lt;client id&gt;",<mark>"hasClientSecret":true</mark>,"has_code":true,"has_code_verifier":true,"redirect_uri":"https://claude.ai/api/mcp/auth_callback"}</pre>
+      <p>When Microsoft refuses, two more lines follow with its error code. This example is a deliberately invalid test request:</p>
+<pre class="code log"><span class="w">warn:</span> Token endpoint upstream OAuth error: invalid_grant {"correlation_id":"&lt;id&gt;","error":"invalid_grant",<mark>"error_codes":[9002313]</mark>,"status":400}
+<span class="w">warn:</span> Token endpoint: upstream OAuth error surfaced to client {"error":"invalid_grant","error_codes":[9002313],"upstream_status":400}</pre>
+      <p>The number in <code>error_codes</code> is Microsoft's AADSTS code. Look it up in the table below.</p>
+    </div>
+  </div>
+</section>
+
+<section id="troubleshoot" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">8</span>Troubleshooting</h2>
+    <p>Claude shows little detail when a connection fails. Find the matching line in the relay's log first, then use this table.</p>
+    <div class="tbl"><table class="trouble">
+      <thead><tr><th>What you see</th><th>What it means</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td><code>error_codes [7000215]</code> (invalid client secret)</td><td>The container sent a secret, and Microsoft does not accept it for this app. Usual causes: the Secret ID was pasted instead of the Value; the secret expired or was replaced in Entra; or the Container App secret was updated but the revision was not restarted.</td><td>Put the current secret <b>Value</b> into the Container App secret <code>client-secret</code>, then <b>Restart revision</b>. Confirm the variable is <i>Reference a secret → client-secret</i>.</td></tr>
+        <tr><td><code>error_codes [7000218]</code>, or <code>"CLIENT_SECRET":"NOT SET"</code> at startup, or <code>"hasClientSecret":false</code></td><td>No secret is reaching the relay.</td><td>Add <code>MS365_MCP_CLIENT_SECRET</code> as <i>Reference a secret</i> (step 3.4). Saving creates a new revision.</td></tr>
+        <tr><td><code>error_codes [50011]</code></td><td>Redirect URI mismatch.</td><td>Add <code>https://claude.ai/api/mcp/auth_callback</code> under the <b>Web</b> platform (step 2.2).</td></tr>
+        <tr><td><code>error_codes [65001]</code></td><td>Consent missing for a permission.</td><td>Grant admin consent (step 2.4). After adding a scope, grant again.</td></tr>
+        <tr><td><code>error_codes [50105]</code></td><td>The user is not assigned to the app.</td><td>Add the user or their group under Users and groups (step 2.6).</td></tr>
+        <tr><td><code>error_codes [700016]</code></td><td>The client id is not found in this tenant.</td><td>Check <code>MS365_MCP_CLIENT_ID</code>, <code>MS365_MCP_TENANT_ID</code> and Claude's OAuth Client ID against the app's Overview.</td></tr>
+        <tr><td>No "Token endpoint" line at all when you connect</td><td>The request never reached the relay, or the relay is not logging.</td><td>Check <code>-v</code> is in the arguments (step 3.2) and that the connector URL is your relay host with <code>/mcp</code>. Check ingress accepts traffic from anywhere.</td></tr>
+        <tr><td>Console logs empty, system logs present</td><td>The relay is running without <code>-v</code>.</td><td>Add <code>-v</code> to the arguments (step 3.2).</td></tr>
+        <tr><td>Sign-in shows Graph scopes, or <code>scopes_supported</code> lists <code>Mail.Read</code> etc.</td><td>On-Behalf-Of mode is off in the running revision.</td><td>Set <code>MS365_MCP_OBO</code> to <code>true</code>.</td></tr>
+        <tr><td>Connect works, but a user gets 403</td><td>The user's tenant is not allowed.</td><td>Set <code>MS365_MCP_OBO_ALLOWED_TENANTS</code> to your tenant id.</td></tr>
+        <tr><td>Mail works, attachments fail with <code>CONNECT tunnel failed, response 403</code></td><td>Claude's sandbox may not reach the relay.</td><td>Add the relay host to the allowed domains (step 4.3).</td></tr>
+        <tr><td>Tool calls start returning 401</td><td>The user's sign-in expired.</td><td>Reconnect the connector in Claude.</td></tr>
+        <tr><td>A setting change has no effect</td><td>Secrets apply only to replicas started after the change.</td><td>Restart the revision (step 3.6), then check the revision's created time and the startup lines.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="operate" class="g-sec">
+  <div class="wrap">
+    <h2><span class="n">9</span>Operating it</h2>
+    <ul class="ops">
+      <li><b>Rotate the secret before it expires.</b> In Entra, add a new client secret and copy its Value. Update the Container App secret <code>client-secret</code>, restart the revision, and check the startup line and one sign-in in the log. Then delete the old secret in Entra.</li>
+      <li><b>Keep one replica, always on.</b> Min 1, max 1 (step 3.5).</li>
+      <li><b>Update deliberately.</b> Softeria releases often. Move the image digest to a newer release in a test app first, run section 6, then change production.</li>
+      <li><b>Change scopes</b> by adding the delegated permission in Entra, granting admin consent, adding the scope to both scope variables, and refreshing the connector's tool list in Claude.</li>
+      <li><b>Audit.</b> The relay writes one JSON line per tool call (user, tool, status, sizes; no mail content). It reaches Log Analytics with the rest of the console log; set the workspace retention you need.</li>
+    </ul>
+    <p class="more">Configuration reference, the Claude skill and test scripts: <a href="https://github.com/rmdevpro/m365-claude-relay">github.com/rmdevpro/m365-claude-relay</a>.</p>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap inner">
+    <div>BlueprintAgentic · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
