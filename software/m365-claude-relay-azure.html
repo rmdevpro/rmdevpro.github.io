@@ -232,7 +232,9 @@ ENABLED_TOOLS                  ^(?!(?:download-bytes|download-bytes-to-file|get-
 MS365_MCP_OBO_ALLOWED_TENANTS  &lt;tenant id&gt;
 MS365_MCP_ALLOWED_REDIRECT_URIS https://claude.ai/api/mcp/auth_callback
 MS365_MCP_DISABLE_DCR          true
-MS365_MCP_TRUST_PROXY_HOPS     1</pre>
+MS365_MCP_TRUST_PROXY_HOPS     1
+MS365_MCP_BODY_FORMAT          html</pre>
+      <p><code>MS365_MCP_BODY_FORMAT=html</code> makes the relay return message bodies as HTML when Claude reads them. Without it they come back as plain text, and the Claude skill cannot check a draft's layout before sending; the text-reading tool it uses for inbox triage is unaffected either way.</p>
       <p>Then add the two secrets as <b>Reference a secret</b>, never as manual entries:</p>
 <pre class="code">MS365_MCP_CLIENT_SECRET        → secret client-secret
 MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
