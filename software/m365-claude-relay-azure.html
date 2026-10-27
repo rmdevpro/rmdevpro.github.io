@@ -198,10 +198,9 @@ Contacts.ReadWrite  MailboxSettings.ReadWrite  Files.ReadWrite  offline_access</
       <dl class="kv">
         <dt>Registry login server</dt><dd><code>ghcr.io</code></dd>
         <dt>Image and tag</dt><dd><code>softeria/ms-365-mcp-server@sha256:0e063c40f809448c184d55597db2b7a879a14d279f11c9cde881e411fbe056ec</code></dd>
-        <dt>Arguments override</dt><dd><code>-v, --http, 0.0.0.0:3000, --enable-attachment-urls</code></dd>
+        <dt>Arguments override</dt><dd><code>--http, 0.0.0.0:3000, --enable-attachment-urls</code></dd>
         <dt>CPU / memory</dt><dd>0.5 / 1 Gi</dd>
       </dl>
-      <p><code>-v</code> sends the relay's log to the container's console, which is what Azure collects. Without it the relay writes only to a file inside the container, and Azure's logs stay empty (see <a href="#logs">Read the logs</a>).</p>
       <figure><img src="../assets/open-source/m365-claude-relay/azure/c2-container-props.png" alt="Container properties: ghcr.io, the pinned Softeria image digest and the arguments" loading="lazy"><figcaption>Containers → Properties. Pin the digest, not a moving tag.</figcaption></figure>
     </div>
 
@@ -353,7 +352,8 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
 <section id="logs" class="g-sec">
   <div class="wrap">
     <h2><span class="n">7</span>Read the logs</h2>
-    <p>Every sign-in Claude makes passes through the relay's <code>/token</code> endpoint, and the relay logs what Microsoft answered. That one line usually names the problem. The relay must be running with <code>-v</code> (step 3.2) for these lines to reach Azure.</p>
+    <p>Every sign-in Claude makes passes through the relay's <code>/token</code> endpoint, and the relay logs what Microsoft answered. That one line usually names the problem.</p>
+    <p class="note">Logging guidance is being revised.</p>
 
     <div class="step">
       <h3>7.1 Live, in the portal</h3>
@@ -405,8 +405,8 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
         <tr><td><code>error_codes [65001]</code></td><td>Consent missing for a permission.</td><td>Grant admin consent (step 2.4). After adding a scope, grant again.</td></tr>
         <tr><td><code>error_codes [50105]</code></td><td>The user is not assigned to the app.</td><td>Add the user or their group under Users and groups (step 2.6).</td></tr>
         <tr><td><code>error_codes [700016]</code></td><td>The client id is not found in this tenant.</td><td>Check <code>MS365_MCP_CLIENT_ID</code>, <code>MS365_MCP_TENANT_ID</code> and Claude's OAuth Client ID against the app's Overview.</td></tr>
-        <tr><td>No "Token endpoint" line at all when you connect</td><td>The request never reached the relay, or the relay is not logging.</td><td>Check <code>-v</code> is in the arguments (step 3.2) and that the connector URL is your relay host with <code>/mcp</code>. Check ingress accepts traffic from anywhere.</td></tr>
-        <tr><td>Console logs empty, system logs present</td><td>The relay is running without <code>-v</code>.</td><td>Add <code>-v</code> to the arguments (step 3.2).</td></tr>
+        <tr><td>No "Token endpoint" line at all when you connect</td><td colspan="2">Logging guidance is being revised.</td></tr>
+        <tr><td>Console logs empty, system logs present</td><td colspan="2">Logging guidance is being revised.</td></tr>
         <tr><td>Sign-in shows Graph scopes, or <code>scopes_supported</code> lists <code>Mail.Read</code> etc.</td><td>On-Behalf-Of mode is off in the running revision.</td><td>Set <code>MS365_MCP_OBO</code> to <code>true</code>.</td></tr>
         <tr><td>Connect works, but a user gets 403</td><td>The user's tenant is not allowed.</td><td>Set <code>MS365_MCP_OBO_ALLOWED_TENANTS</code> to your tenant id.</td></tr>
         <tr><td>Mail works, attachments fail with <code>CONNECT tunnel failed, response 403</code></td><td>Claude's sandbox may not reach the relay.</td><td>Add the relay host to the allowed domains (step 4.3).</td></tr>
