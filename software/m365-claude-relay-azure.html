@@ -86,7 +86,7 @@ dl.kv dt { color: var(--text-faint); } dl.kv dd { min-width: 0; color: var(--tex
     <p class="lede">A step-by-step guide, with screenshots, for putting the relay into your own Microsoft 365 tenant on Azure Container Apps, connecting it to Claude, and reading its logs when something goes wrong.</p>
     <div class="facts">
       <div><span>Parts</span>Entra app · Container App · Claude</div>
-      <div><span>Image</span>Softeria <code>ms-365-mcp-server</code> 0.170.2, unmodified</div>
+      <div><span>Image</span>Our build of Softeria <code>ms-365-mcp-server</code> 0.170.2 with three logging changes (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/775">PR #775</a>): no mail content in logs, capped log files, startup credential self-test</div>
       <div><span>Cost</span>One 0.5 vCPU / 1 GiB replica, always on</div>
       <div><span>Tested</span>October 2026, Microsoft 365 Business tenant, Claude web</div>
     </div>
@@ -197,11 +197,12 @@ Contacts.ReadWrite  MailboxSettings.ReadWrite  Files.ReadWrite  offline_access</
       <p><b>App → Containers → Properties.</b> Image source <b>Docker Hub or other registries</b>, image type <b>Public</b>:</p>
       <dl class="kv">
         <dt>Registry login server</dt><dd><code>ghcr.io</code></dd>
-        <dt>Image and tag</dt><dd><code>softeria/ms-365-mcp-server@sha256:0e063c40f809448c184d55597db2b7a879a14d279f11c9cde881e411fbe056ec</code></dd>
+        <dt>Image and tag</dt><dd><code>rmdevpro/ms-365-mcp-server@sha256:a46e9fd570ac0230837a3fa1fddb2f57fea7029672616464b374dc75ca55dc56</code></dd>
         <dt>Arguments override</dt><dd><code>--http, 0.0.0.0:3000, --enable-attachment-urls</code></dd>
         <dt>CPU / memory</dt><dd>0.5 / 1 Gi</dd>
       </dl>
-      <figure><img src="../assets/open-source/m365-claude-relay/azure/c2-container-props.png" alt="Container properties: ghcr.io, the pinned Softeria image digest and the arguments" loading="lazy"><figcaption>Containers → Properties. Pin the digest, not a moving tag.</figcaption></figure>
+      <p>This image is our build of Softeria's server, version 0.170.2, with three changes we have submitted upstream as <a href="https://github.com/Softeria/ms-365-mcp-server/pull/775">pull request #775</a>: the log never records the content of mail (the stock image writes subjects, bodies and search text to its log files); the log files inside the container are capped at 10 MB × 5 each; and the relay tests its own client id and secret against Microsoft at startup and reports the result (section 7). Once Softeria publishes a release containing these changes, pin that release instead. Leave <code>-v</code> out for normal running; section 7 says what it adds.</p>
+      <figure><img src="../assets/open-source/m365-claude-relay/azure/c2-container-props.png" alt="Container properties page from an earlier deployment: ghcr.io, an image pinned by digest, and the arguments" loading="lazy"><figcaption>Containers → Properties, from an earlier deployment that still used the stock Softeria image: it shows where the fields are, not the image to enter. Use the image and arguments listed above this screenshot. Pin the digest, not a moving tag.</figcaption></figure>
     </div>
 
     <div class="step">
@@ -211,7 +212,7 @@ Contacts.ReadWrite  MailboxSettings.ReadWrite  Files.ReadWrite  offline_access</
         <dt><code>client-secret</code></dt><dd>the client secret <b>Value</b> from step 2.5</dd>
         <dt><code>attach-key</code></dt><dd>a random string that signs the attachment links, for example the output of <code>openssl rand -hex 32</code></dd>
       </dl>
-      <p>Microsoft's own note on this page applies: <i>changing secrets will not create a new revision</i>. A running container keeps the old value until it restarts. After you change a secret, restart the revision (step 3.6).</p>
+      <p>Microsoft's own note on this page applies: <i>changing secrets will not create a new revision</i>. A running container keeps the old value until it restarts. After you change a secret, restart the revision (step 3.6); the relay's startup self-test (section 7) then tells you whether Microsoft accepts the new value. We confirmed on our relay that a correct value saved without a restart still fails sign-in, and the same value after a restart works.</p>
       <figure><img src="../assets/open-source/m365-claude-relay/azure/c4-secrets.png" alt="Secrets page listing attach-key and client-secret" loading="lazy"><figcaption>Security → Secrets.</figcaption></figure>
     </div>
 
@@ -252,7 +253,7 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
       <p><b>App → Revisions and replicas</b> lists the running revision and when it was created. Click it to open its details, which have <b>Restart revision</b> and a <b>Logs</b> tab. Use Restart after changing a secret.</p>
       <figure><img src="../assets/open-source/m365-claude-relay/azure/c5-revisions.png" alt="Active revisions list with one running revision" loading="lazy"><figcaption>Revisions and replicas: one active revision, 100% of traffic.</figcaption></figure>
       <figure><img src="../assets/open-source/m365-claude-relay/azure/c6-revision-details.png" alt="Revision details with the Restart revision button and the time created" loading="lazy"><figcaption>Revision details: Restart revision, and the time it was created.</figcaption></figure>
-      <p>A restart or a new revision does not interrupt users: Azure keeps the old replica serving until the new one is ready. In our measurements a new replica took 11 to 22 seconds to be ready, almost all of it Azure preparing the container; the relay itself starts in under a second.</p>
+      <p>In our test the replacement replica was running about a minute after the restart was issued. Allow for an interruption while that happens. A sign-in that is part-way through fails (<code>AADSTS501481</code>) and has to be started again, and attachment links issued before the restart stop working (404); Claude requests a new one. Calls made after the new replica was up succeeded.</p>
     </div>
 
     <div class="step">
@@ -352,8 +353,12 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
 <section id="logs" class="g-sec">
   <div class="wrap">
     <h2><span class="n">7</span>Read the logs</h2>
-    <p>Every sign-in Claude makes passes through the relay's <code>/token</code> endpoint, and the relay logs what Microsoft answered. That one line usually names the problem.</p>
-    <p class="note">Logging guidance is being revised.</p>
+    <p><b>The first line to look at is the relay's own startup self-test.</b> In this build, when the relay starts it asks Microsoft once whether the client id and secret it was given are accepted, and prints the answer to the console whether or not <code>-v</code> is set. It is also served as JSON at <code>https://&lt;relay host&gt;/health</code>. It reports acceptance of the app credentials only; it says nothing about whether a user can sign in, whether the Graph permissions are consented, or whether Claude can connect. A wrong secret looks like this, taken from our test relay:</p>
+<pre class="code log">[ms365-mcp] Startup self-test FAILED: Microsoft rejected the client secret as not a current secret value of this app (invalid_client, <mark>error_codes [7000215]</mark>, correlation_id &lt;id&gt;). Sign-ins will fail until the secret value is corrected and the revision restarted.</pre>
+    <p>and a good one like this:</p>
+<pre class="code log">[ms365-mcp] Startup self-test: Microsoft accepted the client id and secret for tenant &lt;tenant id&gt;. (App credentials only; not a test of user sign-in or Graph access.)</pre>
+    <p>Besides that line, the console carries the relay's audit stream: one JSON line per tool call, with the user, the tool, HTTP status, error code if any, duration and request id, and no mail content. In normal running that is what Azure collects: the self-test and the audit stream, plus any startup or fault notice the relay prints.</p>
+    <p><b>For more detail, add <code>-v</code></b> to the container's arguments (step 3.2; saving creates a new revision). The relay then also writes its diagnostic log to the console: each tool call with the names and sizes of its parameters, each Graph request as method and path with ids masked, each error as class, HTTP status and code, and every sign-in through <code>/token</code> with Microsoft's answer. In this build that log contains no message content: not subjects, bodies, search text, filters, file names or the text of Graph error messages, which Microsoft fills with the request. The full error text still reaches Claude in the tool result, so the person using it sees why a call failed; the log shows the status and code. <code>-v</code> can stay on; the stock Softeria image is different, and there it must not.</p>
 
     <div class="step">
       <h3>7.1 Live, in the portal</h3>
@@ -367,26 +372,17 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
 <pre class="code">ContainerAppConsoleLogs_CL
 | where ContainerAppName_s == "&lt;container app name&gt;"
 | where TimeGenerated &gt; ago(1d)
-| where Log_s has "Token endpoint" or Log_s has "Secrets Check"
+| where Log_s has "self-test" or Log_s has "Token endpoint" or Log_s has "error_codes"
 | project TimeGenerated, RevisionName_s, Log_s
 | order by TimeGenerated desc</pre>
       <p>Lines arrive a few minutes after the event. Platform events (replica scheduled, image pulled, container started) are in <code>ContainerAppSystemLogs_CL</code>. If your environment sends logs through Azure Monitor diagnostic settings instead, the tables are <code>ContainerAppConsoleLogs</code> and <code>ContainerAppSystemLogs</code>, and the text column is <code>Log</code>.</p>
     </div>
 
     <div class="step">
-      <h3>7.3 What healthy looks like</h3>
-      <p>At startup the relay reports whether it has a client secret, without showing it:</p>
-<pre class="code log"><span class="i">info:</span> Microsoft 365 MCP Server starting...
-<span class="i">info:</span> Secrets Check: {"CLIENT_ID":"&lt;first 8 characters&gt;...",<mark>"CLIENT_SECRET":"SET"</mark>,"NODE_ENV":"production","TENANT_ID":"&lt;tenant id&gt;"}
-<span class="i">info:</span> OBO allowlist: 1 tenant(s), 0 user(s)
-<span class="i">info:</span>   - Attachment URLs: https://&lt;relay host&gt;/attachment (ttl 300s, signed, key id 1)
-<span class="i">info:</span> Server listening on all interfaces (0.0.0.0:3000)</pre>
-      <p>Each sign-in from Claude then logs the exchange. <code>hasClientSecret</code> must be <code>true</code>:</p>
-<pre class="code log"><span class="i">info:</span> Token endpoint called {"grant_type":"authorization_code","method":"POST","url":"/token"}
-<span class="i">info:</span> Token endpoint: authorization_code exchange {"clientId":"&lt;client id&gt;",<mark>"hasClientSecret":true</mark>,"has_code":true,"has_code_verifier":true,"redirect_uri":"https://claude.ai/api/mcp/auth_callback"}</pre>
-      <p>When Microsoft refuses, two more lines follow with its error code. This example is a deliberately invalid test request:</p>
-<pre class="code log"><span class="w">warn:</span> Token endpoint upstream OAuth error: invalid_grant {"correlation_id":"&lt;id&gt;","error":"invalid_grant",<mark>"error_codes":[9002313]</mark>,"status":400}
-<span class="w">warn:</span> Token endpoint: upstream OAuth error surfaced to client {"error":"invalid_grant","error_codes":[9002313],"upstream_status":400}</pre>
+      <h3>7.3 What a refused sign-in looks like</h3>
+      <p>With <code>-v</code>, a user's sign-in that Microsoft refuses writes lines like these, again real ones from our test relay with a wrong secret:</p>
+<pre class="code log"><span class="w">warn:</span> Token endpoint upstream OAuth error: invalid_client {"correlation_id":"&lt;id&gt;","error":"invalid_client",<mark>"error_codes":[7000215]</mark>,"status":401,"timestamp":"&lt;time&gt;"}
+<span class="w">warn:</span> Token endpoint: upstream OAuth error surfaced to client {"error":"invalid_client","error_codes":[7000215],"timestamp":"&lt;time&gt;","upstream_status":401}</pre>
       <p>The number in <code>error_codes</code> is Microsoft's AADSTS code. Look it up in the table below.</p>
     </div>
   </div>
@@ -399,14 +395,15 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
     <div class="tbl"><table class="trouble">
       <thead><tr><th>What you see</th><th>What it means</th><th>Fix</th></tr></thead>
       <tbody>
-        <tr><td><code>error_codes [7000215]</code> (invalid client secret)</td><td>The container sent a secret, and Microsoft does not accept it for this app. Usual causes: the Secret ID was pasted instead of the Value; the secret expired or was replaced in Entra; or the Container App secret was updated but the revision was not restarted.</td><td>Put the current secret <b>Value</b> into the Container App secret <code>client-secret</code>, then <b>Restart revision</b>. Confirm the variable is <i>Reference a secret → client-secret</i>.</td></tr>
-        <tr><td><code>error_codes [7000218]</code>, or <code>"CLIENT_SECRET":"NOT SET"</code> at startup, or <code>"hasClientSecret":false</code></td><td>No secret is reaching the relay.</td><td>Add <code>MS365_MCP_CLIENT_SECRET</code> as <i>Reference a secret</i> (step 3.4). Saving creates a new revision.</td></tr>
+        <tr><td><code>error_codes [7000215]</code> (invalid client secret), in the startup self-test or at sign-in</td><td>The secret the running container sends is not a current secret value of this app. Usual causes: the Secret ID was pasted instead of the Value; the secret was replaced in Entra; or the Container App secret was updated but the revision was not restarted (a saved secret takes effect only in replicas started after the save).</td><td>Put the current secret <b>Value</b> into the Container App secret <code>client-secret</code>, then <b>Restart revision</b>, then read the new startup self-test line. Confirm the variable is <i>Reference a secret → client-secret</i>.</td></tr>
+        <tr><td><code>error_codes [7000222]</code></td><td>The client secret has expired.</td><td>Create a new secret in Entra (step 2.5), put its Value into <code>client-secret</code>, restart the revision.</td></tr>
+        <tr><td><code>error_codes [7000218]</code></td><td>No secret is reaching the relay.</td><td>Add <code>MS365_MCP_CLIENT_SECRET</code> as <i>Reference a secret</i> (step 3.4). Saving creates a new revision.</td></tr>
         <tr><td><code>error_codes [50011]</code></td><td>Redirect URI mismatch.</td><td>Add <code>https://claude.ai/api/mcp/auth_callback</code> under the <b>Web</b> platform (step 2.2).</td></tr>
         <tr><td><code>error_codes [65001]</code></td><td>Consent missing for a permission.</td><td>Grant admin consent (step 2.4). After adding a scope, grant again.</td></tr>
         <tr><td><code>error_codes [50105]</code></td><td>The user is not assigned to the app.</td><td>Add the user or their group under Users and groups (step 2.6).</td></tr>
         <tr><td><code>error_codes [700016]</code></td><td>The client id is not found in this tenant.</td><td>Check <code>MS365_MCP_CLIENT_ID</code>, <code>MS365_MCP_TENANT_ID</code> and Claude's OAuth Client ID against the app's Overview.</td></tr>
-        <tr><td>No "Token endpoint" line at all when you connect</td><td colspan="2">Logging guidance is being revised.</td></tr>
-        <tr><td>Console logs empty, system logs present</td><td colspan="2">Logging guidance is being revised.</td></tr>
+        <tr><td>The startup self-test says accepted, but users cannot sign in</td><td>The app credentials were accepted at startup; that check covers nothing after it. The user's sign-in, the On-Behalf-Of exchange, the Graph permissions and the connector are still to be checked.</td><td>Next checks: add <code>-v</code> (section 7), have the user connect once, and read the <code>/token</code> lines for the code; then this table.</td></tr>
+        <tr><td>With <code>-v</code> on, no "Token endpoint" line appears when a user connects</td><td>No token exchange was observed. That alone does not say where the flow stopped: a request can reach the relay and be refused earlier, at <code>/authorize</code> (for example a redirect URI the relay does not allow), and write no "Token endpoint" line.</td><td>Check you are reading the current revision, the right time window and that <code>-v</code> is on; then look for <code>/authorize</code> lines in the same log and whether the browser step completed; <code>/health</code> from outside shows whether the relay answers at all.</td></tr>
         <tr><td>Sign-in shows Graph scopes, or <code>scopes_supported</code> lists <code>Mail.Read</code> etc.</td><td>On-Behalf-Of mode is off in the running revision.</td><td>Set <code>MS365_MCP_OBO</code> to <code>true</code>.</td></tr>
         <tr><td>Connect works, but a user gets 403</td><td>The user's tenant is not allowed.</td><td>Set <code>MS365_MCP_OBO_ALLOWED_TENANTS</code> to your tenant id.</td></tr>
         <tr><td>Mail works, attachments fail with <code>CONNECT tunnel failed, response 403</code></td><td>Claude's sandbox may not reach the relay.</td><td>Add the relay host to the allowed domains (step 4.3).</td></tr>
@@ -421,11 +418,12 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
   <div class="wrap">
     <h2><span class="n">9</span>Operating it</h2>
     <ul class="ops">
-      <li><b>Rotate the secret before it expires.</b> In Entra, add a new client secret and copy its Value. Update the Container App secret <code>client-secret</code>, restart the revision, and check the startup line and one sign-in in the log. Then delete the old secret in Entra.</li>
+      <li><b>Rotate the secret before it expires.</b> In Entra, add a new client secret and copy its Value. Update the Container App secret <code>client-secret</code>, restart the revision, and read the startup self-test line (or <code>/health</code>). Then delete the old secret in Entra.</li>
       <li><b>Keep one replica, always on.</b> Min 1, max 1 (step 3.5).</li>
       <li><b>Update deliberately.</b> Softeria releases often. Move the image digest to a newer release in a test app first, run section 6, then change production.</li>
       <li><b>Change scopes</b> by adding the delegated permission in Entra, granting admin consent, adding the scope to both scope variables, and refreshing the connector's tool list in Claude.</li>
       <li><b>Audit.</b> The relay writes one JSON line per tool call (user, tool, status, sizes; no mail content). It reaches Log Analytics with the rest of the console log; set the workspace retention you need.</li>
+      <li><b>Files inside the container.</b> The relay also keeps its logs in files under its home directory. In this build they hold no mail content, and each of the three (diagnostic, error, audit) is capped by size: 10 MiB per file, five files kept, oldest dropped (<code>MS365_MCP_LOG_MAX_BYTES</code>, <code>MS365_MCP_LOG_MAX_FILES</code>); there is no age-based expiry. They disappear with the replica. If you ran the stock image before, its log files held mail content; this build does not remove what an earlier replica wrote.</li>
     </ul>
     <p class="more">Configuration reference, the Claude skill and test scripts: <a href="https://github.com/rmdevpro/m365-claude-relay">github.com/rmdevpro/m365-claude-relay</a>.</p>
   </div>
