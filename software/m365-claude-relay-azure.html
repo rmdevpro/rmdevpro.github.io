@@ -86,7 +86,7 @@ dl.kv dt { color: var(--text-faint); } dl.kv dd { min-width: 0; color: var(--tex
     <p class="lede">A step-by-step guide, with screenshots, for putting the relay into your own Microsoft 365 tenant on Azure Container Apps, connecting it to Claude, and reading its logs when something goes wrong.</p>
     <div class="facts">
       <div><span>Parts</span>Entra app · Container App · Claude</div>
-      <div><span>Image</span>Our build of Softeria <code>ms-365-mcp-server</code> 0.170.2 with three logging changes (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/775">PR #775</a>): no mail content in logs, capped log files, startup credential self-test</div>
+      <div><span>Image</span>Our build of Softeria <code>ms-365-mcp-server</code> 0.176.0 with three logging changes (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/775">PR #775</a>): no mail content in logs, capped log files, startup credential self-test; and delete that goes to Deleted Items (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/777">PR #777</a>)</div>
       <div><span>Cost</span>One 0.5 vCPU / 1 GiB replica, always on</div>
       <div><span>Tested</span>October 2026, Microsoft 365 Business tenant, Claude web</div>
     </div>
@@ -197,11 +197,11 @@ Contacts.ReadWrite  MailboxSettings.ReadWrite  Files.ReadWrite  offline_access</
       <p><b>App → Containers → Properties.</b> Image source <b>Docker Hub or other registries</b>, image type <b>Public</b>:</p>
       <dl class="kv">
         <dt>Registry login server</dt><dd><code>ghcr.io</code></dd>
-        <dt>Image and tag</dt><dd><code>rmdevpro/ms-365-mcp-server@sha256:a46e9fd570ac0230837a3fa1fddb2f57fea7029672616464b374dc75ca55dc56</code></dd>
+        <dt>Image and tag</dt><dd><code>rmdevpro/ms-365-mcp-server@sha256:456eb842902d32a5b95cdaff2f0db523dffa89af0abb11e4698c6af9c03bcf88</code></dd>
         <dt>Arguments override</dt><dd><code>--http, 0.0.0.0:3000, --enable-attachment-urls</code></dd>
         <dt>CPU / memory</dt><dd>0.5 / 1 Gi</dd>
       </dl>
-      <p>This image is our build of Softeria's server, version 0.170.2, with three changes we have submitted upstream as <a href="https://github.com/Softeria/ms-365-mcp-server/pull/775">pull request #775</a>: the log never records the content of mail (the stock image writes subjects, bodies and search text to its log files); the log files inside the container are capped at 10 MB × 5 each; and the relay tests its own client id and secret against Microsoft at startup and reports the result (section 7). Once Softeria publishes a release containing these changes, pin that release instead. Leave <code>-v</code> out for normal running; section 7 says what it adds.</p>
+      <p>This image is our build of Softeria's server, version 0.176.0, with three changes we have submitted upstream as <a href="https://github.com/Softeria/ms-365-mcp-server/pull/775">pull request #775</a>: the log never records the content of mail (the stock image writes subjects, bodies and search text to its log files); the log files inside the container are capped at 10 MB × 5 each; and the relay tests its own client id and secret against Microsoft at startup and reports the result (section 7). It has one more change, submitted as <a href="https://github.com/Softeria/ms-365-mcp-server/pull/777">pull request #777</a>: <code>delete-mail-message</code> moves a message to Deleted Items, as Delete does in Outlook (the stock tool skips Deleted Items, like Shift+Delete), and <code>permanently-delete-mail-message</code> keeps the Shift+Delete behaviour. Once Softeria publishes a release containing these changes, pin that release instead. Leave <code>-v</code> out for normal running; section 7 says what it adds.</p>
       <figure><img src="../assets/open-source/m365-claude-relay/azure/c2-container-props.png" alt="Container properties page from an earlier deployment: ghcr.io, an image pinned by digest, and the arguments" loading="lazy"><figcaption>Containers → Properties, from an earlier deployment that still used the stock Softeria image: it shows where the fields are, not the image to enter. Use the image and arguments listed above this screenshot. Pin the digest, not a moving tag.</figcaption></figure>
     </div>
 
