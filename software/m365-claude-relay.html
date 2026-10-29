@@ -120,7 +120,7 @@ section + section { border-top: 0; }
 <section class="product-hero">
   <div class="wrap">
     <a class="back" href="../software/">← Software</a>
-    <div class="kicker">Open source · MIT · v1.0.0</div>
+    <div class="kicker">Open source · MIT</div>
     <h1>M365 Claude Relay.</h1>
     <p class="tagline">Microsoft 365 for Claude custom connectors &mdash; each user acts as themselves.</p>
     <p class="sub">Give Claude your users&rsquo; own Outlook mail, calendar, contacts and OneDrive through one small service you run. Sign-in is Microsoft&rsquo;s own (Entra On-Behalf-Of): the relay never holds a password, never stores a token on disk, and exposes <b>exactly the tools your chosen Graph scopes cover</b>. Works with Claude on the web and desktop, on Free, Pro, Team, and Enterprise plans.</p>
@@ -139,7 +139,7 @@ section + section { border-top: 0; }
     <h2>Why this exists.</h2>
     <p>We built it because Claude&rsquo;s native Microsoft 365 connector can&rsquo;t send, forward, or draft mail with attachments. A user on a managed tenant needed Claude to work with their mail &mdash; and the mail had attachments.</p>
     <p>Anthropic&rsquo;s documentation is explicit: &ldquo;Attachments aren&rsquo;t supported in write tools, so sending, forwarding, and drafting all reject messages with attachments,&rdquo; and &ldquo;Claude can&rsquo;t attach files to the drafts it creates.&rdquo; The relay reads any attachment as a real file and sends, forwards, and drafts with files up to <b>150 MB</b> &mdash; on mail and on calendar events.</p>
-    <p>The native connector is also limited to a fixed set of tools chosen by Anthropic, refuses personal Microsoft accounts, and requires a Global Administrator to consent to Anthropic&rsquo;s app for the whole tenant. The relay lets you run the open-source Softeria M365 MCP Server yourself, with your own app registration and your own scope list, and adds the hardening a public endpoint needs.</p>
+    <p>The native connector is also limited to a fixed set of tools chosen by Anthropic, refuses personal Microsoft accounts, and requires a Global Administrator to consent to Anthropic&rsquo;s app for the whole tenant. The relay is Softeria&rsquo;s open-source Microsoft 365 MCP server, run yourself with your own app registration and your own scope list.</p>
   </div>
 </section>
 
@@ -153,12 +153,12 @@ section + section { border-top: 0; }
         <tbody>
           <tr><th>Email attachments</th><td>Not supported: sending, forwarding, and drafting with attachments are rejected; Claude can&rsquo;t attach files to drafts</td><td class="ours">Read any attachment as a real file; send, forward, and draft with files up to 150&nbsp;MB</td></tr>
           <tr><th>Calendar event attachments</th><td>Not supported</td><td class="ours">Supported (attendees receive the update)</td></tr>
-          <tr><th>Tools</th><td>A fixed set chosen by Anthropic &mdash; about 40 listed in its security guide (7 read/search, the rest write)</td><td class="ours">337 in the catalog; your scope list decides what is exposed (139 with the default mail, calendar, contacts, and files scopes)</td></tr>
+          <tr><th>Tools</th><td>A fixed set chosen by Anthropic &mdash; about 40 listed in its security guide (7 read/search, the rest write)</td><td class="ours">350+ in the catalog; your scope list decides what is exposed (139 with the default scopes on a personal account, 140 on a work tenant)</td></tr>
           <tr><th>Areas</th><td>SharePoint/OneDrive search and file writes, Outlook mail and calendar, Teams chat and calendar</td><td class="ours">The same areas in depth, plus contacts, calendar sharing and delegation, mailbox rules, OneDrive file operations and Excel workbooks, To Do, OneNote, Planner, groups, rooms, presence, meeting transcripts and recordings, and webhook subscriptions (some need additional or work-tenant scopes)</td></tr>
           <tr><th>Accounts</th><td>Work or school only; personal accounts (outlook.com, hotmail.com, live.com) refused</td><td class="ours">Work tenants and personal accounts</td></tr>
           <tr><th>Consent</th><td>Tenant-wide consent to Anthropic&rsquo;s app (&ldquo;M365 MCP Server for Claude&rdquo;) by a Global Administrator</td><td class="ours">Your own app registration; users consent to exactly the scopes you list</td></tr>
           <tr><th>Where it runs</th><td>Anthropic-hosted</td><td class="ours">A container you run, behind your ingress</td></tr>
-          <tr><th>Source</th><td>Anthropic-operated; source not published</td><td class="ours">Open source (MIT): Softeria&rsquo;s M365 MCP Server, pinned and reviewed, behind a minimal public-endpoint gate</td></tr>
+          <tr><th>Source</th><td>Anthropic-operated; source not published</td><td class="ours">Open source (MIT): Softeria&rsquo;s ms-365-mcp-server (our build, two upstream fixes pending release), with the configuration in our repository</td></tr>
         </tbody>
       </table>
     </div>
@@ -169,7 +169,8 @@ section + section { border-top: 0; }
 <section class="framing-strip">
   <div class="wrap">
     <h2>What it is.</h2>
-    <p>A prebuilt, hardened container image. Nearly all of it is off the shelf: <a href="https://github.com/Softeria/ms-365-mcp-server" target="_blank" rel="noopener">Softeria&rsquo;s ms-365-mcp-server</a> (MIT), pinned to a reviewed version and run in On-Behalf-Of mode, behind a minimal, reviewed gate. Softeria handles the OAuth exchange, Microsoft Graph, and the tool surface. The gate adds only what upstream can&rsquo;t do yet &mdash; inbound token validation, an attachment upload bridge, two sign-in fixes, and a start-time scope derivation &mdash; and each of those pieces is tracked upstream and retires once Softeria covers it.</p>
+    <p>One container you run. The server is <a href="https://github.com/Softeria/ms-365-mcp-server" target="_blank" rel="noopener">Softeria&rsquo;s ms-365-mcp-server</a> (MIT), run in On-Behalf-Of mode, with no gate or custom code of ours in front of it. Everything the relay once added in front of Softeria &mdash; the token checks and tenant allowlist, attachment upload links, <code>read-mail-text</code>, and more &mdash; is now part of Softeria itself, through our upstream pull requests (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/693" target="_blank" rel="noopener">#693</a>, <a href="https://github.com/Softeria/ms-365-mcp-server/pull/694" target="_blank" rel="noopener">#694</a>, <a href="https://github.com/Softeria/ms-365-mcp-server/pull/695" target="_blank" rel="noopener">#695</a>, <a href="https://github.com/Softeria/ms-365-mcp-server/pull/703" target="_blank" rel="noopener">#703</a>, <a href="https://github.com/Softeria/ms-365-mcp-server/pull/708" target="_blank" rel="noopener">#708</a>, <a href="https://github.com/Softeria/ms-365-mcp-server/pull/733" target="_blank" rel="noopener">#733</a>, <a href="https://github.com/Softeria/ms-365-mcp-server/pull/736" target="_blank" rel="noopener">#736</a>).</p>
+    <p>The image is our build of Softeria 0.176.0 with two fixes we have submitted upstream and Softeria has not yet released: no mail content in any log, bounded log files, and a startup credential check (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/775" target="_blank" rel="noopener">#775</a>); and delete that moves mail to Deleted Items, as Outlook does, with permanent delete kept as a separate tool (<a href="https://github.com/Softeria/ms-365-mcp-server/pull/777" target="_blank" rel="noopener">#777</a>). Once Softeria releases both, the relay goes back to Softeria&rsquo;s own image. Our repository holds the configuration for Claude, the deployment and verification guide, the Entra and Claude setup, and the Claude skills.</p>
   </div>
 </section>
 
@@ -182,15 +183,15 @@ section + section { border-top: 0; }
         <ol>
           <li>The Claude connector points at your relay. Claude sends the user through Microsoft sign-in with the relay&rsquo;s app registration, and the user consents to the configured Graph scopes.</li>
           <li>Microsoft issues Claude a token for the relay, which Claude keeps and refreshes.</li>
-          <li>On every call the gate validates that token, then exchanges it On-Behalf-Of the user for a Graph token, held in memory, and calls Graph <b>as that user</b>.</li>
+          <li>On every call the relay exchanges that token On-Behalf-Of the user for a Graph token, held in memory &mdash; Entra verifies the token at the exchange &mdash; and calls Graph <b>as that user</b>.</li>
         </ol>
         <p style="margin-top:0.75rem;">The relay has no standing access to any mailbox.</p>
       </div>
       <div class="feature-card">
         <div class="kicker">Scopes</div>
         <h2>Scopes decide the tool surface.</h2>
-        <p>The policy is a list of Microsoft Graph scopes. Every tool whose required scopes that list covers is exposed; users consent to exactly those scopes at sign-in. The default seven &mdash; profile, mail, send, calendars, contacts, mailbox settings, and OneDrive &mdash; expose <b>139 tools</b> on a personal account.</p>
-        <p>Scopes are runtime configuration: change <code>MS365_MCP_ALLOWED_SCOPES</code> and restart, no rebuild. On a work tenant, admin-consented scopes unlock Teams, SharePoint, shared mailboxes, Planner, and directory tools.</p>
+        <p>The policy is a list of Microsoft Graph scopes. Every tool whose required scopes that list covers is exposed; users consent to exactly those scopes at sign-in. The default seven &mdash; profile, mail, send, calendars, contacts, mailbox settings, and OneDrive &mdash; expose <b>139 tools</b> on a personal account and <b>140</b> on a work tenant.</p>
+        <p>Scopes are runtime configuration: change <code>MS365_MCP_ALLOWED_SCOPES</code> and <code>MS365_MCP_EXTRA_SCOPES</code> and restart, no rebuild. On a work tenant, admin-consented scopes unlock Teams, SharePoint, shared mailboxes, Planner, and directory tools.</p>
       </div>
     </div>
   </div>
@@ -213,7 +214,7 @@ section + section { border-top: 0; }
 <section class="section-intro">
   <div class="wrap">
     <h2>Deploy it.</h2>
-    <p>Three steps. Full instructions are in the <a href="https://github.com/rmdevpro/m365-claude-relay" target="_blank" rel="noopener">repository</a>.</p>
+    <p>Four steps. Full instructions are in the <a href="https://github.com/rmdevpro/m365-claude-relay" target="_blank" rel="noopener">repository</a>.</p>
     <p>Running on Azure? Follow the <a href="m365-claude-relay-azure.html">step-by-step Azure guide</a>. For the optional email-management skill, see the <a href="m365-claude-relay-email-rules.html">email rules interview</a>.</p>
   </div>
 </section>
@@ -222,23 +223,18 @@ section + section { border-top: 0; }
   <div class="wrap">
     <ol>
       <li><b>Register an Entra app</b> (about ten minutes) &mdash; you need the client id, tenant id, and a secret. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/entra.md" target="_blank" rel="noopener">docs/entra.md</a></li>
-      <li><b>Run the image</b> behind your TLS ingress on port 7860. For a work tenant, add <code>-e MS365_MCP_ORG_MODE=true</code>. <code>/health</code> reports the running scopes and tool count.</li>
+      <li><b>Run the image</b> with your filled-in <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/relay.env.example" target="_blank" rel="noopener">relay.env.example</a>, one replica, behind your HTTPS ingress on port 3000. For a work tenant, set <code>MS365_MCP_ORG_MODE=true</code>. Check it from outside with <code>test/smoke.sh</code>.</li>
       <li><b>Add the connector in Claude</b> and upload the included skill. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/claude.md" target="_blank" rel="noopener">docs/claude.md</a></li>
+      <li><b>Verify through Claude</b> before anyone relies on it. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/deploy-and-verify.md" target="_blank" rel="noopener">docs/deploy-and-verify.md</a></li>
     </ol>
   </div>
 </section>
 
 <section class="code-block">
   <div class="wrap">
-<pre>docker run -d --name m365-claude-relay --read-only --security-opt no-new-privileges \
-  --tmpfs /dev/shm:rw,size=64m -p 7860:7860 \
-  -e MS365_MCP_CLIENT_ID=&lt;client id&gt; -e MS365_MCP_CLIENT_SECRET=&lt;secret&gt; \
-  -e MS365_MCP_TENANT_ID=&lt;tenant id or consumers&gt; \
-  -e MS365_MCP_PUBLIC_URL=https://relay.example.com \
-  -e MS365_MCP_ATTACHMENT_URL_BASE=https://relay.example.com \
-  -e MS365_MCP_ATTACHMENT_URL_KEY=&lt;32+ random hex&gt; \
-  -e MS365_MCP_ALLOWED_SCOPES="User.Read Mail.ReadWrite Mail.Send Calendars.ReadWrite Contacts.ReadWrite MailboxSettings.ReadWrite Files.ReadWrite" \
-  ghcr.io/rmdevpro/m365-claude-relay:1.0.0</pre>
+<pre>docker run -d --name m365-relay --env-file relay.env -p 127.0.0.1:3000:3000 \
+  ghcr.io/rmdevpro/ms-365-mcp-server@sha256:456eb842902d32a5b95cdaff2f0db523dffa89af0abb11e4698c6af9c03bcf88 \
+  --http 0.0.0.0:3000 --enable-attachment-urls</pre>
   </div>
 </section>
 
@@ -251,12 +247,12 @@ section + section { border-top: 0; }
 <section class="list-block">
   <div class="wrap">
     <ul>
-      <li><b>Strict token validation.</b> Relay tokens are checked against Microsoft&rsquo;s keys &mdash; issuer, audience, tenant, expiry, and scope &mdash; with an optional user allowlist.</li>
-      <li><b>Nothing written to disk.</b> Graph tokens live in memory; logs live on tmpfs. Attachment download and upload links are single-use and expire within five minutes.</li>
-      <li><b>Minimal surface.</b> Exact open routes only, dynamic client registration off, no CORS, and strict security headers on every response.</li>
-      <li><b>Metadata-only logs, plus an audit trail.</b> One structured line per request with no bodies or tokens, and one audit event per tool call identifying the user, tool, and status.</li>
-      <li><b>Safety switches can&rsquo;t be weakened.</b> Fixed constraints &mdash; such as mail attachments going only to unsent drafts &mdash; live in the image&rsquo;s policy file; conflicting environment settings abort startup.</li>
-      <li><b>Supply chain.</b> Digest-pinned base image, a CycloneDX SBOM, a build that fails on critical advisories, and a multi-arch, cosign-signed release image.</li>
+      <li><b>Each call is the user&rsquo;s own.</b> Every call is exchanged On-Behalf-Of the signed-in user, and Entra verifies the token at the exchange. Graph tokens live in memory.</li>
+      <li><b>Only your tenant.</b> <code>MS365_MCP_OBO_ALLOWED_TENANTS</code> (and optionally named users) limits who may use it; anyone else gets 403 before any exchange.</li>
+      <li><b>Sign-in returns only to Claude.</b> Redirect URIs are restricted to Claude&rsquo;s callback, and dynamic client registration is off: Claude uses your client id.</li>
+      <li><b>Single-use file links.</b> Attachment download and upload links are signed, single-use tickets held in memory, which is why the relay runs as one replica.</li>
+      <li><b>No mail content in the logs.</b> Log files are bounded, and the audit trail is one JSON line per tool call &mdash; user, tool, status, sizes &mdash; with no mail content.</li>
+      <li><b>Pinned and checked.</b> The image is pinned by digest and moved deliberately. CI runs the outside checks and the tool-surface test against the pinned image on every push and weekly.</li>
     </ul>
   </div>
 </section>
@@ -271,7 +267,7 @@ section + section { border-top: 0; }
 <section class="closing">
   <div class="wrap">
     <h2>Open source.</h2>
-    <p>M365 Claude Relay is <b>MIT-licensed</b> and released at <b>v1.0.0</b> as the container image <code>ghcr.io/rmdevpro/m365-claude-relay</code>. Support is best effort through GitHub issues, with no SLA.</p>
+    <p>M365 Claude Relay is <b>MIT-licensed</b>, as is Softeria&rsquo;s server. The container image is our build of it, <code>ghcr.io/rmdevpro/ms-365-mcp-server</code>, pinned by digest, until Softeria releases both pending fixes. Server fixes and features go to Softeria upstream. Support is best effort through GitHub issues, with no SLA.</p>
     <div class="gh-row">
       <a class="gh-btn" href="https://github.com/rmdevpro/m365-claude-relay" target="_blank" rel="noopener">View on GitHub →</a>
       <span class="gh-meta">MIT · container image · best-effort support</span>
