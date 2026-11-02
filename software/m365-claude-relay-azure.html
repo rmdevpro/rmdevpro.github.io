@@ -297,12 +297,12 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
 <section id="skills" class="g-sec">
   <div class="wrap">
     <h2><span class="n">5</span>Install the skills</h2>
-    <p>Skills teach Claude how to use the connector well. Install them once for the whole organisation; users then have them without doing anything.</p>
+    <p>Skills teach Claude how to use the connector well. Install both, once for the whole organisation; users then have them without doing anything.</p>
     <div class="tbl"><table>
       <thead><tr><th>Skill</th><th>What it does</th></tr></thead>
       <tbody>
-        <tr><td><a href="https://github.com/rmdevpro/m365-claude-relay/tree/main/claude-skill/microsoft-365"><code>microsoft-365</code></a></td><td>Mail, calendar, contacts and OneDrive through the connector: the attachment links, reading mail without the clutter, writing mail as HTML, and when to stop and ask. Install this one.</td></tr>
-        <tr><td><a href="https://github.com/rmdevpro/m365-claude-relay/tree/main/claude-skill/email-management"><code>email-management</code></a></td><td>Optional. Works through a user's inbox with them. The first time, Claude interviews the user and saves their triage rules to Claude's memory; see <a href="m365-claude-relay-email-rules.html">Your email rules, set up by interview</a>.</td></tr>
+        <tr><td><a href="https://github.com/rmdevpro/m365-claude-relay/tree/main/claude-skill/microsoft-365"><code>microsoft-365</code></a></td><td>Mail, calendar, contacts and OneDrive through the connector: the attachment links, reading mail without the clutter, writing mail as HTML, and when to stop and ask.</td></tr>
+        <tr><td><a href="https://github.com/rmdevpro/m365-claude-relay/tree/main/claude-skill/email-management"><code>email-management</code></a></td><td>Goes with <code>microsoft-365</code>; install both. Works through a user's inbox with them. The first time, Claude interviews the user and saves their triage rules to Claude's memory; see <a href="m365-claude-relay-email-rules.html">Your email rules, set up by interview</a>.</td></tr>
       </tbody>
     </table></div>
 
@@ -311,7 +311,7 @@ MS365_MCP_ATTACHMENT_URL_KEY   → secret attach-key</pre>
       <p>An organisation owner checks two settings:</p>
       <ul class="ops">
         <li><b>Organization settings → Plugins &amp; skills → Policy:</b> <i>Code execution and file creation</i> and <i>Skills</i> both on.</li>
-        <li><b>Organization settings → Capabilities → Memory:</b> on, if you install <code>email-management</code>. Users' rules live in their memory. Turning memory off for the organisation deletes everyone's memory, including those rules.</li>
+        <li><b>Organization settings → Capabilities → Memory:</b> on. <code>email-management</code> keeps each user's triage rules there. Turning memory off for the organisation deletes everyone's memory, including those rules.</li>
       </ul>
     </div>
 

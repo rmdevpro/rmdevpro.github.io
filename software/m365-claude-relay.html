@@ -215,7 +215,7 @@ section + section { border-top: 0; }
   <div class="wrap">
     <h2>Deploy it.</h2>
     <p>Four steps. Full instructions are in the <a href="https://github.com/rmdevpro/m365-claude-relay" target="_blank" rel="noopener">repository</a>.</p>
-    <p>Running on Azure? Follow the <a href="m365-claude-relay-azure.html">step-by-step Azure guide</a>. For the optional email-management skill, see the <a href="m365-claude-relay-email-rules.html">email rules interview</a>.</p>
+    <p>Running on Azure? Follow the <a href="m365-claude-relay-azure.html">step-by-step Azure guide</a>. For the email-management skill that goes with it, see the <a href="m365-claude-relay-email-rules.html">email rules interview</a>.</p>
   </div>
 </section>
 
@@ -224,7 +224,7 @@ section + section { border-top: 0; }
     <ol>
       <li><b>Register an Entra app</b> (about ten minutes) &mdash; you need the client id, tenant id, and a secret. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/entra.md" target="_blank" rel="noopener">docs/entra.md</a></li>
       <li><b>Run the image</b> with your filled-in <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/relay.env.example" target="_blank" rel="noopener">relay.env.example</a>, one replica, behind your HTTPS ingress on port 3000. For a work tenant, set <code>MS365_MCP_ORG_MODE=true</code>. Check it from outside with <code>test/smoke.sh</code>.</li>
-      <li><b>Add the connector in Claude</b> and upload the included skill. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/claude.md" target="_blank" rel="noopener">docs/claude.md</a></li>
+      <li><b>Add the connector in Claude</b> and upload both included skills, <code>microsoft-365</code> and <code>email-management</code>. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/claude.md" target="_blank" rel="noopener">docs/claude.md</a></li>
       <li><b>Verify through Claude</b> before anyone relies on it. <a href="https://github.com/rmdevpro/m365-claude-relay/blob/main/docs/deploy-and-verify.md" target="_blank" rel="noopener">docs/deploy-and-verify.md</a></li>
     </ol>
   </div>
